@@ -1,0 +1,29 @@
+{
+    "name": "projects/hq",
+    "autoload": {
+        "psr-4": {
+            "Projects\\HQ\\": "src/"
+        },
+        "files":[
+            "src/helper.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Hamzah Nur Alfalah",
+            "email": "hamzahnafalah@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Projects\\HQ\\Providers\\HQServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "hanafalah/laravel-support": "dev-main"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
