@@ -25,5 +25,63 @@
         "hanafalah/laravel-support": "dev-main"
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": {
+        "hanafalah/laravel-feature": {
+            "type": "path",
+            "url": "../../repositories/laravel-feature",
+            "options": {
+                "symlink": true
+            }
+        },
+        "hanafalah/laravel-has-props": {
+            "type": "path",
+            "url": "../../repositories/laravel-has-props",
+            "options": {
+                "symlink": true
+            }
+        },
+        "hanafalah/laravel-package-generator": {
+            "type": "path",
+            "url": "../../repositories/laravel-package-generator",
+            "options": {
+                "symlink": true
+            }
+        },
+        "hanafalah/laravel-permission": {
+            "type": "path",
+            "url": "../../repositories/laravel-permission",
+            "options": {
+                "symlink": true
+            }
+        },
+        "hanafalah/laravel-stub": {
+            "type": "path",
+            "url": "../../repositories/laravel-stub",
+            "options": {
+                "symlink": true
+            }
+        },
+        "hanafalah/laravel-support": {
+            "type": "path",
+            "url": "../../repositories/laravel-support",
+            "options": {
+                "symlink": true
+            }
+        },
+        "hanafalah/microtenant": {
+            "type": "path",
+            "url": "../../repositories/microtenant",
+            "options": {
+                "symlink": true
+            }
+        },
+        "hanafalah/module-encoding": {
+            "type": "path",
+            "url": "../../repositories/module-encoding",
+            "options": {
+                "symlink": true
+            }
+        }
+    }
 }
