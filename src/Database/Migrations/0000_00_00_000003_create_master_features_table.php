@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Hanafalah\LaravelFeature\Models\Feature\MasterFeature;
+use Hanafalah\LaravelFeature\Models\MasterFeature;
 
 return new class extends Migration
 {
