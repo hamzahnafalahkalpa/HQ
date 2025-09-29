@@ -6,7 +6,7 @@ use Hanafalah\MicroTenant\Commands\Impersonate\ImpersonateMigrateCommand as Impe
 
 class ImpersonateMigrateCommand extends ImpersonateImpersonateMigrateCommand
 {
-    protected $signature = 'h-q:impersonate-migrate 
+    protected $signature = 'hq:impersonate-migrate 
                                 {--app= : The type of the application}
                                 {--group= : The type of the group}
                                 {--tenant= : The type of the tenant}

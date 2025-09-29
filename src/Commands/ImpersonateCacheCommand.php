@@ -6,7 +6,7 @@ use Hanafalah\MicroTenant\Commands\Impersonate\ImpersonateCacheCommand as Impers
 
 class ImpersonateCacheCommand extends ImpersonateImpersonateCacheCommand
 {
-    protected $signature = 'h-q:impersonate-cache 
+    protected $signature = 'hq:impersonate-cache 
                                 {--forget : Forgets the current cache}
                                 {--app_id= : The id of the application}
                                 {--group_id= : The id of the group}

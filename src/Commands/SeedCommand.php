@@ -10,7 +10,7 @@ class SeedCommand extends EnvironmentCommand{
      *
      * @var string
      */
-    protected $signature = 'h-q:seed {class? : Class name of the seeder}';
+    protected $signature = 'hq:seed {class? : Class name of the seeder}';
 
 
     /**

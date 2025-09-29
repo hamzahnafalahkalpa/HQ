@@ -14,7 +14,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            //ADD YOUR SEEDER HERE
+            WorkspaceSeeder::class,
+            ApiAccessSeeder::class
         ]);
     }
 }

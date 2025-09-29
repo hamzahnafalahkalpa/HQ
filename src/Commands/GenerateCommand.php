@@ -6,7 +6,7 @@ use Hanafalah\LaravelPackageGenerator\Commands\GeneratePackageCommand;
 
 class GenerateCommand extends GeneratePackageCommand
 {
-    protected $signature = 'h-q:add-package {namespace}
+    protected $signature = 'hq:add-package {namespace}
         {--package-author= : Nama author}
         {--package-email= : Email author}
         {--pattern= : Pattern yang digunakan}';

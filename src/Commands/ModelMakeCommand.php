@@ -6,7 +6,7 @@ use Hanafalah\LaravelPackageGenerator\Commands\ModelMakeCommand as CommandsModel
 
 class ModelMakeCommand extends CommandsModelMakeCommand
 {
-    protected $signature = 'h-q:make-model 
+    protected $signature = 'hq:make-model 
                 {name}
                 {--pattern= : Pattern yang digunakan}
                 {--class-basename= : Nama class yang digunakan}';

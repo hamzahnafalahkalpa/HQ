@@ -13,7 +13,7 @@ class MigrateCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'h-q:migrate {--seed}';
+    protected $signature = 'hq:migrate {--seed}';
 
     /**
      * The console command description.
@@ -70,7 +70,7 @@ class MigrateCommand extends Command
 
         if ($this->option('seed')){
             $this->info("Run seeding");
-            Artisan::call('h-q:seed');
+            Artisan::call('hq:seed');
             $this->info("Seeded");
         }
         return Command::SUCCESS;

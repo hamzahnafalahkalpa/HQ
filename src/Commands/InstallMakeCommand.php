@@ -9,7 +9,7 @@ class InstallMakeCommand extends EnvironmentCommand
      *
      * @var string
      */
-    protected $signature = 'h-q:install';
+    protected $signature = 'hq:install';
 
 
     /**
@@ -31,7 +31,7 @@ class InstallMakeCommand extends EnvironmentCommand
             '--provider' => $provider,
             '--tag'      => 'config'
         ]);
-        $this->info('✔️  Created config/h-q.php');
+        $this->info('✔️  Created config/hq.php');
 
         $this->callSilent('vendor:publish', [
             '--provider' => $provider,
@@ -39,6 +39,6 @@ class InstallMakeCommand extends EnvironmentCommand
         ]);
         $this->info('✔️  Created migrations');
 
-        $this->comment('projects/h-q installed successfully.');
+        $this->comment('projects/hq installed successfully.');
     }
 }

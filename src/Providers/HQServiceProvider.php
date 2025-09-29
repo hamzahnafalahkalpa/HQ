@@ -15,7 +15,6 @@ use Projects\HQ\{
 };
 use Hanafalah\LaravelSupport\Middlewares\PayloadMonitoring;
 use Hanafalah\MicroTenant\Contracts\Supports\ConnectionManager;
-use Hanafalah\MicroTenant\Facades\MicroTenant;
 use Projects\HQ\Supports\ConnectionManager as SupportsConnectionManager;
 
 class HQServiceProvider extends HQEnvironment
@@ -40,20 +39,15 @@ class HQServiceProvider extends HQEnvironment
                     $this->__config_h_q = config('h-q');
                 },
                 'Provider' => function(){
-                    $model   = Facades\HQ::myModel($this->TenantModel()->find(HQ::ID));
-
-                    $this->bootedRegisters($model->packages, 'h-q', __DIR__.'/../'.$this->__config_h_q['libs']['migration'] ?? 'Migrations');
                     $this->registerOverideConfig('h-q',__DIR__.'/../'.$this->__config_h_q['libs']['config']);
                 }
             ]);
     }
 
-    public function boot(Kernel $kernel){        
-        $kernel->pushMiddleware(PayloadMonitoring::class);
-        $model   = Facades\HQ::myModel($this->TenantModel()->find(HQ::ID));
-        if (isset($model)){
-            $this->deferredProviders($model);
-
+    public function boot(Kernel $kernel){    
+        $tenant = $this->TenantModel()->where('flag','HQ')->first();  
+        if (isset($tenant)) {
+            $kernel->pushMiddleware(PayloadMonitoring::class);
             tenancy()->initialize(HQ::ID);
             $this->registers([
                 '*',
@@ -61,10 +55,10 @@ class HQServiceProvider extends HQEnvironment
             ]);
             $this->autoBinds();
             $this->registerRouteService(RouteServiceProvider::class);
-
+    
             $this->app->singleton(PathRegistry::class, function () {
                 $registry = new PathRegistry();
-
+    
                 $config = config("h-q");
                 foreach ($config['libs'] as $key => $lib) $registry->set($key, 'projects'.$lib);
                 return $registry;
