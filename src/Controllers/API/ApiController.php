@@ -1,10 +1,10 @@
 <?php
 
-namespace Projects\HQ\Controllers\API;
+namespace Projects\Hq\Controllers\API;
 
 use App\Http\Controllers\ApiController as ControllersApiController;
 use Illuminate\Support\Facades\Artisan;
-use Projects\HQ\Concerns\HasUser;
+use Projects\Hq\Concerns\HasUser;
 
 abstract class ApiController extends ControllersApiController
 {

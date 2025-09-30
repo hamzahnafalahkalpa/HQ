@@ -1,6 +1,6 @@
 <?php
 
-namespace Projects\HQ\Requests\API\Navigation\Auth;
+namespace Projects\Hq\Requests\API\Navigation\Auth;
 
 use Hanafalah\LaravelSupport\Requests\FormRequest;
 use Illuminate\Validation\Rule;

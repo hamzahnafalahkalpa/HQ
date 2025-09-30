@@ -1,6 +1,6 @@
 <?php
 
-namespace Projects\HQ;
+namespace Projects\Hq;
 
 use Illuminate\Database\Eloquent\Model;
 use Hanafalah\LaravelSupport\{
@@ -8,13 +8,13 @@ use Hanafalah\LaravelSupport\{
     Supports\PackageManagement,
     Events as SupportEvents
 };
-use Projects\HQ\Contracts\HQ as ContractsHQ;
+use Projects\Hq\Contracts\Hq as ContractsHq;
 
-class HQ extends PackageManagement implements ContractsHQ{
+class Hq extends PackageManagement implements ContractsHq{
     use Supports\LocalPath,HasRepository;
 
-    const LOWER_CLASS_NAME = "h-q";
-    const SERVICE_TYPE     = "tenant";
+    const LOWER_CLASS_NAME = "hq";
+    const SERVICE_TYPE     = "";
     const ID               = "1";
 
     public ?Model $model;

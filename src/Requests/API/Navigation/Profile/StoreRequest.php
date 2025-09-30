@@ -1,6 +1,6 @@
 <?php
 
-namespace Projects\HQ\Requests\API\Navigation\Profile;
+namespace Projects\Hq\Requests\API\Navigation\Profile;
 
 use Hanafalah\LaravelSupport\Requests\FormRequest;
 

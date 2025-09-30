@@ -1,10 +1,10 @@
 <?php
 
-namespace Projects\HQ\Controllers\API\Navigation\Notification;
+namespace Projects\Hq\Controllers\API\Navigation\Notification;
 
 use Hanafalah\ModuleEmployee\Contracts\Schemas\Employee;
-use Projects\HQ\Controllers\API\ApiController;
-use Projects\HQ\Requests\API\Navigation\Profile\ShowRequest;
+use Projects\Hq\Controllers\API\ApiController;
+use Projects\Hq\Requests\API\Navigation\Profile\ShowRequest;
 
 class NotificationController extends ApiController{
     public function __construct(

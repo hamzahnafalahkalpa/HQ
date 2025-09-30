@@ -1,9 +1,9 @@
 <?php
 
-namespace Projects\HQ\Controllers;
+namespace Projects\Hq\Controllers;
 
 use App\Http\Controllers\Controller as MainController;
-use Projects\HQ\Concerns\HasUser;
+use Projects\Hq\Concerns\HasUser;
 
 abstract class Controller extends MainController
 {

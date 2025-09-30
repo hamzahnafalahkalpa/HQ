@@ -1,8 +1,8 @@
 <?php
 
-namespace Projects\HQ\Facades;
+namespace Projects\Hq\Facades;
 
-class HQ extends \Illuminate\Support\Facades\Facade
+class Hq extends \Illuminate\Support\Facades\Facade
 {
   /**
    * Get the registered name of the component.
@@ -11,6 +11,6 @@ class HQ extends \Illuminate\Support\Facades\Facade
    */
   protected static function getFacadeAccessor()
   {
-    return \Projects\HQ\Contracts\HQ::class;
+    return \Projects\Hq\Contracts\Hq::class;
   }
 }

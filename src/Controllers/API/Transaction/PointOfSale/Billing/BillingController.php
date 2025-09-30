@@ -1,9 +1,9 @@
 <?php
 
-namespace Projects\HQ\Controllers\API\Transaction\PointOfSale\Billing;
+namespace Projects\Hq\Controllers\API\Transaction\PointOfSale\Billing;
 
-use Projects\HQ\Controllers\API\Transaction\Billing\EnvironmentController;
-use Projects\HQ\Requests\API\Transaction\PointOfSale\Billing\{
+use Projects\Hq\Controllers\API\Transaction\Billing\EnvironmentController;
+use Projects\Hq\Requests\API\Transaction\PointOfSale\Billing\{
     ViewRequest, ShowRequest, StoreRequest, DeleteRequest
 };
 

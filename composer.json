@@ -2,7 +2,7 @@
     "name": "projects/hq",
     "autoload": {
         "psr-4": {
-            "Projects\\HQ\\": "src/"
+            "Projects\\Hq\\": "src/"
         },
         "files":[
             "src/helper.php"
@@ -17,12 +17,13 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Projects\\HQ\\Providers\\HQServiceProvider"
+                "Projects\\Hq\\Providers\\HqServiceProvider"
             ]
         }
     },
     "require": {
-        "hanafalah/laravel-support": "dev-main"
+        "hanafalah/laravel-support": "dev-main",
+        "hanafalah/module-payment": "dev-main"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -79,6 +80,13 @@
         "hanafalah/module-encoding": {
             "type": "path",
             "url": "../../repositories/module-encoding",
+            "options": {
+                "symlink": true
+            }
+        },
+        "hanafalah/module-payment": {
+            "type": "path",
+            "url": "../../repositories/module-payment",
             "options": {
                 "symlink": true
             }

@@ -1,9 +1,9 @@
 <?php
 
-namespace Projects\HQ\Controllers\API\Menu;
+namespace Projects\Hq\Controllers\API\Menu;
 
 use Hanafalah\LaravelPermission\Contracts\Schemas\Menu;
-use Projects\HQ\Controllers\API\ApiController;
+use Projects\Hq\Controllers\API\ApiController;
 
 class MenuController extends ApiController{
     public function __construct(

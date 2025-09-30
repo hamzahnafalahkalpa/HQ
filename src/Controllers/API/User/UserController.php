@@ -1,8 +1,8 @@
 <?php
 
-namespace Projects\HQ\Controllers\API\User;
+namespace Projects\Hq\Controllers\API\User;
 
-use Projects\HQ\Requests\API\User\{
+use Projects\Hq\Requests\API\User\{
     ViewRequest, ShowRequest, StoreRequest, DeleteRequest
 };
 

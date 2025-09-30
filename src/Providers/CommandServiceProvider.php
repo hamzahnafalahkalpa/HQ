@@ -1,9 +1,9 @@
 <?php
 
-namespace Projects\HQ\Providers;
+namespace Projects\Hq\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Projects\HQ\Commands;
+use Projects\Hq\Commands;
 
 class CommandServiceProvider extends ServiceProvider
 {
@@ -25,7 +25,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->commands(config('h-q.commands', $this->__commands));
+        $this->commands(config('hq.commands', $this->__commands));
     }
 
     public function provides()

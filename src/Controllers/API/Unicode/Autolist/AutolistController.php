@@ -1,11 +1,11 @@
 <?php
 
-namespace Projects\HQ\Controllers\API\Unicode\Autolist;
+namespace Projects\Hq\Controllers\API\Unicode\Autolist;
 
 use Hanafalah\LaravelHasProps\Models\Scopes\HasCurrentScope;
 use Hanafalah\LaravelSupport\Concerns\Support\HasCache;
 use Illuminate\Http\Request;
-use Projects\HQ\Controllers\API\ApiController;
+use Projects\Hq\Controllers\API\ApiController;
 use Illuminate\Support\Str;
 use Hanafalah\ModuleMedicService\Enums\Label as MedicServiceLabel;
 

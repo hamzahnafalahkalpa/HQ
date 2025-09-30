@@ -1,6 +1,6 @@
 <?php
 
-namespace Projects\HQ\Requests\API\User;
+namespace Projects\Hq\Requests\API\User;
 
 use Hanafalah\LaravelSupport\Requests\FormRequest;
 

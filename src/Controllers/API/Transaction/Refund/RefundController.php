@@ -1,8 +1,8 @@
 <?php
 
-namespace Projects\HQ\Controllers\API\Transaction\Refund;
+namespace Projects\Hq\Controllers\API\Transaction\Refund;
 
-use Projects\HQ\Requests\API\Transaction\Refund\{
+use Projects\Hq\Requests\API\Transaction\Refund\{
     ViewRequest, ShowRequest
 };
 

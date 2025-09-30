@@ -1,8 +1,8 @@
 <?php
 
-namespace Projects\HQ\Controllers\API\Transaction\PointOfSale;
+namespace Projects\Hq\Controllers\API\Transaction\PointOfSale;
 
-use Projects\HQ\Controllers\API\Transaction\EnvironmentController as EnvTransaction;
+use Projects\Hq\Controllers\API\Transaction\EnvironmentController as EnvTransaction;
 
 class EnvironmentController extends EnvTransaction{
     protected function getPosTransactionPaginate(?callable $callback = null){        

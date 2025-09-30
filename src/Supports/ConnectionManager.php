@@ -1,6 +1,6 @@
 <?php
 
-namespace Projects\HQ\Supports;
+namespace Projects\Hq\Supports;
 
 use Hanafalah\MicroTenant\Contracts\Supports\ConnectionManager as SupportsConnectionManager;
 use Illuminate\Database\Eloquent\Model;

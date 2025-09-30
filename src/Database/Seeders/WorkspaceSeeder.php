@@ -1,6 +1,6 @@
 <?php
 
-namespace Projects\HQ\Database\Seeders;
+namespace Projects\Hq\Database\Seeders;
 
 use Hanafalah\LaravelSupport\Concerns\Support\HasRequestData;
 use Hanafalah\MicroTenant\Contracts\Data\TenantData;
@@ -24,35 +24,34 @@ class WorkspaceSeeder extends Seeder{
      */
     public function run(): void
     {
-        $workspace = app(config('database.models.Workspace'))->uuid('9e7ff0f6-7679-46c8-ac3e-71da81816HQ')->first();        
+        $workspace = app(config('database.models.Workspace'))->uuid('9e7ff0f6-7679-46c8-ac3e-71da81816Hq')->first();        
         $generator_config = config('laravel-package-generator');
         $project_namespace = 'Projects';
         if (!isset($workspace)){
             $workspace = app(config('app.contracts.Workspace'))->prepareStoreWorkspace(WorkspaceData::from([
-                'uuid'    => '9e7ff0f6-7679-46c8-ac3e-71da818160HQ',
-                'name'    => 'HQ',
+                'uuid'    => '9e7ff0f6-7679-46c8-ac3e-71da818160Hq',
+                'name'    => 'Hq',
                 'status'  => Status::ACTIVE->value
             ]));
 
             $tenant_schema  = app(config('app.contracts.Tenant'));
-            $tenant_model   = app(config('database.models.Tenant'));
             $project_tenant = $tenant_schema->prepareStoreTenant($this->requestDTO(TenantData::class,[
                 'parent_id'      => null,
-                'name'           => 'Wellmed Lite',
-                'flag'           => $tenant_model::FLAG_APP_TENANT,
+                'name'           => 'Hq',
+                'flag'           => 'APP',
                 'reference_id'   => null,
                 'reference_type' => null,
-                'provider'       => $project_namespace.'\\WellmedLite\\Providers\\WellmedLiteServiceProvider',
+                'provider'       => $project_namespace.'\\Hq\\Providers\\HqServiceProvider',
                 'path'           => $generator_config['patterns']['project']['published_at'],
                 'packages'       => [],
+                'product_type'   => 'Hq',
                 'config'         => $generator_config['patterns']['project']
             ]));
-            dd($project_tenant);
         }else{
             $project_tenant = $workspace->tenant;
         }
 
-        $providers = config('wellmed-lite-starterpack.packages');
+        $providers = config('hq.packages',[]);
         $providers = array_keys($providers);
         $package_providers = [];
         $requires = [
@@ -85,13 +84,13 @@ class WorkspaceSeeder extends Seeder{
         
         $project_tenant->setAttribute('packages',$package_providers);
         $project_tenant->save();
-        // shell_exec("cd $tenant_path/".Str::kebab($tenant->name)." && rm -rf composer.lock && composer install");
+
         MicroTenant::tenantImpersonate($project_tenant);
         tenancy()->initialize($project_tenant->getKey());
 
-        // Artisan::call('impersonate:cache',[
-        //     '--app_id'    => $project_tenant->getKey()
-        // ]);
+        Artisan::call('impersonate:cache',[
+            '--app_id'    => $project_tenant->getKey()
+        ]);
 
         Artisan::call('impersonate:migrate',[
             '--app'       => true,

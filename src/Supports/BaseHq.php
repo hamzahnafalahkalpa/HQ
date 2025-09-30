@@ -1,14 +1,14 @@
 <?php
 
-namespace Projects\HQ\Supports;
+namespace Projects\Hq\Supports;
 
 use Hanafalah\LaravelSupport\Contracts\Supports\DataManagement;
 use Hanafalah\LaravelSupport\Supports\PackageManagement;
 
-class BaseHQ extends PackageManagement implements DataManagement
+class BaseHq extends PackageManagement implements DataManagement
 {
-    protected $__config_name = 'h-q';
-    protected $__h_q = [];
+    protected $__config_name = 'hq';
+    protected $__hq = [];
 
     /**
      * A description of the entire PHP function.
@@ -19,6 +19,6 @@ class BaseHQ extends PackageManagement implements DataManagement
      */
     public function __construct()
     {
-        $this->setConfig($this->__config_name, $this->__h_q);
+        $this->setConfig($this->__config_name, $this->__hq);
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace Projects\HQ\Controllers\API\Transaction\Invoice\Refund;
+namespace Projects\Hq\Controllers\API\Transaction\Invoice\Refund;
 
-use Projects\HQ\Requests\API\Transaction\Invoice\Refund\{
+use Projects\Hq\Requests\API\Transaction\Invoice\Refund\{
     ViewRequest, ShowRequest, StoreRequest, DeleteRequest
 };
-use Projects\HQ\Controllers\API\Transaction\Refund\EnvironmentController;
+use Projects\Hq\Controllers\API\Transaction\Refund\EnvironmentController;
 
 
 class RefundController extends EnvironmentController{

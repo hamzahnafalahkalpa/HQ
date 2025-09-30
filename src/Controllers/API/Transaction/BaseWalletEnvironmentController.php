@@ -1,10 +1,10 @@
 <?php
 
-namespace Projects\HQ\Controllers\API\Transaction;
+namespace Projects\Hq\Controllers\API\Transaction;
 
 use Hanafalah\ModulePayment\Contracts\Schemas\Deposit;
 use Hanafalah\ModulePayment\Contracts\Schemas\Refund;
-use Projects\HQ\Controllers\API\ApiController;
+use Projects\Hq\Controllers\API\ApiController;
 
 class BaseWalletEnvironmentController extends ApiController{
     public function __construct(

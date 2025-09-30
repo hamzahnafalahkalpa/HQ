@@ -1,12 +1,12 @@
 <?php
 
-use Projects\HQ\{
+use Projects\Hq\{
     Contracts, Models, Commands
 };
 
 return [
-    "namespace"     => "Projects\HQ",
-    "service_name"  => "HQ",
+    "namespace"     => "Projects\Hq",
+    "service_name"  => "Hq",
     "paths"         => [
         "local_path"   => 'projects',
         "base_path"    => __DIR__.'\\..\\'
@@ -70,5 +70,5 @@ return [
     ],
     "encodings" => [
     ],
-    "provider" => "Projects\HQ\\Providers\\HQServiceProvider"
+    "provider" => "Projects\Hq\\Providers\\HqServiceProvider"
 ];

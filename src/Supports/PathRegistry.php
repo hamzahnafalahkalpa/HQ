@@ -1,6 +1,6 @@
 <?php 
 
-namespace Projects\HQ\Supports;
+namespace Projects\Hq\Supports;
 
 class PathRegistry
 {

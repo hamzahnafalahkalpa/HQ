@@ -1,8 +1,8 @@
 <?php
 
-namespace Projects\HQ\Controllers\API\Transaction\Invoice;
+namespace Projects\Hq\Controllers\API\Transaction\Invoice;
 
-use Projects\HQ\Requests\API\Transaction\Invoice\{
+use Projects\Hq\Requests\API\Transaction\Invoice\{
     ViewRequest, ShowRequest
 };
 

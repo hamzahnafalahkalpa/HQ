@@ -1,10 +1,10 @@
 <?php
 
-namespace Projects\HQ\Providers;
+namespace Projects\Hq\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Projects\HQ\HQ;
+use Projects\Hq\Hq;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -19,7 +19,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->__lower_package_name = HQ::LOWER_CLASS_NAME;
+        $this->__lower_package_name = Hq::LOWER_CLASS_NAME;
         parent::boot();
     }
 

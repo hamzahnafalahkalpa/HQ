@@ -1,8 +1,8 @@
 <?php
 
-namespace Projects\HQ\Controllers\API\Transaction\Billing;
+namespace Projects\Hq\Controllers\API\Transaction\Billing;
 
-use Projects\HQ\Requests\API\Transaction\Billing\{
+use Projects\Hq\Requests\API\Transaction\Billing\{
     ViewRequest, ShowRequest
 };
 

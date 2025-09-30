@@ -1,6 +1,6 @@
 <?php
 
-namespace Projects\HQ\Requests\API\Navigation\DigitalSign;
+namespace Projects\Hq\Requests\API\Navigation\DigitalSign;
 
 use Hanafalah\LaravelSupport\Requests\FormRequest;
 

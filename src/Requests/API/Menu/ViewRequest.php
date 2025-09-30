@@ -1,6 +1,6 @@
 <?php
 
-namespace Projects\HQ\Requests\API\Menu;
+namespace Projects\Hq\Requests\API\Menu;
 
 use Hanafalah\LaravelSupport\Requests\FormRequest;
 

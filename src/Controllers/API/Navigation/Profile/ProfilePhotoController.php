@@ -1,10 +1,10 @@
 <?php
 
-namespace Projects\HQ\Controllers\API\Navigation\Profile;
+namespace Projects\Hq\Controllers\API\Navigation\Profile;
 
 use Hanafalah\ModuleEmployee\Contracts\Schemas\ProfilePhoto;
-use Projects\HQ\Controllers\API\ApiController;
-use Projects\HQ\Requests\API\Navigation\Profile\{
+use Projects\Hq\Controllers\API\ApiController;
+use Projects\Hq\Requests\API\Navigation\Profile\{
     ShowRequest, StoreRequest
 };
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace Projects\HQ\Controllers\API\Navigation\DigitalSign;
+namespace Projects\Hq\Controllers\API\Navigation\DigitalSign;
 
 use Hanafalah\ModuleEmployee\Contracts\Schemas\Employee;
 use Hanafalah\ModuleHandwriting\Contracts\Schemas\DigitalSign;
-use Projects\HQ\Controllers\API\ApiController;
-use Projects\HQ\Requests\API\Navigation\DigitalSign\{
+use Projects\Hq\Controllers\API\ApiController;
+use Projects\Hq\Requests\API\Navigation\DigitalSign\{
     ViewRequest, StoreRequest
 };
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Projects\HQ\Contracts;
+namespace Projects\Hq\Contracts;
 
 use Hanafalah\LaravelSupport\Contracts\Supports\DataManagement;
 
-interface HQ extends DataManagement{
+interface Hq extends DataManagement{
 
 }

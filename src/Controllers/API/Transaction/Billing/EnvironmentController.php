@@ -1,9 +1,9 @@
 <?php
 
-namespace Projects\HQ\Controllers\API\Transaction\Billing;
+namespace Projects\Hq\Controllers\API\Transaction\Billing;
 
 use Hanafalah\ModulePayment\Contracts\Schemas\Billing;
-use Projects\HQ\Controllers\API\ApiController;
+use Projects\Hq\Controllers\API\ApiController;
 
 class EnvironmentController extends ApiController{
     public function __construct(

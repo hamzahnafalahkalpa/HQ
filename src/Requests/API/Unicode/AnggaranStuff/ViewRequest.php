@@ -1,6 +1,6 @@
 <?php
 
-namespace Projects\HQ\Requests\API\Unicode\AnggaranStuff;
+namespace Projects\Hq\Requests\API\Unicode\AnggaranStuff;
 
 use Hanafalah\LaravelSupport\Requests\FormRequest;
 

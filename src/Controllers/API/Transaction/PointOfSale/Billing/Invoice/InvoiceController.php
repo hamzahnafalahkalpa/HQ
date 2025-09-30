@@ -1,11 +1,11 @@
 <?php
 
-namespace Projects\HQ\Controllers\API\Transaction\PointOfSale\Billing\Invoice;
+namespace Projects\Hq\Controllers\API\Transaction\PointOfSale\Billing\Invoice;
 
-use Projects\HQ\Requests\API\Transaction\PointOfSale\Billing\Invoice\{
+use Projects\Hq\Requests\API\Transaction\PointOfSale\Billing\Invoice\{
     ViewRequest, ShowRequest, StoreRequest, DeleteRequest
 };
-use Projects\HQ\Controllers\API\Transaction\Invoice\EnvironmentController;
+use Projects\Hq\Controllers\API\Transaction\Invoice\EnvironmentController;
 
 class InvoiceController extends EnvironmentController{
     protected function commonConditional($query){

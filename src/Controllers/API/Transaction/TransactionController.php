@@ -1,8 +1,8 @@
 <?php
 
-namespace Projects\HQ\Controllers\API\Transaction;
+namespace Projects\Hq\Controllers\API\Transaction;
 
-use Projects\HQ\Requests\API\Transaction\{
+use Projects\Hq\Requests\API\Transaction\{
     ViewRequest, ShowRequest, StoreRequest, DeleteRequest
 };
 

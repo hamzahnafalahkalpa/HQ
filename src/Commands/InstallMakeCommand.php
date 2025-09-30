@@ -1,6 +1,6 @@
 <?php
 
-namespace Projects\HQ\Commands;
+namespace Projects\Hq\Commands;
 
 class InstallMakeCommand extends EnvironmentCommand
 {
@@ -24,7 +24,7 @@ class InstallMakeCommand extends EnvironmentCommand
      */
     public function handle()
     {
-        $provider = 'Projects\HQ\HQServiceProvider';
+        $provider = 'Projects\Hq\HqServiceProvider';
 
         $this->comment('Installing Module...');
         $this->callSilent('vendor:publish', [
@@ -38,6 +38,9 @@ class InstallMakeCommand extends EnvironmentCommand
             '--tag'      => 'migrations'
         ]);
         $this->info('✔️  Created migrations');
+
+        $this->callSilent('hq:seed');
+        $this->callSilent('hq:migrate');
 
         $this->comment('projects/hq installed successfully.');
     }

@@ -1,6 +1,6 @@
 <?php 
 
-namespace Projects\HQ\Contracts\Supports;
+namespace Projects\Hq\Contracts\Supports;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace Projects\HQ\Providers;
+namespace Projects\Hq\Providers;
 
 use Illuminate\Contracts\Container\Container;
 use Hanafalah\LaravelSupport\Providers\BaseServiceProvider;
 
-abstract class HQEnvironment extends BaseServiceProvider{
-    protected $__config_h_q = [];
+abstract class HqEnvironment extends BaseServiceProvider{
+    protected $__config_hq = [];
     protected string $__lower_package_name;
     protected string $__config_base_path      = '/../Config';
     protected string $__migration_base_path   = '/../Database/Migrations';
@@ -14,7 +14,7 @@ abstract class HQEnvironment extends BaseServiceProvider{
 
     public function __construct(Container $app) {
         parent::__construct($app);
-        $this->__config_h_q = $this->__config['h-q'];
+        $this->__config_hq = $this->__config['hq'];
     }
 
     protected function migrationPath(string $path = ''): string{

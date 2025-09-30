@@ -1,6 +1,6 @@
 <?php
 
-namespace Projects\HQ\Commands;
+namespace Projects\Hq\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
@@ -20,7 +20,7 @@ class MigrateCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Run migrations for the HQ project';
+    protected $description = 'Run migrations for the Hq project';
 
     /**
      * Execute the console command.
@@ -66,7 +66,7 @@ class MigrateCommand extends Command
             }
         }
 
-        $this->info("Migrations for HQ project have been successfully executed.");
+        $this->info("Migrations for Hq project have been successfully executed.");
 
         if ($this->option('seed')){
             $this->info("Run seeding");

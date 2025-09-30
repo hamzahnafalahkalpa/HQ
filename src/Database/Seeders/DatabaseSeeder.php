@@ -1,6 +1,6 @@
 <?php
 
-namespace Projects\HQ\Database\Seeders;
+namespace Projects\Hq\Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -15,7 +15,11 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             WorkspaceSeeder::class,
-            ApiAccessSeeder::class
+            ApiAccessSeeder::class,
+            PermissionSeeder::class,
+            RoleSeeder::class,
+            ProductSeeder::class,
+            PaymentMethodSeeder::class,
         ]);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-use Projects\HQ\Contracts\Supports\ConnectionManager;
+use Projects\Hq\Contracts\Supports\ConnectionManager;
 use Stancl\Tenancy\TenantDatabaseManagers\PostgreSQLSchemaManager;
 
 return [
@@ -52,42 +52,53 @@ return [
             'pgsql' => PostgreSQLSchemaManager::class, // Separate by schema instead of database
         ],
         'app_tenant'   => [
-            'prefix' => 'lite_',
+            'prefix' => 'hq_',
             'suffix' => ''
         ],
         'model_connections' => [
-            "central"        => [
+            'central'        => [
                 'models' => [
-                    "ApiAccess",
-                    "Cache",
-                    "CacheLock",
-                    "Country",
-                    "District",
-                    "Domain",
-                    "FailedJob",
-                    "JobBatch",
-                    "Job",
-                    "PasswordResetToken",
-                    "PayloadMonitoring",
-                    "PersonalAccessToken",
-                    "Province",
-                    "Subdistrict",
-                    "Tenant",
-                    "UserReference",
-                    "User",
-                    "Village",
-                    "Workspace"
+                    'ApiAccess',
+                    'Cache',
+                    'CacheLock',
+                    'Country',
+                    'District',
+                    'Domain',
+                    'FailedJob',
+                    'JobBatch',
+                    'Job',
+                    'PasswordResetToken',
+                    'PayloadMonitoring',
+                    'PersonalAccessToken',
+                    'Province',
+                    'Subdistrict',
+                    'Tenant',
+                    'UserReference',
+                    'User',
+                    'Village',
+                    'Workspace',
+                    'HqUnicode',
+                    'Encoding',
+                    'MasterFeature',
+                    'ModelHasFeature',
+                    'Version'
                 ]
             ],
-            "central_app"    => [
+            'central_app'    => [
                 'models' => [
-                    "Encoding",
-                    "MasterFeature",
-                    "ModelHasFeature",
+                    'Role',
+                    'Permission',
                     'CentralActivityStatus',
-                    'CentralActivity'
+                    'CentralActivity',
+                    'Permission',
+                    'ModelHasPermission',
+                    'Product'
                 ]
             ]
-        ]
+        ],
+        'database_tenant_name' => [
+            'prefix' => 'hq_',
+            'suffix' => ''
+        ],
     ],
 ];

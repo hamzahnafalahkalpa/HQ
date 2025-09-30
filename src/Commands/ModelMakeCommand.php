@@ -1,6 +1,6 @@
 <?php
 
-namespace Projects\HQ\Commands;
+namespace Projects\Hq\Commands;
 
 use Hanafalah\LaravelPackageGenerator\Commands\ModelMakeCommand as CommandsModelMakeCommand;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Projects\HQ\Commands;
+namespace Projects\Hq\Commands;
 
 use Illuminate\Support\Facades\Artisan;
 
@@ -27,7 +27,7 @@ class SeedCommand extends EnvironmentCommand{
     {
         $class = $this->argument('class') ?? "DatabaseSeeder";
         Artisan::call('db:seed',[
-            '--class' => "Projects\HQ\\Database\Seeders\\$class"
+            '--class' => "Projects\Hq\\Database\Seeders\\$class"
         ]);   
     }
 }

@@ -1,54 +1,52 @@
 <?php
 
-namespace Projects\HQ\Providers;
+namespace Projects\Hq\Providers;
 
 use Illuminate\Foundation\Http\Kernel;
 use Hanafalah\LaravelSupport\{
     Concerns\NowYouSeeMe,
     Supports\PathRegistry
 };
-use Illuminate\Support\Str;
-use Projects\HQ\{
-    HQ,
+use Projects\Hq\{
+    Hq,
     Contracts,
-    Facades
 };
 use Hanafalah\LaravelSupport\Middlewares\PayloadMonitoring;
 use Hanafalah\MicroTenant\Contracts\Supports\ConnectionManager;
-use Projects\HQ\Supports\ConnectionManager as SupportsConnectionManager;
+use Projects\Hq\Supports\ConnectionManager as SupportsConnectionManager;
 
-class HQServiceProvider extends HQEnvironment
+class HqServiceProvider extends HqEnvironment
 {
     use NowYouSeeMe;
 
     public function register()
     {
-        $this->registerMainClass(HQ::class,false)
+        $this->registerMainClass(Hq::class,false)
              ->registerCommandService(CommandServiceProvider::class)
             ->registers([
                 'Services' => function(){
                     $this->binds([
-                        Contracts\HQ::class => function(){
-                            return new HQ;
+                        Contracts\Hq::class => function(){
+                            return new Hq;
                         },
                         ConnectionManager::class => SupportsConnectionManager::class
                         //WorkspaceDTO\WorkspaceSettingData::class => WorkspaceSettingData::class
                     ]);   
                 },
                 'Config' => function() {
-                    $this->__config_h_q = config('h-q');
+                    $this->__config_hq = config('hq');
                 },
                 'Provider' => function(){
-                    $this->registerOverideConfig('h-q',__DIR__.'/../'.$this->__config_h_q['libs']['config']);
+                    $this->registerOverideConfig('hq',__DIR__.'/../'.$this->__config_hq['libs']['config']);
                 }
             ]);
     }
 
     public function boot(Kernel $kernel){    
-        $tenant = $this->TenantModel()->where('flag','HQ')->first();  
+        $tenant = $this->TenantModel()->where('flag','APP')->where('props->product_type','Hq')->first();  
         if (isset($tenant)) {
-            $kernel->pushMiddleware(PayloadMonitoring::class);
-            tenancy()->initialize(HQ::ID);
+            // $kernel->pushMiddleware(PayloadMonitoring::class);
+            tenancy()->initialize(Hq::ID);
             $this->registers([
                 '*',
                 'Model', 'Database'
@@ -59,7 +57,7 @@ class HQServiceProvider extends HQEnvironment
             $this->app->singleton(PathRegistry::class, function () {
                 $registry = new PathRegistry();
     
-                $config = config("h-q");
+                $config = config("hq");
                 foreach ($config['libs'] as $key => $lib) $registry->set($key, 'projects'.$lib);
                 return $registry;
             });

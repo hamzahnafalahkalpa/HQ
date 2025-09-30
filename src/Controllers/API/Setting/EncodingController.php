@@ -1,10 +1,10 @@
 <?php
 
-namespace Projects\HQ\Controllers\API\Setting;
+namespace Projects\Hq\Controllers\API\Setting;
 
 use Hanafalah\ModuleEncoding\Contracts\Schemas\Encoding;
-use Projects\HQ\Controllers\API\ApiController;
-use Projects\HQ\Requests\API\Setting\Encoding\{
+use Projects\Hq\Controllers\API\ApiController;
+use Projects\Hq\Requests\API\Setting\Encoding\{
     ViewRequest, ShowRequest, StoreRequest, DeleteRequest
 };
 

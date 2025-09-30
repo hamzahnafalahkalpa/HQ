@@ -1,12 +1,12 @@
 <?php
 
-namespace Projects\HQ\Controllers\API\Transaction;
+namespace Projects\Hq\Controllers\API\Transaction;
 
 use Hanafalah\ModulePayment\Contracts\Schemas\PosTransaction;
 use Hanafalah\ModuleTransaction\Contracts\Schemas\{
     Transaction
 };
-use Projects\HQ\Controllers\API\ApiController;
+use Projects\Hq\Controllers\API\ApiController;
 
 class EnvironmentController extends ApiController{
     public function __construct(

@@ -1,9 +1,9 @@
 <?php
 
-namespace Projects\HQ\Controllers\API\User;
+namespace Projects\Hq\Controllers\API\User;
 
 use Hanafalah\ModuleUser\Contracts\Schemas\User;
-use Projects\HQ\Controllers\API\ApiController;
+use Projects\Hq\Controllers\API\ApiController;
 
 class EnvironmentController extends ApiController{
     public function __construct(

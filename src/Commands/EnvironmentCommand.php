@@ -1,6 +1,6 @@
 <?php
 
-namespace Projects\HQ\Commands;
+namespace Projects\Hq\Commands;
 
 use Hanafalah\LaravelSupport\Concerns\ServiceProvider\HasMigrationConfiguration;
 

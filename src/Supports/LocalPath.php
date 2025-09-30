@@ -1,6 +1,6 @@
 <?php 
 
-namespace Projects\HQ\Supports;
+namespace Projects\Hq\Supports;
 
 use Hanafalah\LaravelSupport\Concerns\Support\HasCall;
 use Illuminate\Support\Str;
@@ -18,7 +18,7 @@ trait LocalPath {
     }
 
     public function getConfig(string $root = ''){
-        return config('h-q'.(
+        return config('hq'.(
             $root == '' ? '' : '.'.$root
         ));
     }

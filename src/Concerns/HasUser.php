@@ -1,6 +1,6 @@
 <?php
 
-namespace Projects\HQ\Concerns;
+namespace Projects\Hq\Concerns;
 
 use Hanafalah\ApiHelper\Facades\ApiAccess;
 

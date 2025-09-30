@@ -1,8 +1,8 @@
 <?php
 
-namespace Projects\HQ\Controllers\API\Transaction\Refund;
+namespace Projects\Hq\Controllers\API\Transaction\Refund;
 
-use Projects\HQ\Controllers\API\Transaction\BaseWalletEnvironmentController as BaseEnv;
+use Projects\Hq\Controllers\API\Transaction\BaseWalletEnvironmentController as BaseEnv;
 
 class EnvironmentController extends BaseEnv{
     protected function getRefundList(?callable $callback = null){        
