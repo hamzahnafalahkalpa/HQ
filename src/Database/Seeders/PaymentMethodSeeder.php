@@ -167,7 +167,6 @@ class PaymentMethodSeeder extends Seeder
             ]
         ];
         $paymentMethod = app(config('app.contracts.PaymentMethod'));
-        dd(config('app.contracts.PaymentMethod'));
         foreach ($arr as $data) $paymentMethod->prepareStorePaymentMethod($this->requestDTO(PaymentMethodData::class,$data));
     }
 }

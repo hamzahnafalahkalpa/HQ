@@ -46,10 +46,14 @@ class HqServiceProvider extends HqEnvironment
         $tenant = $this->TenantModel()->where('flag','APP')->where('props->product_type','Hq')->first();  
         if (isset($tenant)) {
             // $kernel->pushMiddleware(PayloadMonitoring::class);
-            tenancy()->initialize(Hq::ID);
+            tenancy()->initialize($tenant);
             $this->registers([
                 '*',
-                'Model', 'Database'
+                'Model', 'Database',
+                'Provider' > function() use ($tenant){
+                    $this->bootedRegisters($tenant->packages, 'wellmed-lite', __DIR__.'/../'.$this->__config_hq['libs']['migration'] ?? 'Migrations');
+                    $this->registerOverideConfig('hq',__DIR__.'/../'.$this->__config_hq['libs']['config']);
+                }
             ]);
             $this->autoBinds();
             $this->registerRouteService(RouteServiceProvider::class);

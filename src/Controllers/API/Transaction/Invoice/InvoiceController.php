@@ -8,7 +8,9 @@ use Projects\Hq\Requests\API\Transaction\Invoice\{
 
 class InvoiceController extends EnvironmentController{
     protected function commonConditional($query){
-        $query->whereNotNull('reported_at')->where('props->is_deferred',false);
+        $query->whereNotNull('reported_at')->whereHas('paymentHistory',function($q){
+            $q->where('props->is_deferred',false);
+        });
     }
 
     public function index(ViewRequest $request){

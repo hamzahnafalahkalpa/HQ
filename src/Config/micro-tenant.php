@@ -77,22 +77,11 @@ return [
                     'User',
                     'Village',
                     'Workspace',
-                    'HqUnicode',
+                    'Unicode',
                     'Encoding',
                     'MasterFeature',
                     'ModelHasFeature',
                     'Version'
-                ]
-            ],
-            'central_app'    => [
-                'models' => [
-                    'Role',
-                    'Permission',
-                    'CentralActivityStatus',
-                    'CentralActivity',
-                    'Permission',
-                    'ModelHasPermission',
-                    'Product'
                 ]
             ]
         ],

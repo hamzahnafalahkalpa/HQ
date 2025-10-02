@@ -1,10 +1,10 @@
 <?php
 
-use Hanafalah\LaravelSupport\Models\Unicode\Unicode;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Hanafalah\MicroTenant\Concerns\Tenant\NowYouSeeMe;
+use Projects\Hq\Models\HqUnicode;
 
 return new class extends Migration
 {
@@ -14,7 +14,7 @@ return new class extends Migration
 
     public function __construct()
     {
-        $this->__table = app(config('database.models.Unicode', Unicode::class));
+        $this->__table = app(config('database.models.HqUnicode', HqUnicode::class));
     }
 
     /**
@@ -48,6 +48,8 @@ return new class extends Migration
                     ->nullable()->after($this->__table->getKeyName())
                     ->index()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             });
+        },function(){
+            dd('cok');
         });
     }
 
