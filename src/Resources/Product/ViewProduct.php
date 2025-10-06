@@ -2,9 +2,9 @@
 
 namespace Projects\Hq\Resources\Product;
 
-use Hanafalah\LaravelSupport\Resources\ApiResource;
+use Hanafalah\LaravelSupport\Resources\Unicode\ViewUnicode;
 
-class ViewProduct extends ApiResource
+class ViewProduct extends ViewUnicode
 {
   /**
    * Transform the resource into an array.
@@ -14,7 +14,10 @@ class ViewProduct extends ApiResource
    */
   public function toArray(\Illuminate\Http\Request $request): array
   {
-    $arr = parent::toArray($request);
+    $arr = [
+      'product_code' => $this->product_code
+    ];
+    $arr = $this->mergeArray(parent::toArray($request),$arr);
     return $arr;
   }
 }

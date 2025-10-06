@@ -2,4 +2,6 @@
 
 namespace Projects\Hq\Contracts\Data;
 
-interface ProductData {}
+use Hanafalah\LaravelSupport\Contracts\Data\UnicodeData;
+
+interface ProductData extends UnicodeData {}

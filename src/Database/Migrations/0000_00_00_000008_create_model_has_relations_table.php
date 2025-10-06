@@ -23,8 +23,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        $this->isNotTableExists(function(){
-            $table_name = $this->__table->getTableName();
+        $table_name = $this->__table->getTableName();
+        $this->isNotTableExists(function() use ($table_name){
             Schema::create($table_name, function (Blueprint $table) {
                 $table->ulid('id')->primary();
                 $table->string('model_type', 50)->nullable(false);

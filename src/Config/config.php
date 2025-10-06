@@ -36,15 +36,6 @@ return [
         'data' => 'Data',
         'resource' => 'Resources',
     ],
-    "packages" => [
-        /*--------------------------------------------------------------------------
-        * Note: The contents of the packages are started with the class base name,
-        * then followed by config and others. You can be used to override default package config
-        * "module-user" => [
-        *       "config" => []
-        * ]
-        *------------------------------------------------------------------------*/
-    ],
     "app" => [
         "impersonate" => [
             "storage"   => [
@@ -83,6 +74,9 @@ return [
         'hanafalah/module-support'              => ['repository' =>'hamzahnafalahkalpa/module-support'],
         'hanafalah/module-transaction'          => ['repository' =>'hamzahnafalahkalpa/module-transaction'],
         'hanafalah/module-tax'                  => ['repository' =>'hamzahnafalahkalpa/module-tax'],
-        'hanafalah/wellmed-feature'             => ['repository' =>'hamzahnafalahkalpa/wellmed-feature']
+        'hanafalah/wellmed-feature'             => ['repository' =>'hamzahnafalahkalpa/wellmed-feature'],
+        'hanafalah/module-payer'                => ['repository' =>'hamzahnafalahkalpa/module-payer'],
+        'hanafalah/module-organization'         => ['repository' =>'hamzahnafalahkalpa/module-organization'],
+        'hanafalah/module-employee'              => ['repository' =>'hamzahnafalahkalpa/module-employee']
     ]
 ];

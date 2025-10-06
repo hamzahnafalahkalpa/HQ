@@ -24,10 +24,11 @@ class WorkspaceSeeder extends Seeder{
      */
     public function run(): void
     {
-        $workspace = app(config('database.models.Workspace'))->uuid('9e7ff0f6-7679-46c8-ac3e-71da81816Hq')->first();        
+        $workspace = app(config('database.models.Workspace'))->uuid('9e7ff0f6-7679-46c8-ac3e-71da818160Hq')->first();        
         $generator_config = config('laravel-package-generator');
         $project_namespace = 'Projects';
         if (!isset($workspace)){
+            $is_new = true;
             $workspace = app(config('app.contracts.Workspace'))->prepareStoreWorkspace(WorkspaceData::from([
                 'uuid'    => '9e7ff0f6-7679-46c8-ac3e-71da818160Hq',
                 'name'    => 'Hq',
@@ -39,8 +40,8 @@ class WorkspaceSeeder extends Seeder{
                 'parent_id'      => null,
                 'name'           => 'Hq',
                 'flag'           => 'APP',
-                'reference_id'   => null,
-                'reference_type' => null,
+                'reference_id'   => $workspace->getKey(),
+                'reference_type' => $workspace->getMorphClass(),
                 'provider'       => $project_namespace.'\\Hq\\Providers\\HqServiceProvider',
                 'path'           => $generator_config['patterns']['project']['published_at'],
                 'packages'       => [],
@@ -48,45 +49,46 @@ class WorkspaceSeeder extends Seeder{
                 'config'         => $generator_config['patterns']['project']
             ]));
         }else{
+            $is_new = false;
             $project_tenant = $workspace->tenant;
         }
-
-        $providers = config('hq.packages',[]);
-        $providers = array_keys($providers);
-        $package_providers = [];
-        $requires = [
-            'require' => []
-        ];
-        $repositories = [
-            'repositories' => []
-        ];
-        foreach ($providers as $provider) {
-            $original    = $provider;
-            $provider    = explode("/", $provider);
-            $provider[0] = Str::studly($provider[0]);
-            $provider[1] = Str::studly($provider[1]);
-            $provider    = implode('\\',$provider).'\\'.$provider[1].'ServiceProvider';
-            $package_providers[$original] = [
-                'provider' => $provider
+        if ($is_new){
+            $providers = config('hq.packages',[]);
+            $providers = array_keys($providers);
+            $package_providers = [];
+            $requires = [
+                'require' => []
             ];
-
-            $repositories['repositories'][Str::kebab($original)] = [
-                'type' => 'path',
-                'url'  => '../../repositories/'.Str::afterLast($original,'/'),
-                'options' => [
-                    'symlink' => true
-                ]
+            $repositories = [
+                'repositories' => []
             ];
-            if (Str::kebab($original) != 'hanafalah/microtenant'){
-                $requires['require'][Str::kebab($original)] = 'dev-main as 1.0'; 
+            foreach ($providers as $provider) {
+                $original    = $provider;
+                $provider    = explode("/", $provider);
+                $provider[0] = Str::studly($provider[0]);
+                $provider[1] = Str::studly($provider[1]);
+                $provider    = implode('\\',$provider).'\\'.$provider[1].'ServiceProvider';
+                $package_providers[$original] = [
+                    'provider' => $provider
+                ];
+    
+                $repositories['repositories'][Str::kebab($original)] = [
+                    'type' => 'path',
+                    'url'  => '../../repositories/'.Str::afterLast($original,'/'),
+                    'options' => [
+                        'symlink' => true
+                    ]
+                ];
+                if (Str::kebab($original) != 'hanafalah/microtenant'){
+                    $requires['require'][Str::kebab($original)] = 'dev-main as 1.0'; 
+                }
             }
+            
+            $project_tenant->setAttribute('packages',$package_providers);
+            $project_tenant->save();
         }
-        
-        $project_tenant->setAttribute('packages',$package_providers);
-        $project_tenant->save();
-
         MicroTenant::tenantImpersonate($project_tenant);
-        tenancy()->initialize($project_tenant->getKey());
+        tenancy()->initialize($project_tenant);
 
         Artisan::call('impersonate:cache',[
             '--app_id'    => $project_tenant->getKey()

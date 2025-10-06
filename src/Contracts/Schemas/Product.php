@@ -2,6 +2,7 @@
 
 namespace Projects\Hq\Contracts\Schemas;
 
+use Hanafalah\LaravelSupport\Contracts\Schemas\Unicode;
 use Projects\Hq\Contracts\Data\ProductData;
 //use Projects\Hq\Contracts\Data\ProductUpdateData;
 use Hanafalah\LaravelSupport\Contracts\Supports\DataManagement;
@@ -28,7 +29,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method array storeMultipleProduct(array $datas)
  */
 
-interface Product extends DataManagement
+interface Product extends Unicode
 {
     public function prepareStoreProduct(ProductData $product_dto): Model;
+    public function product(mixed $conditionals = null): Builder;
 }

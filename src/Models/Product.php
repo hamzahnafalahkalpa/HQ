@@ -3,7 +3,7 @@
 namespace Projects\Hq\Models;
 
 use Hanafalah\LaravelHasProps\Concerns\HasProps;
-use Hanafalah\LaravelSupport\Models\BaseModel;
+use Hanafalah\LaravelSupport\Models\Unicode\Unicode;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Projects\Hq\Resources\Product\{
@@ -11,27 +11,27 @@ use Projects\Hq\Resources\Product\{
     ShowProduct
 };
 
-class Product extends BaseModel
+class Product extends Unicode
 {
     use HasUlids, HasProps, SoftDeletes;
 
-    public $incrementing  = false;
-    protected $keyType    = 'string';
-    protected $primaryKey = 'id';
-    public $list = [
-        'id', 'product_code', 'flag', 'name', 'props'
-    ];
-    public $show = [];
+    protected $table = 'unicodes';
 
     protected $casts = [
         'name' => 'string', 
         'flag' => 'string',
-        'product_code' => 'string'
+        'product_code' => 'string',
+        'label'  => 'string'
     ];
 
     public function getPropsQuery(): array{
         return [
+            'product_code' => 'props->product_code'
         ];
+    }
+
+    protected function isUsingService(): bool{
+        return true;
     }
 
     protected static function booted(): void{
@@ -43,13 +43,13 @@ class Product extends BaseModel
         });
     }
 
-    public function viewUsingRelation(): array{
-        return [];
-    }
+    // public function viewUsingRelation(): array{
+    //     return [];
+    // }
 
-    public function showUsingRelation(): array{
-        return [];
-    }
+    // public function showUsingRelation(): array{
+    //     return [];
+    // }
 
     public function getViewResource(){
         return ViewProduct::class;

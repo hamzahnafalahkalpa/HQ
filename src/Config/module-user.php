@@ -6,6 +6,9 @@ use Hanafalah\ModuleUser\{
 
 return [
     'user_reference_types' => [
+        'company' => [
+            'schema' => 'Company',
+        ],
         'employee' => [
             'schema' => 'Employee',
         ],

@@ -16,8 +16,12 @@ use Projects\Hq\Controllers\API\Setting\{
 |
 */
 Route::apiResource('/setting',SettingController::class)->only('index');
-// Route::group([
-//     'prefix' => 'setting',
-//     'as' => 'setting.'
-// ],function(){
-// });
+Route::group([
+    'prefix' => 'setting',
+    'as' => 'setting.'
+],function(){
+    include __DIR__.'/setting/acl.php'; 
+    include __DIR__.'/setting/finance.php'; 
+    include __DIR__.'/setting/general-setting.php'; 
+    include __DIR__.'/setting/stakeholder.php'; 
+});

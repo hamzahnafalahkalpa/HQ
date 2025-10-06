@@ -2,8 +2,6 @@
 
 namespace Projects\Hq\Requests\API\User;
 
-use Projects\WellmedLite\Requests\API\Transaction\Deposit\Environment;
-
 class ShowRequest extends Environment
 {
 

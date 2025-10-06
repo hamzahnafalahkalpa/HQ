@@ -14,12 +14,4 @@ class UserController extends EnvironmentController{
     public function show(ShowRequest $request){
         return $this->showUser();
     }
-
-    public function store(StoreRequest $request){
-        return $this->storeUser();
-    }
-
-    public function delete(DeleteRequest $request){
-        return $this->deleteUser();
-    }
 }

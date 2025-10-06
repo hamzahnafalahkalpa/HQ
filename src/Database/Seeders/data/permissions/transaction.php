@@ -9,13 +9,12 @@ return [
     'type'        => Type::MENU->value,
     'show_in_acl' => true,
     'guard_name'  => 'api',
-    'ordering'    => 10,
+    'ordering'    => 2,
     'childs'      => [
-        include __DIR__.'/transaction/point-of-sale.php',
+        include __DIR__.'/transaction/submission.php',
         include __DIR__.'/transaction/billing.php',
         include __DIR__.'/transaction/invoice.php',
-        include __DIR__.'/transaction/refund.php',
-        include __DIR__.'/transaction/deposit.php',
+        include __DIR__.'/transaction/refund.php'
     ]
 ];
 

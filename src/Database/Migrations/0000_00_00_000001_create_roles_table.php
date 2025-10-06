@@ -1,10 +1,10 @@
 <?php
 
+use Hanafalah\LaravelPermission\Models\Role\Role;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Hanafalah\MicroTenant\Concerns\Tenant\NowYouSeeMe;
-use Projects\Hq\Models\HqRole;
 
 return new class extends Migration
 {
@@ -14,7 +14,7 @@ return new class extends Migration
 
     public function __construct()
     {
-        $this->__table = app(config('database.models.HqRole', HqRole::class));
+        $this->__table = app(config('database.models.Role', Role::class));
     }
 
     /**

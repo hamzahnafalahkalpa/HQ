@@ -4,8 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Hanafalah\LaravelPermission\Enums\Permission\Type;
+use Hanafalah\LaravelPermission\Models\Permission\Permission;
 use Hanafalah\MicroTenant\Concerns\Tenant\NowYouSeeMe;
-use Projects\Hq\Models\HqPermission;
 
 return new class extends Migration
 {
@@ -15,7 +15,7 @@ return new class extends Migration
 
     public function __construct()
     {
-        $this->__table = app(config('database.models.HqPermission', HqPermission::class));
+        $this->__table = app(config('database.models.Permission', Permission::class));
     }
 
     /**

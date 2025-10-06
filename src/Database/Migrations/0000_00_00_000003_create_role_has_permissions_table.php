@@ -1,12 +1,12 @@
 <?php
 
+use Hanafalah\LaravelPermission\Models\Permission\Permission;
+use Hanafalah\LaravelPermission\Models\Role\Role;
+use Hanafalah\LaravelPermission\Models\Role\RoleHasPermission;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Hanafalah\MicroTenant\Concerns\Tenant\NowYouSeeMe;
-use Projects\Hq\Models\HqPermission;
-use Projects\Hq\Models\HqRole;
-use Projects\Hq\Models\HqRoleHasPermission;
 
 return new class extends Migration
 {
@@ -16,7 +16,7 @@ return new class extends Migration
 
     public function __construct()
     {
-        $this->__table = app(config('database.models.HqRoleHasPermission', HqRoleHasPermission::class));
+        $this->__table = app(config('database.models.RoleHasPermission', RoleHasPermission::class));
     }
 
     /**
@@ -27,8 +27,8 @@ return new class extends Migration
         $table_name = $this->__table->getTable();
         $this->isNotTableExists(function() use ($table_name){
             Schema::create($table_name, function (Blueprint $table) {
-                $permission = app(config('database.models.HqPermission', HqPermission::class));
-                $role       = app(config('database.models.HqRole', HqRole::class));
+                $permission = app(config('database.models.Permission', Permission::class));
+                $role       = app(config('database.models.Role', Role::class));
 
                 $table->id();
                 $table->foreignIdFor($permission::class)

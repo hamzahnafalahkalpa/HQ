@@ -26,11 +26,7 @@ class HqServiceProvider extends HqEnvironment
             ->registers([
                 'Services' => function(){
                     $this->binds([
-                        Contracts\Hq::class => function(){
-                            return new Hq;
-                        },
                         ConnectionManager::class => SupportsConnectionManager::class
-                        //WorkspaceDTO\WorkspaceSettingData::class => WorkspaceSettingData::class
                     ]);   
                 },
                 'Config' => function() {
@@ -44,20 +40,20 @@ class HqServiceProvider extends HqEnvironment
 
     public function boot(Kernel $kernel){    
         $tenant = $this->TenantModel()->where('flag','APP')->where('props->product_type','Hq')->first();  
+        config(['database.connections.tenant.search_path' => $tenant->tenancy_db_name]);
         if (isset($tenant)) {
-            // $kernel->pushMiddleware(PayloadMonitoring::class);
-            tenancy()->initialize($tenant);
             $this->registers([
                 '*',
                 'Model', 'Database',
-                'Provider' > function() use ($tenant){
-                    $this->bootedRegisters($tenant->packages, 'wellmed-lite', __DIR__.'/../'.$this->__config_hq['libs']['migration'] ?? 'Migrations');
+                'Provider' => function() use ($tenant){
+                    $this->bootedRegisters($tenant->packages, 'hq', __DIR__.'/../'.$this->__config_hq['libs']['migration'] ?? 'Migrations');
                     $this->registerOverideConfig('hq',__DIR__.'/../'.$this->__config_hq['libs']['config']);
                 }
             ]);
             $this->autoBinds();
+            tenancy()->end();
+            tenancy()->initialize($tenant);
             $this->registerRouteService(RouteServiceProvider::class);
-    
             $this->app->singleton(PathRegistry::class, function () {
                 $registry = new PathRegistry();
     
@@ -65,6 +61,15 @@ class HqServiceProvider extends HqEnvironment
                 foreach ($config['libs'] as $key => $lib) $registry->set($key, 'projects'.$lib);
                 return $registry;
             });
+        }else{
+            $this->registers([
+                '*',
+                'Model', 'Database',
+                'Provider' => function() use ($tenant){
+                    $this->registerOverideConfig('hq',__DIR__.'/../'.$this->__config_hq['libs']['config']);
+                }
+            ]);
+            $this->autoBinds();
         }
     }    
 }

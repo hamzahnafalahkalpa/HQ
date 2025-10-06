@@ -13,9 +13,9 @@ class ProductSeeder extends Seeder
     use HasRequest;
 
     protected $__products = [
-        ['flag' => 'LITE', 'name' => 'Wellmed Lite'],
-        ['flag' => 'PLUS', 'name' => 'Wellmed Plus'],
-        ['flag' => 'E', 'name' => 'Wellmed E']
+        ['label' => 'LITE', 'name' => 'Wellmed Lite', 'ordering' => 1],
+        ['label' => 'PLUS', 'name' => 'Wellmed Plus', 'ordering' => 2],
+        ['label' => 'E', 'name' => 'Wellmed E', 'ordering' => 3]
     ];
 
     /**
@@ -26,7 +26,7 @@ class ProductSeeder extends Seeder
         foreach ($this->__products as $product) {
             app(config('app.contracts.Product'))->prepareStoreProduct($this->requestDTO(config('app.contracts.ProductData'),[
                 'name' => $product['name'],
-                'flag' => $product['flag']
+                'label' => $product['label']
             ]));
         }
     }

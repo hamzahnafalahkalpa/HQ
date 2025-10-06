@@ -19,9 +19,11 @@ trait HasUser
         if (isset($user)){
             $user->load([
                 'userReference' => function($query){
-                    $query->with([
-                        'role'
-                    ])->where('reference_type', $this->EmployeeModelMorph());
+                    $query->with(['role'])
+                          ->whereIn('reference_type', [
+                            $this->PeopleModelMorph(),
+                            $this->EmployeeModelMorph()
+                        ]);
                 }
             ]);
             $user_reference = $user->userReference;
@@ -31,10 +33,6 @@ trait HasUser
                 $workspace = &$user_reference->workspace;
                 if(isset($workspace)) {
                     $this->global_workspace = $workspace;
-    
-                    if (isset($workspace->setting)){
-                        $setting = $workspace->setting;
-                    }
                 }
                 $impersonate = config()->get('app.impersonate');
                 config()->set('app.impersonate', $this->mergeArray($impersonate,[

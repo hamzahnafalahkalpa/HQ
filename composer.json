@@ -22,8 +22,14 @@
         }
     },
     "require": {
+        "xendit/xendit-php": "^7.0",
         "hanafalah/laravel-support": "dev-main",
-        "hanafalah/module-payment": "dev-main"
+        "hanafalah/module-payment": "dev-main",
+        "hanafalah/module-payer": "dev-main",
+        "hanafalah/module-people": "dev-main",
+        "hanafalah/module-support": "dev-main",
+        "hanafalah/wellmed-feature": "dev-main",
+        "hanafalah/module-employee": "dev-main"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -31,6 +37,41 @@
         "hanafalah/laravel-feature": {
             "type": "path",
             "url": "../../repositories/laravel-feature",
+            "options": {
+                "symlink": true
+            }
+        },
+        "hanafalah/wellmed-feature": {
+            "type": "path",
+            "url": "../../repositories/wellmed-feature",
+            "options": {
+                "symlink": true
+            }
+        },
+        "hanafalah/module-support": {
+            "type": "path",
+            "url": "../../repositories/module-support",
+            "options": {
+                "symlink": true
+            }
+        },
+        "hanafalah/module-employee": {
+            "type": "path",
+            "url": "../../repositories/module-employee",
+            "options": {
+                "symlink": true
+            }
+        },
+        "hanafalah/module-service": {
+            "type": "path",
+            "url": "../../repositories/module-service",
+            "options": {
+                "symlink": true
+            }
+        },
+        "hanafalah/module-regional": {
+            "type": "path",
+            "url": "../../repositories/module-regional",
             "options": {
                 "symlink": true
             }
@@ -84,9 +125,30 @@
                 "symlink": true
             }
         },
+        "hanafalah/module-people": {
+            "type": "path",
+            "url": "../../repositories/module-encoding",
+            "options": {
+                "symlink": true
+            }
+        },
         "hanafalah/module-payment": {
             "type": "path",
             "url": "../../repositories/module-payment",
+            "options": {
+                "symlink": true
+            }
+        },
+        "hanafalah/module-payer": {
+            "type": "path",
+            "url": "../../repositories/module-payer",
+            "options": {
+                "symlink": true
+            }
+        },
+        "hanafalah/module-organization": {
+            "type": "path",
+            "url": "../../repositories/module-organization",
             "options": {
                 "symlink": true
             }

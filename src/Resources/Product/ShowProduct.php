@@ -2,6 +2,8 @@
 
 namespace Projects\Hq\Resources\Product;
 
+use Hanafalah\LaravelSupport\Resources\Unicode\ShowUnicode as UnicodeShowUnicode;
+
 class ShowProduct extends ViewProduct
 {
   /**
@@ -13,7 +15,8 @@ class ShowProduct extends ViewProduct
   public function toArray(\Illuminate\Http\Request $request): array
   {
     $arr = [];
-    $arr = $this->mergeArray(parent::toArray($request),$arr);
+    $show = $this->resolveNow(new UnicodeShowUnicode($this));
+    $arr = $this->mergeArray(parent::toArray($request),$show,$arr);
     return $arr;
   }
 }

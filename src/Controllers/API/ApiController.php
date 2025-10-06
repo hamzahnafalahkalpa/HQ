@@ -11,7 +11,10 @@ abstract class ApiController extends ControllersApiController
     use HasUser;
 
     public function __construct(){
-        config(['micro-tenant.use-db-name' => true]);
+        config([
+            'micro-tenant.use-db-name' => true,
+            'database.connections.tenant' => config('database.connections.central_app')
+        ]);
         if (app()->environment('local')) {
             $commands = Artisan::all();
             if (array_key_exists('octane:reload-workers', $commands)) {
