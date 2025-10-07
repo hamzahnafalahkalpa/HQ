@@ -29,7 +29,8 @@
         "hanafalah/module-people": "dev-main",
         "hanafalah/module-support": "dev-main",
         "hanafalah/wellmed-feature": "dev-main",
-        "hanafalah/module-employee": "dev-main"
+        "hanafalah/module-employee": "dev-main",
+        "hanafalah/laravel-xendit": "dev-main"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -44,6 +45,13 @@
         "hanafalah/wellmed-feature": {
             "type": "path",
             "url": "../../repositories/wellmed-feature",
+            "options": {
+                "symlink": true
+            }
+        },
+        "hanafalah/laravel-xendit": {
+            "type": "path",
+            "url": "../../repositories/laravel-xendit",
             "options": {
                 "symlink": true
             }

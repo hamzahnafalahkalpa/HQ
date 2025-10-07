@@ -77,6 +77,7 @@ return [
         'hanafalah/wellmed-feature'             => ['repository' =>'hamzahnafalahkalpa/wellmed-feature'],
         'hanafalah/module-payer'                => ['repository' =>'hamzahnafalahkalpa/module-payer'],
         'hanafalah/module-organization'         => ['repository' =>'hamzahnafalahkalpa/module-organization'],
-        'hanafalah/module-employee'              => ['repository' =>'hamzahnafalahkalpa/module-employee']
+        'hanafalah/module-employee'             => ['repository' =>'hamzahnafalahkalpa/module-employee'],
+        'hanafalah/laravel-xendit'              => ['repository' =>'hamzahnafalahkalpa/laravel-xendit']
     ]
 ];

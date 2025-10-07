@@ -4,7 +4,6 @@ namespace Projects\Hq\Controllers\API\Transaction\Submission;
 
 use Hanafalah\ModulePayment\Contracts\Schemas\PosTransaction;
 use Projects\Hq\Controllers\API\ApiController;
-use Xendit\Configuration;
 
 class EnvironmentController extends ApiController{
     public function __construct(
@@ -12,8 +11,6 @@ class EnvironmentController extends ApiController{
     ){
         parent::__construct();
         $this->userAttempt();
-        
-        // Configuration::setXenditKey(env('XENDIT_KEY'));
     }
 
     protected function commonConditional($query){
