@@ -38,6 +38,11 @@ class InstallMakeCommand extends EnvironmentCommand
             '--tag'      => 'migrations'
         ]);
         $this->info('✔️  Created migrations');
+
+        $this->call('optimize:clear');
+        $this->call('migrate');
+        $this->call('db:seed');
+
         $this->callSilent('hq:seed');
 
         $this->comment('projects/hq installed successfully.');

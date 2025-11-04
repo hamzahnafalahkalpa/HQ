@@ -51,8 +51,7 @@ return new class extends Migration
         $this->isNotColumnExists('parent_id',function() use ($table_name){
             Schema::table($table_name, function (Blueprint $table) use ($table_name) {
                 $table->foreignIdFor($this->__table::class, 'parent_id')
-                    ->after('id')->nullable()->index()->constrained($table_name)
-                    ->cascadeOnUpdate()->restrictOnDelete();
+                    ->after('id')->nullable()->index();
             });
         });
     }
