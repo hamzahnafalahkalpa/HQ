@@ -16,7 +16,7 @@ class EncodingSeeder extends Seeder{
         foreach (config('module-encoding.encodings') as $encoding) {
             $encoding = app(config('database.models.Encoding'))
                         ->firstOrCreate([
-                            'flag' => $encoding['flag'],
+                            'label' => $encoding['label'],
                         ],[
                             'name' => $encoding['name']
                         ]);

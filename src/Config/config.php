@@ -9,7 +9,7 @@ return [
     "service_name"  => "Hq",
     "paths"         => [
         "local_path"   => 'projects',
-        "base_path"    => __DIR__.'\\..\\'
+        "base_path"    => __DIR__.'/../'
     ],
     "libs"           => [
         'migration' => 'Database/Migrations',

@@ -10,9 +10,10 @@ use Hanafalah\LaravelSupport\{
 use Projects\Hq\{
     Hq,
     Contracts,
+    Facades
 };
-use Hanafalah\LaravelSupport\Middlewares\PayloadMonitoring;
-use Hanafalah\MicroTenant\Contracts\Supports\ConnectionManager;
+use Hanafalah\MicroTenant\Facades\MicroTenant;
+use Projects\Hq\Contracts\Supports\ConnectionManager as ConnectionManager;
 use Projects\Hq\Supports\ConnectionManager as SupportsConnectionManager;
 
 class HqServiceProvider extends HqEnvironment
@@ -39,37 +40,44 @@ class HqServiceProvider extends HqEnvironment
     }
 
     public function boot(Kernel $kernel){    
-        $tenant = $this->TenantModel()->where('flag','APP')->where('props->product_type','Hq')->first();  
-        config(['database.connections.tenant.search_path' => $tenant->tenancy_db_name]);
-        if (isset($tenant)) {
-            $this->registers([
-                '*',
-                'Model', 'Database',
-                'Provider' => function() use ($tenant){
-                    $this->bootedRegisters($tenant->packages, 'hq', __DIR__.'/../'.$this->__config_hq['libs']['migration'] ?? 'Migrations');
-                    $this->registerOverideConfig('hq',__DIR__.'/../'.$this->__config_hq['libs']['config']);
+        $this->registerModel();
+        $this->app->booted(function(){
+            try {
+                $tenant = $this->TenantModel()->where('flag','APP')->where('props->product_type','Hq')->first();  
+                if (isset($tenant)) {
+                    config(['database.connections.tenant.search_path' => $tenant->tenancy_db_name]);
+                    $cache = app(config('laravel-support.service_cache'))->getConfigCache();
+                    $this->registers([
+                        '*',
+                        'Provider' => function() use ($tenant){
+                            $this->bootedRegisters($tenant->packages, 'hq', __DIR__.'/../'.$this->__config_hq['libs']['migration'] ?? 'Migrations');
+                            $this->registerOverideConfig('hq',__DIR__.'/../'.$this->__config_hq['libs']['config']);
+                        },
+                        'Model', 'Database',
+                    ]);
+                    MicroTenant::impersonate($tenant,false);    
+                    ($this->checkCacheConfig('config-cache')) ? $this->multipleBinds(config('app.contracts')) : $this->autoBinds();
+                    $this->registerRouteService(RouteServiceProvider::class);
+                    
+                    $this->app->singleton(PathRegistry::class, function () {
+                        $registry = new PathRegistry();
+            
+                        $config = config("hq");
+                        foreach ($config['libs'] as $key => $lib) $registry->set($key, 'projects'.$lib);
+                        return $registry;
+                    });
+                }else{
+                    $this->registers([
+                        '*',
+                        'Model', 'Database',
+                        'Provider' => function() use ($tenant){
+                            $this->registerOverideConfig('hq',__DIR__.'/../'.$this->__config_hq['libs']['config']);
+                        }
+                    ]);
+                    $this->autoBinds();
                 }
-            ]);
-            $this->autoBinds();
-            tenancy()->end();
-            tenancy()->initialize($tenant);
-            $this->registerRouteService(RouteServiceProvider::class);
-            $this->app->singleton(PathRegistry::class, function () {
-                $registry = new PathRegistry();
-    
-                $config = config("hq");
-                foreach ($config['libs'] as $key => $lib) $registry->set($key, 'projects'.$lib);
-                return $registry;
-            });
-        }else{
-            $this->registers([
-                '*',
-                'Model', 'Database',
-                'Provider' => function() use ($tenant){
-                    $this->registerOverideConfig('hq',__DIR__.'/../'.$this->__config_hq['libs']['config']);
-                }
-            ]);
-            $this->autoBinds();
-        }
+            } catch (\Exception $e) {
+            }
+        });
     }    
 }
