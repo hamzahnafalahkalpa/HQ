@@ -87,8 +87,10 @@ class WorkspaceSeeder extends Seeder{
             $project_tenant->setAttribute('packages',$package_providers);
             $project_tenant->save();
         }
-        MicroTenant::tenantImpersonate($project_tenant);
-        tenancy()->initialize($project_tenant);
+
+        config([
+            'database.connections.tenant.search_path' => $project_tenant->tenancy_db_name
+        ]);
 
         Artisan::call('impersonate:cache',[
             '--app_id'    => $project_tenant->getKey()
@@ -98,5 +100,7 @@ class WorkspaceSeeder extends Seeder{
             '--app'       => true,
             '--app_id'    => $project_tenant->getKey()
         ]);
+
+        MicroTenant::tenantImpersonate($project_tenant,false);        
     }
 }

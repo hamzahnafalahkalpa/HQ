@@ -113,7 +113,8 @@ return [
             'tenant' => [
                 'models' => [
                     'Unicode',
-                    'HqAddress'
+                    'HqAddress',
+                    'Permission'
                 ]
             ]
         ],

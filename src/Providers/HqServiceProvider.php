@@ -55,7 +55,9 @@ class HqServiceProvider extends HqEnvironment
                         },
                         'Model', 'Database',
                     ]);
+
                     MicroTenant::impersonate($tenant,false);    
+
                     ($this->checkCacheConfig('config-cache')) ? $this->multipleBinds(config('app.contracts')) : $this->autoBinds();
                     $this->registerRouteService(RouteServiceProvider::class);
                     
