@@ -13,7 +13,9 @@ use Projects\Hq\{
     Facades
 };
 use Hanafalah\MicroTenant\Facades\MicroTenant;
+use Projects\Hq\Contracts\Schemas\Product;
 use Projects\Hq\Contracts\Supports\ConnectionManager as ConnectionManager;
+use Projects\Hq\Schemas\Product as SchemasProduct;
 use Projects\Hq\Supports\ConnectionManager as SupportsConnectionManager;
 
 class HqServiceProvider extends HqEnvironment
@@ -27,7 +29,11 @@ class HqServiceProvider extends HqEnvironment
             ->registers([
                 'Services' => function(){
                     $this->binds([
-                        ConnectionManager::class => SupportsConnectionManager::class
+                        Contracts\Hq::class => function(){
+                            return new Hq;
+                        },
+                        ConnectionManager::class => SupportsConnectionManager::class,
+                        Product::class => SchemasProduct::class
                     ]);   
                 },
                 'Config' => function() {
@@ -45,8 +51,9 @@ class HqServiceProvider extends HqEnvironment
             try {
                 $tenant = $this->TenantModel()->where('flag','APP')->where('props->product_type','Hq')->first();  
                 if (isset($tenant)) {
-                    config(['database.connections.tenant.search_path' => $tenant->tenancy_db_name]);
+                    // config(['database.connections.tenant.search_path' => $tenant->tenancy_db_name]);
                     $cache = app(config('laravel-support.service_cache'))->getConfigCache();
+
                     $this->registers([
                         '*',
                         'Provider' => function() use ($tenant){
@@ -57,7 +64,6 @@ class HqServiceProvider extends HqEnvironment
                     ]);
 
                     MicroTenant::impersonate($tenant,false);    
-
                     ($this->checkCacheConfig('config-cache')) ? $this->multipleBinds(config('app.contracts')) : $this->autoBinds();
                     $this->registerRouteService(RouteServiceProvider::class);
                     
@@ -78,7 +84,7 @@ class HqServiceProvider extends HqEnvironment
                     ]);
                     $this->autoBinds();
                 }
-            } catch (\Exception $e) {
+            } catch (\Throwable $th) {
             }
         });
     }    

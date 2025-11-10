@@ -31,7 +31,7 @@ return [
             'show_in_data' => true,
             'show_in_acl' => true,
             'childs'      => [
-                include_once __DIR__.'/point-of-sale/billing.php',
+                include_once __DIR__.'/submission/billing.php',
             ]
         ],
         [

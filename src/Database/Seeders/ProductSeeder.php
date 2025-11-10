@@ -12,11 +12,626 @@ class ProductSeeder extends Seeder
 {
     use HasRequest;
 
-    protected $__products = [
-        ['label' => 'LITE', 'name' => 'Wellmed Lite', 'ordering' => 1],
-        ['label' => 'PLUS', 'name' => 'Wellmed Plus', 'ordering' => 2],
-        ['label' => 'E', 'name' => 'Wellmed E', 'ordering' => 3]
+    protected array $__products = [
+        [
+            'label' => 'LITE', 
+            'name' => 'Wellmed Lite', 
+            'ordering' => 1,
+            'price' => 1250000,
+            'discount' => 60, // in percent
+            'notes' => [
+                'Cocok untuk klinik kecil dan praktik perorangan.',
+                'Fitur dasar untuk manajemen pasien dan rekam medis elektronik.',
+                'Terinstall tiga (3) pengguna secara default.',
+                'Hanya untuk satu (1) poliklinik/departemen.',
+            ],
+            'product_items' => [
+                [
+                    'name' => 'Dashboard',
+                    'master_product_item' => [
+                        'name' => 'Dashboard',
+                        'label' => 'Dashboard',
+                    ],
+                    'note' => null,
+                    'price' => 0,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Rekam Medis Elektronik',
+                    'master_product_item' => [
+                        'name' => 'Rekam Medis Elektronik',
+                        'label' => 'EMR',
+                    ],
+                    'note' => null,
+                    'price' => 150000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Pemeriksaan',
+                    'master_product_item' => [
+                        'name' => 'Pemeriksaan',
+                        'label' => 'Consultation',
+                    ],
+                    'note' => null,
+                    'price' => 150000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Laporan',
+                    'master_product_item' => [
+                        'name' => 'Laporan',
+                        'label' => 'Report',
+                    ],
+                    'note' => null,
+                    'price' => 100000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Integrasi Satu Sehat',
+                    'master_product_item' => [
+                        'name' => 'Integrasi Satu Sehat',
+                        'label' => 'SatuSehat',
+                    ],
+                    'note' => null,
+                    'price' => 250000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Kasir',
+                    'master_product_item' => [
+                        'name' => 'Kasir',
+                        'label' => 'Cashier',
+                    ],
+                    'note' => null,
+                    'price' => 100000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Jumlah Pengguna',
+                    'master_product_item' => [
+                        'name' => 'Jumlah Pengguna',
+                        'label' => 'User',
+                    ],
+                    'note' => 'Max 3 Pengguna',
+                    'price' => 300000,
+                    'discount' => 0
+                ]
+            ],
+            'additional_items' => [
+                [
+                    'name' => 'Penambahan Pengguna',
+                    'master_product_item' => [
+                        'name' => 'Add on User',
+                        'label' => 'Add on User',
+                    ],
+                    'price' => 100000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Penambahan Formulir',
+                    'master_product_item' => [
+                        'name' => 'Add on Form',
+                        'label' => 'Add on Form',
+                    ],
+                    'price' => 1500000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Penambahan Laporan',
+                    'master_product_item' => [
+                        'name' => 'Add on Report',
+                        'label' => 'Add on Report',
+                    ],
+                    'price' => 1500000,
+                    'discount' => 0
+                ]
+            ]
+        ],
+        [
+            'label' => 'PLUS', 
+            'name' => 'Wellmed Plus', 
+            'ordering' => 2,
+            'price' => 4100000,
+            'discount' => 55, // bundle price 1.850.000
+            'notes' => [
+                'Cocok untuk klinik menengah dengan kebutuhan integrasi dan AI.',
+                'Termasuk 8 pengguna dan 2 poliklinik secara default.',
+                'Mendukung integrasi BPJS, laboratorium, dan radiologi.',
+                'Termasuk AI patient recap hingga 500 pasien per bulan.'
+            ],
+            'product_items' => [
+                [
+                    'name' => 'Dashboard',
+                    'master_product_item' => [
+                        'name' => 'Dashboard',
+                        'label' => 'Dashboard',
+                    ],
+                    'note' => null,
+                    'price' => 0,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Rekam Medis Elektronik',
+                    'master_product_item' => [
+                        'name' => 'Rekam Medis Elektronik',
+                        'label' => 'EMR',
+                    ],
+                    'note' => 'Recap per visit + full export in PDF',
+                    'price' => 400000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Pemeriksaan',
+                    'master_product_item' => [
+                        'name' => 'Pemeriksaan',
+                        'label' => 'Consultation',
+                    ],
+                    'note' => 'Include 500 patient recap (AI) / bulan',
+                    'price' => 0,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Laporan',
+                    'master_product_item' => [
+                        'name' => 'Laporan',
+                        'label' => 'Reporting',
+                    ],
+                    'note' => 'Medium (~20 laporan)',
+                    'price' => 200000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Integrasi Satu Sehat',
+                    'master_product_item' => [
+                        'name' => 'Integrasi Satu Sehat',
+                        'label' => 'SatuSehat Integration',
+                    ],
+                    'note' => null,
+                    'price' => 250000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Integrasi BPJS',
+                    'master_product_item' => [
+                        'name' => 'Integrasi BPJS',
+                        'label' => 'BPJS Integration',
+                    ],
+                    'note' => null,
+                    'price' => 250000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Laboratorium',
+                    'master_product_item' => [
+                        'name' => 'Laboratorium',
+                        'label' => 'Laboratorium',
+                    ],
+                    'note' => 'Document repository dan koneksi ke EMR',
+                    'price' => 300000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Radiologi',
+                    'master_product_item' => [
+                        'name' => 'Radiologi',
+                        'label' => 'Radiologi',
+                    ],
+                    'note' => 'Document repository dan koneksi ke EMR',
+                    'price' => 300000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Apotek',
+                    'master_product_item' => [
+                        'name' => 'Apotek',
+                        'label' => 'Pharmacy',
+                    ],
+                    'note' => 'Dispense dan link ke kasir',
+                    'price' => 400000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Reservasi / Kalendar',
+                    'master_product_item' => [
+                        'name' => 'Reservasi / Kalendar',
+                        'label' => 'Reservation / Calendar',
+                    ],
+                    'note' => null,
+                    'price' => 100000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Poli Spesialis',
+                    'master_product_item' => [
+                        'name' => 'Poli Spesialis',
+                        'label' => 'Specialist Poly',
+                    ],
+                    'note' => null,
+                    'price' => 300000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Jumlah Pengguna',
+                    'master_product_item' => [
+                        'name' => 'Jumlah Pengguna',
+                        'label' => 'Users Included',
+                    ],
+                    'note' => 'Max 8 pengguna',
+                    'price' => 1200000,
+                    'discount' => 0
+                ]
+            ],
+            'additional_items' => [
+                [
+                    'name' => 'Penambahan Poli',
+                    'master_product_item' => [
+                        'name' => 'Add on Poli',
+                        'label' => 'Additional Clinic',
+                    ],
+                    'note' => '2 poli by default, added',
+                    'price' => 300000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Add on Patient Recap',
+                    'master_product_item' => [
+                        'name' => 'Add on Patient Recap',
+                        'label' => 'Add on 1000 Patients (AI)',
+                    ],
+                    'price' => 200000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Add on User',
+                    'master_product_item' => [
+                        'name' => 'Add on User',
+                        'label' => 'Add on User',
+                    ],
+                    'price' => 150000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Add on Integrations',
+                    'master_product_item' => [
+                        'name' => 'Add on Integrations',
+                        'label' => 'Integrations (Selected)',
+                    ],
+                    'price' => 1200000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Integration Config (One Time)',
+                    'master_product_item' => [
+                        'name' => 'Integration Config',
+                        'label' => 'Integration Setup',
+                    ],
+                    'price' => 6000000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Add on Skrining (One Time)',
+                    'master_product_item' => [
+                        'name' => 'Add on Skrining',
+                        'label' => 'Custom Screening Form',
+                    ],
+                    'price' => 1500000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Add on Report (One Time)',
+                    'master_product_item' => [
+                        'name' => 'Add on Report',
+                        'label' => 'Custom Report',
+                    ],
+                    'price' => 1500000,
+                    'discount' => 0
+                ]
+            ]
+        ],
+        [
+            'label' => 'E',
+            'name' => 'Wellmed E',
+            'ordering' => 3,
+            'price' => 15400000,
+            'discount' => 42, // bundle price 9.000.000
+            'notes' => [
+                'Paket lengkap untuk klinik besar atau rumah sakit kecil.',
+                'Termasuk integrasi LIS, PACS, dan modul lanjutan.',
+                'Cocok untuk layanan multi-poli, rawat inap, dan IGD.',
+                'Mendukung 30 pengguna dan 2 spesialisasi secara default.'
+            ],
+            'product_items' => [
+                [
+                    'name' => 'Dashboard',
+                    'master_product_item' => [
+                        'name' => 'Dashboard',
+                        'label' => 'Dashboard',
+                    ],
+                    'note' => null,
+                    'price' => 0,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Rekam Medis Elektronik',
+                    'master_product_item' => [
+                        'name' => 'Rekam Medis Elektronik',
+                        'label' => 'EMR',
+                    ],
+                    'note' => 'Recap per visit + full export in PDF',
+                    'price' => 500000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Pemeriksaan',
+                    'master_product_item' => [
+                        'name' => 'Pemeriksaan',
+                        'label' => 'Consultation',
+                    ],
+                    'note' => 'Include 100 patient recap (AI) / bulan',
+                    'price' => 0,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Laporan',
+                    'master_product_item' => [
+                        'name' => 'Laporan',
+                        'label' => 'Reporting',
+                    ],
+                    'note' => 'Medium (~20 laporan)',
+                    'price' => 0,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Integrasi Satu Sehat',
+                    'master_product_item' => [
+                        'name' => 'Integrasi Satu Sehat',
+                        'label' => 'SatuSehat Integration',
+                    ],
+                    'note' => null,
+                    'price' => 250000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Integrasi BPJS',
+                    'master_product_item' => [
+                        'name' => 'Integrasi BPJS',
+                        'label' => 'BPJS Integration',
+                    ],
+                    'note' => null,
+                    'price' => 250000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Laboratorium',
+                    'master_product_item' => [
+                        'name' => 'Laboratorium',
+                        'label' => 'Laboratorium',
+                    ],
+                    'note' => 'Document repository dan koneksi ke EMR',
+                    'price' => 0,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Radiologi',
+                    'master_product_item' => [
+                        'name' => 'Radiologi',
+                        'label' => 'Radiologi',
+                    ],
+                    'note' => 'Document repository dan koneksi ke EMR',
+                    'price' => 0,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Apotek',
+                    'master_product_item' => [
+                        'name' => 'Apotek',
+                        'label' => 'Pharmacy',
+                    ],
+                    'note' => 'Dispense dan link ke kasir',
+                    'price' => 0,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Kasir',
+                    'master_product_item' => [
+                        'name' => 'Kasir',
+                        'label' => 'Cashier',
+                    ],
+                    'note' => null,
+                    'price' => 0,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Reservasi / Kalendar',
+                    'master_product_item' => [
+                        'name' => 'Reservasi / Kalendar',
+                        'label' => 'Reservation / Calendar',
+                    ],
+                    'note' => 'Kyoo + kalendar dan antrian',
+                    'price' => 100000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Poli Spesialis',
+                    'master_product_item' => [
+                        'name' => 'Poli Spesialis',
+                        'label' => 'Specialist Poly',
+                    ],
+                    'note' => 'User defined (1 custom screening/formulir)',
+                    'price' => 300000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Advanced Reporting',
+                    'master_product_item' => [
+                        'name' => 'Advanced Reporting',
+                        'label' => 'Custom Self Service Reports',
+                    ],
+                    'note' => null,
+                    'price' => 500000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Advanced Kasir',
+                    'master_product_item' => [
+                        'name' => 'Advanced Kasir',
+                        'label' => 'Advanced Cashier',
+                    ],
+                    'note' => 'Invoice, payer, voucher by payer, custom pricelists',
+                    'price' => 1000000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Advanced Apotek',
+                    'master_product_item' => [
+                        'name' => 'Advanced Apotek',
+                        'label' => 'Advanced Pharmacy',
+                    ],
+                    'note' => 'Added inventory support (alkes)',
+                    'price' => 1000000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Advanced Lab',
+                    'master_product_item' => [
+                        'name' => 'Advanced Lab',
+                        'label' => 'LIS Integration',
+                    ],
+                    'note' => null,
+                    'price' => 1000000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Advanced Radiologi',
+                    'master_product_item' => [
+                        'name' => 'Advanced Radiologi',
+                        'label' => 'PACS Integration',
+                    ],
+                    'note' => 'Custom PACS support',
+                    'price' => 1000000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Rawat Inap',
+                    'master_product_item' => [
+                        'name' => 'Rawat Inap',
+                        'label' => 'Inpatient',
+                    ],
+                    'note' => null,
+                    'price' => 500000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'MCU',
+                    'master_product_item' => [
+                        'name' => 'MCU',
+                        'label' => 'Medical Check Up',
+                    ],
+                    'note' => null,
+                    'price' => 1000000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'IGD',
+                    'master_product_item' => [
+                        'name' => 'IGD',
+                        'label' => 'Emergency Unit',
+                    ],
+                    'note' => null,
+                    'price' => 500000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Spesialisasi',
+                    'master_product_item' => [
+                        'name' => 'Spesialisasi',
+                        'label' => 'Specialty',
+                    ],
+                    'note' => '2 included',
+                    'price' => 1000000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Jumlah Pengguna',
+                    'master_product_item' => [
+                        'name' => 'Jumlah Pengguna',
+                        'label' => 'Users Included',
+                    ],
+                    'note' => '@30 pengguna',
+                    'price' => 6000000,
+                    'discount' => 0
+                ]
+            ],
+            'additional_items' => [
+                [
+                    'name' => 'Penambahan Poli',
+                    'master_product_item' => [
+                        'name' => 'Add on Poli',
+                        'label' => 'Additional Clinic',
+                    ],
+                    'note' => 'Per poli added',
+                    'price' => 500000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Add on Patient Recap',
+                    'master_product_item' => [
+                        'name' => 'Add on Patient Recap',
+                        'label' => 'Add on 1000 Patients (AI)',
+                    ],
+                    'price' => 200000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Add on User',
+                    'master_product_item' => [
+                        'name' => 'Add on User',
+                        'label' => 'Add on User',
+                    ],
+                    'price' => 200000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Add on Integrations',
+                    'master_product_item' => [
+                        'name' => 'Add on Integrations',
+                        'label' => 'Integrations (Selected)',
+                    ],
+                    'price' => 1200000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Integration Config (One Time)',
+                    'master_product_item' => [
+                        'name' => 'Integration Config',
+                        'label' => 'Integration Setup',
+                    ],
+                    'price' => 6000000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Add on Skrining (One Time)',
+                    'master_product_item' => [
+                        'name' => 'Add on Skrining',
+                        'label' => 'Custom Screening Form',
+                    ],
+                    'price' => 1500000,
+                    'discount' => 0
+                ],
+                [
+                    'name' => 'Add on Report (One Time)',
+                    'master_product_item' => [
+                        'name' => 'Add on Report',
+                        'label' => 'Custom Report',
+                    ],
+                    'price' => 1500000,
+                    'discount' => 0
+                ]
+            ]
+        ]
+
     ];
+
 
     /**
      * Seed the application's database.
@@ -24,10 +639,12 @@ class ProductSeeder extends Seeder
     public function run(): void
     {
         foreach ($this->__products as $product) {
-            app(config('app.contracts.Product'))->prepareStoreProduct($this->requestDTO(config('app.contracts.ProductData'),[
-                'name' => $product['name'],
-                'label' => $product['label']
-            ]));
+            switch ($product['label']) {
+                case 'LITE': $product['icon'] = hq_asset_url('/assets/wellmed-lite.png');break;
+                case 'PLUS': $product['icon'] = hq_asset_url('/assets/wellmed-plus.png');break;
+                case 'E': $product['icon'] = hq_asset_url('/assets/wellmed-e.png');break;
+            }
+            app(config('app.contracts.Product'))->prepareStoreProduct($this->requestDTO(config('app.contracts.ProductData'),$product));
         }
     }
 }

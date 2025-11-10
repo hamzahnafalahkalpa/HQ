@@ -15,9 +15,17 @@ class ViewProduct extends ViewUnicode
   public function toArray(\Illuminate\Http\Request $request): array
   {
     $arr = [
-      'product_code' => $this->product_code
-    ];
-    $arr = $this->mergeArray(parent::toArray($request),$arr);
+      "id" => $this->id,
+      "name" => $this->name,
+      "label" => $this->label,
+      'product_code' => $this->product_code,
+      'icon' => $this->icon,
+      'product_items' => $this->relationValidation('productItems',function(){
+          return $this->productItems->map(function($item){
+              return $item->toViewApi();
+          });
+      }),
+    ];    
     return $arr;
   }
 }

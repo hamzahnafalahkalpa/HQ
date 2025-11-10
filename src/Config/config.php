@@ -76,6 +76,8 @@ return [
         'hanafalah/module-tax'                  => ['repository' =>'hamzahnafalahkalpa/module-tax'],
         'hanafalah/wellmed-feature'             => ['repository' =>'hamzahnafalahkalpa/wellmed-feature'],
         'hanafalah/module-payer'                => ['repository' =>'hamzahnafalahkalpa/module-payer'],
+        'hanafalah/module-profession'           => ['repository' =>'hamzahnafalahkalpa/module-profession'],
+        'hanafalah/module-card-identity'        => ['repository' =>'hamzahnafalahkalpa/module-card-identity'],
         'hanafalah/module-organization'         => ['repository' =>'hamzahnafalahkalpa/module-organization'],
         'hanafalah/module-employee'             => ['repository' =>'hamzahnafalahkalpa/module-employee'],
         'hanafalah/laravel-xendit'              => ['repository' =>'hamzahnafalahkalpa/laravel-xendit']

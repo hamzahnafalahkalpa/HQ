@@ -133,6 +133,20 @@
                 "symlink": true
             }
         },
+        "hanafalah/module-profession": {
+            "type": "path",
+            "url": "repositories/module-profession",
+            "options": {
+                "symlink": true
+            }
+        },
+        "hanafalah/module-card-identity": {
+            "type": "path",
+            "url": "repositories/module-card-identity",
+            "options": {
+                "symlink": true
+            }
+        },
         "hanafalah/module-people": {
             "type": "path",
             "url": "../../repositories/module-encoding",

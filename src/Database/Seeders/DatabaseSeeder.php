@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             ProductSeeder::class,
             PaymentMethodSeeder::class,
-            UserSeeder::class
+            UserSeeder::class,
+            AssetSeeder::class
         ]);
     }
 }

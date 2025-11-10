@@ -43,13 +43,13 @@ class Product extends Unicode
         });
     }
 
-    // public function viewUsingRelation(): array{
-    //     return [];
-    // }
+    public function viewUsingRelation(): array{
+        return ['productItems'];
+    }
 
-    // public function showUsingRelation(): array{
-    //     return [];
-    // }
+    public function showUsingRelation(): array{
+        return ['productItems'];
+    }
 
     public function getViewResource(){
         return ViewProduct::class;
@@ -58,4 +58,6 @@ class Product extends Unicode
     public function getShowResource(){
         return ShowProduct::class;
     }
+
+    public function productItems(){return $this->hasManyModel('ProductItem','product_id');}
 }
