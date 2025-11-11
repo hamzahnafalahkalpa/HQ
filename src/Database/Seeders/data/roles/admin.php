@@ -2,5 +2,8 @@
 
 return [
     'api.setting.*',
-    'api.transaction.*',
+    'api.product-service.*',
+    'api.invoice.*',
+    'api.customer.*',
+    'api.customer-care.*',
 ];

@@ -1,6 +1,7 @@
 <?php
 
 return [
-    'api.setting.general-setting.*',
-    'api.transaction.*',
+    'api.product-service.*',
+    'api.invoice.*',
+    'api.customer-care.*'
 ];
