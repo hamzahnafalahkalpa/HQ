@@ -1,8 +1,8 @@
 <?php
 
-namespace Projects\Hq\Controllers\API\Transaction\Submission;
+namespace Projects\Hq\Controllers\API\ProductService\Submission;
 
-use Projects\Hq\Requests\API\Transaction\Submission\{
+use Projects\Hq\Requests\API\ProductService\Submission\{
     ViewRequest, ShowRequest, StoreRequest, DeleteRequest
 };
 
@@ -30,14 +30,35 @@ class SubmissionController extends EnvironmentController{
     }
 
     public function store(StoreRequest $request){
+        $this->userAttempt();
         $user = $this->global_user;
+
+        $tagihan_name = $user->name;
+        if (isset(request()->transaction_item)){
+            $transaction_item = request()->transaction_item;
+            $service = $this->ServiceModel()->findOrFail($transaction_item['item_id']);
+            $payment_detail = $transaction_item['payment_detail'] ?? [
+                'id' => null,
+                'payment_summary_id'  => null,
+                'transaction_item_id' => null,
+                'qty'        => 1,
+                'price'      => $service->price,
+                'amount'     => $service->price,
+                'debt'       => $service->price,
+                'cogs'       => $service->cogs ?? 0
+            ];
+            $transaction_item['payment_detail'] = $payment_detail;
+            request()->merge(['transaction_item' => $transaction_item]);
+            $tagihan_name = $service->name;
+        }
+
         if (!isset(request()->submission)){
             $submission = [
                 'id' => null,
                 'name' => 'Registration',
                 'payment_summary' => [
                     'id' => null,
-                    'name'           =>  trim('Total Tagihan '.($user->name ?? '')),
+                    'name'           =>  trim('Total Tagihan Pembelian '.($tagihan_name ?? '')),
                     'reference_type' => 'Submission'
                 ]
             ];
@@ -55,23 +76,7 @@ class SubmissionController extends EnvironmentController{
             request()->merge(['consument' => $consument]);
         }
 
-        if (isset(request()->transaction_item)){
-            $transaction_item = request()->transaction_item;
-            $service = $this->ServiceModel()->findOrFail($transaction_item['item_id']);
-            $payment_detail = $transaction_item['payment_detail'] ?? [
-                'id' => null,
-                'payment_summary_id'  => null,
-                'transaction_item_id' => null,
-                'qty'        => 1,
-                'price'      => $service->price,
-                'amount'     => $service->price,
-                'debt'       => $service->price,
-                'cogs'       => $service->cogs ?? 0
-            ];
-            $transaction_item['payment_detail'] = $payment_detail;
-            request()->merge(['transaction_item' => $transaction_item]);
-        }
-        $name = request()->name;
+        $name = request()->reference['name'];
         request()->merge([
             'name' => $name ?? 'Registration Submission'
         ]);

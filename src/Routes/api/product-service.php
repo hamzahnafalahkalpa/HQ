@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Projects\Hq\Controllers\API\Transaction\Submission\SubmissionController;
+use Projects\Hq\Controllers\API\ProductService\ProductServiceController;
+use Projects\Hq\Controllers\API\ProductService\Submission\SubmissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +14,8 @@ use Projects\Hq\Controllers\API\Transaction\Submission\SubmissionController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::apiResource('/product-service',SubmissionController::class)->parameters(['product-service' => 'id']);
+Route::apiResource('/product-service',ProductServiceController::class)->parameters(['product-service' => 'id']);
+Route::apiResource('/submission',SubmissionController::class)->parameters(['submission' => 'id']);
 // Route::group([
 //     "prefix" => "/product-service/{transaction_id}",
 //     'as' => 'product-service.show.'

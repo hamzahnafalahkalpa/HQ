@@ -2,19 +2,14 @@
 
 namespace Projects\Hq\Controllers\API\ProductService;
 
-use Hanafalah\ModulePayment\Contracts\Schemas\PosTransaction;
-use Hanafalah\ModuleTransaction\Contracts\Schemas\{
-    Transaction
-};
+use Projects\Hq\Contracts\Schemas\ModuleWorkspace\Workspace;
 use Projects\Hq\Controllers\API\ApiController;
 
 class EnvironmentController extends ApiController{
     public function __construct(
-        public Transaction $__transaction_schema,
-        public PosTransaction $__pos_schema
+        public Workspace $__schema,
     ){
         parent::__construct();
-        $this->userAttempt();
     }
 
     protected function commonConditional($query){
@@ -22,42 +17,45 @@ class EnvironmentController extends ApiController{
     }
 
     protected function commonRequest(){
-        
+        $this->userAttempt();
+        request()->merge([
+            'search_owner_id' => $this->global_user->getKey()
+        ]);
     }
 
-    protected function getTransactionPaginate(?callable $callback = null){        
+    protected function getWorkspacePaginate(?callable $callback = null){        
         $this->commonRequest();
-        return $this->__transaction_schema->conditionals(function($query) use ($callback){
+        return $this->__schema->conditionals(function($query) use ($callback){
             $this->commonConditional($query);
             $query->when(isset($callback),function ($query) use ($callback){
                 $callback($query);
             });
-        })->viewTransactionPaginate();
+        })->viewWorkspacePaginate();
     }
 
-    protected function showTransaction(?callable $callback = null){        
+    protected function showWorkspace(?callable $callback = null){        
         $this->commonRequest();
-        return $this->__transaction_schema->conditionals(function($query) use ($callback){
+        return $this->__schema->conditionals(function($query) use ($callback){
             $this->commonConditional($query);
             $query->when(isset($callback),function ($query) use ($callback){
                 $callback($query);
             });
-        })->showTransaction();
+        })->showWorkspace();
     }
 
-    protected function deleteTransaction(?callable $callback = null){        
+    protected function deleteWorkspace(?callable $callback = null){        
         $this->commonRequest();
-        return $this->__transaction_schema->conditionals(function($query) use ($callback){
+        return $this->__schema->conditionals(function($query) use ($callback){
             $this->commonConditional($query);
             $callback($query);
-        })->deleteTransaction();
+        })->deleteWorkspace();
     }
 
-    protected function storeTransaction(?callable $callback = null){
+    protected function storeWorkspace(?callable $callback = null){
         $this->commonRequest();
-        return $this->__transaction_schema->conditionals(function($query) use ($callback){
+        return $this->__schema->conditionals(function($query) use ($callback){
             $this->commonConditional($query);
             $callback($query);
-        })->storeTransaction();
+        })->storeWorkspace();
     }
 }

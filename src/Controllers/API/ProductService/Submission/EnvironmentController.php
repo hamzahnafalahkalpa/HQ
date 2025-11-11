@@ -1,6 +1,6 @@
 <?php
 
-namespace Projects\Hq\Controllers\API\Transaction\Submission;
+namespace Projects\Hq\Controllers\API\ProductService\Submission;
 
 use Hanafalah\ModulePayment\Contracts\Schemas\PosTransaction;
 use Projects\Hq\Controllers\API\ApiController;
@@ -10,7 +10,6 @@ class EnvironmentController extends ApiController{
         public PosTransaction $__pos_schema
     ){
         parent::__construct();
-        $this->userAttempt();
     }
 
     protected function commonConditional($query){
@@ -18,7 +17,7 @@ class EnvironmentController extends ApiController{
     }
 
     protected function commonRequest(){
-        
+        $this->userAttempt();
     }
 
     protected function getPosTransactionPaginate(?callable $callback = null){        

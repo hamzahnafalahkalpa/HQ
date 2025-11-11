@@ -2,24 +2,24 @@
 
 namespace Projects\Hq\Controllers\API\ProductService;
 
-use Projects\Hq\Requests\API\Transaction\{
+use Projects\Hq\Requests\API\ProductService\{
     ViewRequest, ShowRequest, StoreRequest, DeleteRequest
 };
 
-class TransactionController extends EnvironmentController{
+class ProductServiceController extends EnvironmentController{
     public function index(ViewRequest $request){
-        return $this->getTransactionPaginate();
+        return $this->getWorkspacePaginate();
     }
 
     public function show(ShowRequest $request){
-        return $this->showTransaction();
+        return $this->showWorkspace();
     }
 
     public function store(StoreRequest $request){
-        return $this->storeTransaction();
+        return $this->storeWorkspace();
     }
 
     public function delete(DeleteRequest $request){
-        return $this->deleteTransaction();
+        return $this->deleteWorkspace();
     }
 }
