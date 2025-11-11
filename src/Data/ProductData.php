@@ -18,9 +18,11 @@ class ProductData extends UnicodeData implements DataProductData
     public static function before(array &$attributes){
         $attributes['flag'] ??= 'Product';
         $attributes['service'] ??= [
+            'name'  => $attributes['name'] ?? 'Unnamed Service',
             'price' => $attributes['price'] ?? 0,
         ];
         $attributes['service']['price'] ??= $attributes['price'] ?? 0;
+        $attributes['service']['name'] ??= $attributes['name'] ?? 0;
         parent::before($attributes);
     }
 }
