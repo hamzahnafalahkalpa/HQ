@@ -9,6 +9,6 @@ return [
     'type'        => Type::MENU->value,
     'show_in_acl' => true,
     'guard_name'  => 'api',
-    'ordering'    => 1
+    'ordering'    => 3
 ];
 

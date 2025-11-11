@@ -9,7 +9,7 @@ return [
     'type'        => Type::MENU->value,
     'show_in_acl' => true,
     'guard_name'  => 'api',
-    'ordering'    => 2,
+    'ordering'    => 1,
     'childs'      => [
         [
             'name'        => 'Tambah Layanan',

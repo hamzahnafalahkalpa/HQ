@@ -19,6 +19,7 @@ class EnvironmentController extends ApiController{
     protected function commonRequest(){
         $this->userAttempt();
         request()->merge([
+            'owner_id' => $this->global_user->getKey(),
             'search_owner_id' => $this->global_user->getKey()
         ]);
     }
