@@ -19,6 +19,8 @@ class Company extends SchemasCompany implements ContractsCompany
 
         if (isset($company_dto->address)){
             $address = $company_dto->address;
+            $address->model_type = $company->getMorphClass();
+            $address->model_id   = $company->getKey();
             $company->setAddress(Flag::OTHER->value, $address);
         }
 

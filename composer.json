@@ -23,6 +23,7 @@
     },
     "require": {
         "xendit/xendit-php": "^7.0",
+        "hanafalah/wellmed-product": "dev-main",
         "hanafalah/laravel-support": "dev-main",
         "hanafalah/module-payment": "dev-main",
         "hanafalah/module-payer": "dev-main",
@@ -66,6 +67,13 @@
         "hanafalah/module-employee": {
             "type": "path",
             "url": "../../repositories/module-employee",
+            "options": {
+                "symlink": true
+            }
+        },
+        "hanafalah/wellmed-product": {
+            "type": "path",
+            "url": "../../repositories/wellmed-product",
             "options": {
                 "symlink": true
             }

@@ -63,6 +63,7 @@ return [
     ],
     "provider" => "Projects\Hq\\Providers\\HqServiceProvider",
     'packages' => [
+        'hanafalah/wellmed-product'             => ['repository' =>'hamzahnafalahkalpa/wellmed-product'],
         'hanafalah/laravel-feature'             => ['repository' =>'hamzahnafalahkalpa/laravel-feature'],
         'hanafalah/module-user'                 => ['repository' =>'hamzahnafalahkalpa/module-user'],
         'hanafalah/module-workspace'            => ['repository' =>'hamzahnafalahkalpa/module-workspace'],

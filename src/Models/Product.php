@@ -3,7 +3,6 @@
 namespace Projects\Hq\Models;
 
 use Hanafalah\LaravelHasProps\Concerns\HasProps;
-use Hanafalah\LaravelSupport\Models\Unicode\Unicode;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Projects\Hq\Resources\Product\{
@@ -11,7 +10,7 @@ use Projects\Hq\Resources\Product\{
     ShowProduct
 };
 
-class Product extends Unicode
+class Product extends CentralUnicode
 {
     use HasUlids, HasProps, SoftDeletes;
 

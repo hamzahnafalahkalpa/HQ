@@ -16,7 +16,8 @@ class ViewTenant extends TenantViewTenant
   {
     $arr = [
       'product_type' => $this->product_type,
-      'recurring_payment' => $this->recurring_payment,
+      'is_recurring' => $this->is_recurring,
+      'recurring_period' => $this->recurring_period,
       'started_at' => $this->started_at,
       'expired_at' => $this->expired_at
     ];

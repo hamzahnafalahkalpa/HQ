@@ -3,7 +3,6 @@
 namespace Projects\Hq\Models;
 
 use Hanafalah\LaravelHasProps\Concerns\HasProps;
-use Hanafalah\LaravelSupport\Models\Unicode\Unicode;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Projects\Hq\Resources\Product\{
@@ -11,20 +10,11 @@ use Projects\Hq\Resources\Product\{
     ShowMasterProductItem
 };
 
-class MasterProductItem extends Unicode
+class MasterProductItem extends CentralUnicode
 {
     use HasUlids, HasProps, SoftDeletes;
 
     protected $table = 'unicodes';
-
-    // protected static function booted(): void{
-    //     parent::booted();
-    //     static::creating(function($query){
-    //         if (!isset($query->product_code)){
-    //             $query->product_code = static::hasEncoding('PRODUCT_CODE'); 
-    //         }
-    //     });
-    // }
 
     public function viewUsingRelation(): array{
         return [];

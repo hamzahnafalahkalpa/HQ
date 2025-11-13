@@ -107,7 +107,10 @@ return [
                     'MasterFeature',
                     'ModelHasFeature',
                     'Version',
-                    'Address'
+                    'Address',
+                    'Product',
+                    'ProductItem',
+                    'MasterProductItem'
                 ]
             ],
             'tenant' => [

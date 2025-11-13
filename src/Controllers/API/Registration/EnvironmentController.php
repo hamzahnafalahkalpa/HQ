@@ -10,7 +10,6 @@ class EnvironmentController extends ApiController{
         public UserReference $__user_reference_schema
     ){
         parent::__construct();
-        $this->userAttempt();
     }
 
     protected function commonConditional($query){
@@ -18,7 +17,7 @@ class EnvironmentController extends ApiController{
     }
 
     protected function commonRequest(){
-        
+        $this->userAttempt();
     }
 
     protected function storeRegistration(?callable $callback = null){
