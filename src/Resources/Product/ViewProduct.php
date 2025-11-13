@@ -24,7 +24,7 @@ class ViewProduct extends ViewUnicode
       'icon' => $this->icon,
       'price' => $this->price,
       'discount' => $this->discount,
-      'actual_price' => $price - ($price*$discount),
+      'actual_price' => $price - ($price*$discount/100),
       'product_items' => $this->relationValidation('productItems',function(){
           return $this->productItems->transform(function($item){
               return $item->toViewApi();
