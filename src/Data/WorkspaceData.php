@@ -12,6 +12,10 @@ class WorkspaceData extends DataWorkspaceData implements ContractsDataWorkspaceD
     #[MapName('product_id')]
     public mixed $product_id = null;
 
+    #[MapInputName('product_model')]
+    #[MapName('product_model')]
+    public ?object $product_model = null;
+
     #[MapInputName('installed_product_items')]
     #[MapName('installed_product_items')]
     #[DataCollectionOf(InstalledProductItemData::class)]
@@ -21,6 +25,7 @@ class WorkspaceData extends DataWorkspaceData implements ContractsDataWorkspaceD
         $new = self::new();
         if (isset($attributes['product_id'])){
             $product = $new->ProductModel()->findOrFail($attributes['product_id']);
+            $attributes['product_model'] = $product;
             $attributes['prop_product'] = $product->toViewApi()->resolve();
         }
     }

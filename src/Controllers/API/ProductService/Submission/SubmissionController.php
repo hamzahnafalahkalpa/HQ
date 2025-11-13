@@ -38,7 +38,47 @@ class SubmissionController extends EnvironmentController{
         if (isset(request()->transaction_item)){
             $transaction_item = request()->transaction_item;
             $transaction_item['item_type'] = 'Workspace';
-            $transaction_item['item']['owner_id'] = $user->getKey();
+            $item_payload = &$transaction_item['item'];
+            $item_payload['owner_id'] = $user->getKey();
+            $item_payload['integration'] = [
+                "satu_sehat" => [
+                    "progress" => 0,
+                    "general" => [
+                        "ihs_number" => null
+                    ],
+                    "syncs" => [
+                        [
+                            'flag' => 'encounter',
+                            'label' => 'Kunjungan',
+                        ],
+                        [
+                            'flag' => 'condition',
+                            'label' => 'Diagnosa',
+                        ], 
+                        [
+                            'flag' => 'dispense',
+                            'label' => 'Resep',
+                        ]
+                    ]
+                ],
+                "bpjs" => [
+                    "progress" => 0,
+                    "syncs" => [
+                        [
+                            'flag' => 'encounter',
+                            'label' => 'Kunjungan',
+                        ],
+                        [
+                            'flag' => 'condition',
+                            'label' => 'Diagnosa',
+                        ], 
+                        [
+                            'flag' => 'dispense',
+                            'label' => 'Resep',
+                        ]
+                    ]
+                ]
+            ];
             $product = $this->ProductModel()->findOrFail($transaction_item['item']['product_id']);
             $payment_detail = $transaction_item['payment_detail'] ?? [
                 'id' => null,

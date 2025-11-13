@@ -11,6 +11,9 @@ return [
         "local_path"   => 'projects',
         "base_path"    => __DIR__.'/../'
     ],
+    'backbone' => [
+        'url' => env('HQ_BACKBONE_URL', 'http://host.docker.internal:9000/api/add-tenant'),
+    ],
     "libs"           => [
         'migration' => 'Database/Migrations',
         'database' => 'Database',
