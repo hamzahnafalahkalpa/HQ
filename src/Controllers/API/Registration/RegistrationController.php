@@ -19,15 +19,19 @@ class RegistrationController extends EnvironmentController{
                 break;
             }
         }
-        $data = array_fill_keys($possibleTypes, null);
-        if (isset($reference)) $data['reference'] = $reference;
-        $data['reference_type'] = $referenceType;
-        request()->merge($data);
+        if (isset($referenceType)) {
+            $data = array_fill_keys($possibleTypes, null);
+            if (isset($reference)) $data['reference'] = $reference;
+            $data['reference_type'] = $referenceType;
+            request()->merge($data);
+        }
 
         $user = request()->user;
         $user['is_hq_user'] = true;
         $user['email_verified_at'] = now();
         request()->merge([
+            'workspace_type' => 'Tenant',
+            'workspace_id' => tenancy()->tenant->getKey(),
             'user' => $user,
             'role_ids' => [$this->RoleModel()->where('name','Customer')->firstOrFail()->getKey()]
         ]);
