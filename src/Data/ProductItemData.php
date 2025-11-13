@@ -18,6 +18,10 @@ class ProductItemData extends Data implements DataProductItemData
     #[MapName('name')]
     public ?string $name = null;
 
+    #[MapInputName('flag')]
+    #[MapName('flag')]
+    public ?string $flag = null;
+
     #[MapInputName('product_id')]
     #[MapName('product_id')]
     public mixed $product_id = null;
@@ -37,4 +41,8 @@ class ProductItemData extends Data implements DataProductItemData
     #[MapInputName('props')]
     #[MapName('props')]
     public ?array $props = null;
+
+    public static function before(array &$attributes){
+        $attributes['flag'] ??= 'Main';
+    }
 }

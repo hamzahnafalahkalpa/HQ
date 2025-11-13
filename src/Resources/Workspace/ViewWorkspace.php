@@ -15,6 +15,10 @@ class ViewWorkspace extends WorkspaceViewWorkspace
   public function toArray(\Illuminate\Http\Request $request): array
   {
     $arr = [
+      'product_id' => $this->product_id,
+      'product' => $this->relationValidation('product',function(){
+        return $this->product->toViewApi()->resolve();
+      },$this->prop_product),
       'tenant' => $this->relationValidation('tenant',function(){
         return $this->tenant->toViewApi();
       })

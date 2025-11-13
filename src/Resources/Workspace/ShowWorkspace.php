@@ -14,7 +14,16 @@ class ShowWorkspace extends ViewWorkspace
    */
   public function toArray(\Illuminate\Http\Request $request): array
   {
-    $arr = [];
+    $arr = [
+      'product' => $this->relationValidation('product',function(){
+        return $this->product->toViewApi()->resolve();
+      },$this->prop_product),
+      'installed_product_items' => $this->relationValidation('installedProductItems',function(){
+        return $this->installedProductItems->transform(function($installedProductItem){
+          return $installedProductItem->toViewApi();
+        });
+      })
+    ];
     $show = $this->resolveNow(new WorkspaceShowWorkspace($this));
     $arr = $this->mergeArray(parent::toArray($request),$show,$arr);
     return $arr;

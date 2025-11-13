@@ -110,7 +110,8 @@ return [
                     'Address',
                     'Product',
                     'ProductItem',
-                    'MasterProductItem'
+                    'MasterProductItem',
+                    'InstalledProductItem'
                 ]
             ],
             'tenant' => [

@@ -8,12 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 use Projects\Hq\Contracts\Schemas\ModuleWorkspace\Workspace as ModuleWorkspaceWorkspace;
 
 class Workspace extends SchemasWorkspace implements ModuleWorkspaceWorkspace{
-    // protected function prepareStoreAddressWorkspace(Model $workspace, WorkspaceData &$workspace_dto): void{
-    //     $address             = &$workspace_dto->props->setting->address;
-    //     $address->model_type = $workspace->getMorphClass();
-    //     $address->model_id   = $workspace->getKey(); 
-    //     $address_model       = $this->schemaContract('wellmed_address')->prepareStoreWellmedAddress($address);
-    //     $address->id         = $address_model->getKey();
-    //     unset($address->props);
-    // }
+    public function prepareStoreWorkspace(mixed $workspace_dto): Model{
+        $workspace = parent::prepareStoreWorkspace($workspace_dto);
+        $workspace->product_id = $workspace_dto->product_id;
+        if (isset($workspace_dto->installed_product_items) && count($workspace_dto->installed_product_items) > 0){
+            foreach ($workspace_dto->installed_product_items as &$installed_product_item) {
+                $installed_product_item->reference_type = $workspace->getMorphClass();
+                $installed_product_item->reference_id = $workspace->getKey();
+                $this->schemaContract('installed_product_item')->prepareStoreInstalledProductItem($installed_product_item);
+            }
+        }
+        $this->fillingProps($workspace,$workspace_dto->props);
+        $workspace->save();
+        return $this->workspace_model = $workspace;
+    }
 }

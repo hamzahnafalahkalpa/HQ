@@ -8,4 +8,15 @@ use Projects\Hq\Resources\PosTransaction\{
     ShowPosTransaction
 };
 
-class PosTransaction extends TransactionPosTransaction{}
+class PosTransaction extends TransactionPosTransaction{
+    public function showUsingRelation(): array{
+        return $this->mergeArray(parent::showUsingRelation(),[
+            'transactionItems.item' => function($query){
+                $query->with([
+                    'product',
+                    'installedProductItems'
+                ]);
+            },
+        ]);
+    }
+}

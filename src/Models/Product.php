@@ -43,11 +43,11 @@ class Product extends CentralUnicode
     }
 
     public function viewUsingRelation(): array{
-        return ['productItems'];
+        return ['productItems','additionalItems'];
     }
 
     public function showUsingRelation(): array{
-        return ['productItems'];
+        return ['productItems','additionalItems'];
     }
 
     public function getViewResource(){
@@ -58,5 +58,6 @@ class Product extends CentralUnicode
         return ShowProduct::class;
     }
 
-    public function productItems(){return $this->hasManyModel('ProductItem','product_id');}
+    public function productItems(){return $this->hasManyModel('ProductItem','product_id')->where('flag','Main');}
+    public function additionalItems(){return $this->hasManyModel('ProductItem','product_id')->where('flag','Add');}
 }

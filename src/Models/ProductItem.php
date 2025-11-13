@@ -18,11 +18,12 @@ class ProductItem extends BaseModel
     public $incrementing = false;
     protected $keyType = 'string';
     protected $primaryKey = 'id';
-    protected $list = ['id', 'name', 'product_id', 'master_product_item_id', 'price', 'props'];
+    protected $list = ['id', 'name', 'flag', 'product_id', 'master_product_item_id', 'price', 'props'];
 
     protected $casts = [
         'name' => 'string', 
         'product_id' => 'string',
+        'flag' => 'string',
         'master_product_item_id' => 'string'
     ];
 

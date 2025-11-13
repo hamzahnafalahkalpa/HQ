@@ -30,7 +30,8 @@ class ProductItem extends PackageManagement implements ContractsProductItem
 
         $add = [
             'name' => $product_item_dto->name,
-            'price' => $product_item_dto->price
+            'price' => $product_item_dto->price,
+            'flag' => $product_item_dto->flag
         ];
         if (isset($product_item_dto->id)) {
             $guard  = ['id' => $product_item_dto->id];

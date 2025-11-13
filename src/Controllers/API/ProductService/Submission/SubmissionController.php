@@ -15,6 +15,7 @@ class SubmissionController extends EnvironmentController{
             $billing['author_type']  ??= $this->global_user->getMorphClass();   
             $billing['author_id']    ??= $this->global_user->getKey();   
         }
+
         request()->merge([
             'search_reference_type' => ['Submission'],
             'billing'               => $billing ?? null
@@ -36,20 +37,22 @@ class SubmissionController extends EnvironmentController{
         $tagihan_name = $user->name;
         if (isset(request()->transaction_item)){
             $transaction_item = request()->transaction_item;
-            $service = $this->ServiceModel()->findOrFail($transaction_item['item_id']);
+            $transaction_item['item_type'] = 'Workspace';
+            $transaction_item['item']['owner_id'] = $user->getKey();
+            $product = $this->ProductModel()->findOrFail($transaction_item['item']['product_id']);
             $payment_detail = $transaction_item['payment_detail'] ?? [
                 'id' => null,
                 'payment_summary_id'  => null,
                 'transaction_item_id' => null,
                 'qty'        => 1,
-                'price'      => $service->price,
-                'amount'     => $service->price,
-                'debt'       => $service->price,
-                'cogs'       => $service->cogs ?? 0
+                'price'      => $product->price,
+                'amount'     => $product->price,
+                'debt'       => $product->price,
+                'cogs'       => 0
             ];
             $transaction_item['payment_detail'] = $payment_detail;
             request()->merge(['transaction_item' => $transaction_item]);
-            $tagihan_name = $service->name;
+            $tagihan_name = $product->name;
         }
 
         if (!isset(request()->submission)){

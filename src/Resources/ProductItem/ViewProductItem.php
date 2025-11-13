@@ -17,6 +17,7 @@ class ViewProductItem extends ApiResource
     $arr = [
       'id' => $this->id,
       'name' => $this->name,
+      'flag' => $this->flag,
       'product_id' => $this->product_id,
       'master_product_item_id' => $this->master_product_item_id,
       'price' => $this->price,

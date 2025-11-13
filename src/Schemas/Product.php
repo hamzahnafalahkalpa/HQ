@@ -25,8 +25,8 @@ class Product extends Unicode implements ContractsProduct
     public function prepareStoreProduct(ProductData $product_dto): Model{
         $product = $this->prepareStoreUnicode($product_dto);
 
-        if (isset($product_dto->product_items)){
-            foreach ($product_dto->product_items as &$product_item_dto) {
+        if (isset($product_dto->product_items) || isset($product_dto->additional_items)){
+            foreach (array_merge($product_dto->product_items ?? [], $product_dto->additional_items ?? []) as &$product_item_dto) {
                 $product_item_dto->product_id = $product->getKey();
                 $this->schemaContract('product_item')->prepareStoreProductItem($product_item_dto);
             }
