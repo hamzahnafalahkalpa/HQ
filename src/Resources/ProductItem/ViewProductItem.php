@@ -18,6 +18,7 @@ class ViewProductItem extends ApiResource
       'id' => $this->id,
       'name' => $this->name,
       'flag' => $this->flag,
+      'label' => $this->label,
       'product_id' => $this->product_id,
       'master_product_item_id' => $this->master_product_item_id,
       'price' => $this->price,

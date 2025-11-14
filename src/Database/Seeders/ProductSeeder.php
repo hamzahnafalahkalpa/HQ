@@ -99,7 +99,19 @@ class ProductSeeder extends Seeder
             ],
             'additional_items' => [
                 [
+                    'name' => 'Penambahan Poli',
+                    'label' => 'MedicService',
+                    'master_product_item' => [
+                        'name' => 'Add on Poli',
+                        'label' => 'Additional Clinic',
+                    ],
+                    'note' => '1 poli by default, added',
+                    'price' => 0,
+                    'discount' => 0
+                ],
+                [
                     'name' => 'Penambahan Pengguna',
+                    'label' => 'User',
                     'master_product_item' => [
                         'name' => 'Add on User',
                         'label' => 'Add on User',
@@ -109,6 +121,7 @@ class ProductSeeder extends Seeder
                 ],
                 [
                     'name' => 'Penambahan Formulir',
+                    'label' => 'Form',
                     'master_product_item' => [
                         'name' => 'Add on Form',
                         'label' => 'Add on Form',
@@ -118,6 +131,7 @@ class ProductSeeder extends Seeder
                 ],
                 [
                     'name' => 'Penambahan Laporan',
+                    'label' => 'Report',
                     'master_product_item' => [
                         'name' => 'Add on Report',
                         'label' => 'Add on Report',
@@ -264,6 +278,7 @@ class ProductSeeder extends Seeder
             'additional_items' => [
                 [
                     'name' => 'Penambahan Poli',
+                    'label' => 'MedicService',
                     'master_product_item' => [
                         'name' => 'Add on Poli',
                         'label' => 'Additional Clinic',
@@ -274,6 +289,7 @@ class ProductSeeder extends Seeder
                 ],
                 [
                     'name' => 'Add on Patient Recap',
+                    'label' => 'PatientRecap',
                     'master_product_item' => [
                         'name' => 'Add on Patient Recap',
                         'label' => 'Add on 1000 Patients (AI)',
@@ -283,6 +299,7 @@ class ProductSeeder extends Seeder
                 ],
                 [
                     'name' => 'Add on User',
+                    'label' => 'User',
                     'master_product_item' => [
                         'name' => 'Add on User',
                         'label' => 'Add on User',
@@ -292,6 +309,7 @@ class ProductSeeder extends Seeder
                 ],
                 [
                     'name' => 'Add on Integrations',
+                    'label' => 'Integration',
                     'master_product_item' => [
                         'name' => 'Add on Integrations',
                         'label' => 'Integrations (Selected)',
@@ -301,6 +319,7 @@ class ProductSeeder extends Seeder
                 ],
                 [
                     'name' => 'Integration Config (One Time)',
+                    'label' => 'Integration',
                     'master_product_item' => [
                         'name' => 'Integration Config',
                         'label' => 'Integration Setup',
@@ -310,6 +329,7 @@ class ProductSeeder extends Seeder
                 ],
                 [
                     'name' => 'Add on Skrining (One Time)',
+                    'label' => 'Screening',
                     'master_product_item' => [
                         'name' => 'Add on Skrining',
                         'label' => 'Custom Screening Form',
@@ -319,6 +339,7 @@ class ProductSeeder extends Seeder
                 ],
                 [
                     'name' => 'Add on Report (One Time)',
+                    'label' => 'Report',
                     'master_product_item' => [
                         'name' => 'Add on Report',
                         'label' => 'Custom Report',
@@ -565,6 +586,7 @@ class ProductSeeder extends Seeder
             'additional_items' => [
                 [
                     'name' => 'Penambahan Poli',
+                    'label' => 'MedicService',
                     'master_product_item' => [
                         'name' => 'Add on Poli',
                         'label' => 'Additional Clinic',
@@ -575,6 +597,7 @@ class ProductSeeder extends Seeder
                 ],
                 [
                     'name' => 'Add on Patient Recap',
+                    'label' => 'PatientRecap',
                     'master_product_item' => [
                         'name' => 'Add on Patient Recap',
                         'label' => 'Add on 1000 Patients (AI)',
@@ -584,6 +607,7 @@ class ProductSeeder extends Seeder
                 ],
                 [
                     'name' => 'Add on User',
+                    'label' => 'User',
                     'master_product_item' => [
                         'name' => 'Add on User',
                         'label' => 'Add on User',
@@ -593,6 +617,7 @@ class ProductSeeder extends Seeder
                 ],
                 [
                     'name' => 'Add on Integrations',
+                    'label' => 'Integration',
                     'master_product_item' => [
                         'name' => 'Add on Integrations',
                         'label' => 'Integrations (Selected)',
@@ -602,6 +627,7 @@ class ProductSeeder extends Seeder
                 ],
                 [
                     'name' => 'Integration Config (One Time)',
+                    'label' => 'Integration',
                     'master_product_item' => [
                         'name' => 'Integration Config',
                         'label' => 'Integration Setup',
@@ -611,6 +637,7 @@ class ProductSeeder extends Seeder
                 ],
                 [
                     'name' => 'Add on Skrining (One Time)',
+                    'label' => 'Screening',
                     'master_product_item' => [
                         'name' => 'Add on Skrining',
                         'label' => 'Custom Screening Form',
@@ -620,6 +647,7 @@ class ProductSeeder extends Seeder
                 ],
                 [
                     'name' => 'Add on Report (One Time)',
+                    'label' => 'Report',
                     'master_product_item' => [
                         'name' => 'Add on Report',
                         'label' => 'Custom Report',

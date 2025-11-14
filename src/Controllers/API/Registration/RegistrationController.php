@@ -11,7 +11,6 @@ class RegistrationController extends EnvironmentController{
         $possibleTypes = ['company','people'];
         $reference = null;
         $referenceType = null;
-
         foreach ($possibleTypes as $type) {
             if (request()->filled($type)) {
                 $reference = request()->input($type);

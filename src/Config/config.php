@@ -74,6 +74,7 @@ return [
         'hanafalah/module-people'               => ['repository' =>'hamzahnafalahkalpa/module-people'],
         'hanafalah/module-card-identity'        => ['repository' =>'hamzahnafalahkalpa/module-card-identity'],
         'hanafalah/module-regional'             => ['repository' =>'hamzahnafalahkalpa/module-regional'],
+        'hanafalah/module-medic-service'        => ['repository' =>'hamzahnafalahkalpa/module-medic-service'],
         'hanafalah/module-service'              => ['repository' =>'hamzahnafalahkalpa/module-service'],
         'hanafalah/module-support'              => ['repository' =>'hamzahnafalahkalpa/module-support'],
         'hanafalah/module-transaction'          => ['repository' =>'hamzahnafalahkalpa/module-transaction'],

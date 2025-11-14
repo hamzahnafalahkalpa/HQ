@@ -111,7 +111,8 @@ return [
                     'Product',
                     'ProductItem',
                     'MasterProductItem',
-                    'InstalledProductItem'
+                    'InstalledProductItem',
+                    'MedicService'
                 ]
             ],
             'tenant' => [
