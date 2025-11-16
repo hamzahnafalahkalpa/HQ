@@ -5,12 +5,6 @@ namespace Projects\Hq\Database\Seeders;
 use Hanafalah\LaravelSupport\Concerns\Support\HasRequestData;
 use Hanafalah\MicroTenant\Contracts\Data\TenantData;
 use Hanafalah\MicroTenant\Facades\MicroTenant;
-use Hanafalah\ModuleRegional\Data\AddressData;
-use Hanafalah\ModuleWorkspace\Data\{
-    WorkspaceData,
-    WorkspacePropsData,
-    WorkspaceSettingData
-};
 use Hanafalah\ModuleWorkspace\Enums\Workspace\Status;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Artisan;
@@ -29,14 +23,14 @@ class WorkspaceSeeder extends Seeder{
         $project_namespace = 'Projects';
         if (!isset($workspace)){
             $is_new = true;
-            $workspace = app(config('app.contracts.Workspace'))->prepareStoreWorkspace(WorkspaceData::from([
+            $workspace = app(config('app.contracts.Workspace'))->prepareStoreWorkspace($this->requestDTO(config('app.contracts.WorkspaceData'),[
                 'uuid'    => '9e7ff0f6-7679-46c8-ac3e-71da818160Hq',
                 'name'    => 'Hq',
                 'status'  => Status::ACTIVE->value
             ]));
 
             $tenant_schema  = app(config('app.contracts.Tenant'));
-            $project_tenant = $tenant_schema->prepareStoreTenant($this->requestDTO(TenantData::class,[
+            $project_tenant = $tenant_schema->prepareStoreTenant($this->requestDTO(config('app.contracts.TenantData'),[
                 'parent_id'      => null,
                 'name'           => 'Hq',
                 'flag'           => 'APP',
