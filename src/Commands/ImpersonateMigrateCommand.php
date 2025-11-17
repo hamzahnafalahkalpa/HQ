@@ -14,4 +14,14 @@ class ImpersonateMigrateCommand extends ImpersonateImpersonateMigrateCommand
                                 {--group_id= : The id of the group}
                                 {--tenant_id= : The id of the tenant}
                             ';
+
+
+    protected function impersonateConfig(array $config_path) : self{
+        foreach($config_path as $key => $config) {
+            if(isset($config)) {
+                $this->__impersonate[$key] = config('hq');
+            }
+        }
+        return $this;
+    }
 }

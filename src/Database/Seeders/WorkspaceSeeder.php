@@ -46,41 +46,6 @@ class WorkspaceSeeder extends Seeder{
             $is_new = false;
             $project_tenant = $workspace->tenant;
         }
-        if ($is_new){
-            $providers = config('hq.packages',[]);
-            $providers = array_keys($providers);
-            $package_providers = [];
-            $requires = [
-                'require' => []
-            ];
-            $repositories = [
-                'repositories' => []
-            ];
-            foreach ($providers as $provider) {
-                $original    = $provider;
-                $provider    = explode("/", $provider);
-                $provider[0] = Str::studly($provider[0]);
-                $provider[1] = Str::studly($provider[1]);
-                $provider    = implode('\\',$provider).'\\'.$provider[1].'ServiceProvider';
-                $package_providers[$original] = [
-                    'provider' => $provider
-                ];
-    
-                $repositories['repositories'][Str::kebab($original)] = [
-                    'type' => 'path',
-                    'url'  => '../../repositories/'.Str::afterLast($original,'/'),
-                    'options' => [
-                        'symlink' => true
-                    ]
-                ];
-                if (Str::kebab($original) != 'hanafalah/microtenant'){
-                    $requires['require'][Str::kebab($original)] = 'dev-main as 1.0'; 
-                }
-            }
-            
-            $project_tenant->setAttribute('packages',$package_providers);
-            $project_tenant->save();
-        }
 
         config([
             'database.connections.tenant.search_path' => $project_tenant->tenancy_db_name

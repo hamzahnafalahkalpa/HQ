@@ -112,7 +112,8 @@ return [
                     'ProductItem',
                     'MasterProductItem',
                     'InstalledProductItem',
-                    'MedicService'
+                    'MedicService',
+                    'Timezone'
                 ]
             ],
             'tenant' => [

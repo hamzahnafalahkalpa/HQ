@@ -29,7 +29,7 @@ class Product extends CentralUnicode
         ];
     }
 
-    protected function isUsingService(): bool{
+    public function isUsingService(): bool{
         return true;
     }
 

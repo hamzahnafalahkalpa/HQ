@@ -34,11 +34,10 @@ class Workspace extends SchemasWorkspace implements ModuleWorkspaceWorkspace{
                         ->timeout(10)
                         ->post($url, [
                             'workspace_id'    => $workspace->getKey(),
-                            // 'workspace' => $workspace,
+                            'workspace_name' => $workspace->name,
+                            'product_label' => $product_model->label,
                             'app_tenant_id'   => $app_tenant->getKey(),
-                            // 'app_tenant' => $app_tenant,
                             'group_tenant_id' => $group_tenant->getKey(),
-                            // 'group_tenant' => $group_tenant
                         ]);
     
                     // Kalau status bukan 2xx, lempar exception

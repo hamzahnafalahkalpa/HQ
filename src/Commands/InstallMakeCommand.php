@@ -1,6 +1,7 @@
 <?php
 
 namespace Projects\Hq\Commands;
+use Illuminate\Support\Facades\App;
 
 class InstallMakeCommand extends EnvironmentCommand
 {
@@ -41,11 +42,11 @@ class InstallMakeCommand extends EnvironmentCommand
 
         $this->call('optimize:clear');
         $direct_access = config('micro-tenant.direct_provider_access');
+
         config(['micro-tenant.direct_provider_access' => false]);
         $this->call('migrate');
         $this->call('db:seed');
         config(['micro-tenant.direct_provider_access' => $direct_access]);
-
         $this->callSilent('hq:seed');
 
         $this->comment('projects/hq installed successfully.');

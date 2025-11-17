@@ -15,11 +15,13 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+            TimezoneSeeder::class,
             WorkspaceSeeder::class,
             ApiAccessSeeder::class,
             EncodingSeeder::class,
             WalletSeeder::class,
             PermissionSeeder::class,
+            TimezoneSeeder::class,
             RoleSeeder::class,
             ProductSeeder::class,
             PaymentMethodSeeder::class,
