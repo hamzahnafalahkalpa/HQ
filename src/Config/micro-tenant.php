@@ -77,7 +77,7 @@ return [
             'pgsql' => PostgreSQLSchemaManager::class, // Separate by schema instead of database
         ],
         'app_tenant'   => [
-            'prefix' => 'hq_',
+            'prefix' => env('HQ_DATABASE_PREFIX', 'hq_'),
             'suffix' => ''
         ],
         'model_connections' => [
@@ -125,7 +125,7 @@ return [
             ]
         ],
         'database_tenant_name' => [
-            'prefix' => 'hq_',
+            'prefix' => env('HQ_DATABASE_PREFIX', 'hq_'),
             'suffix' => ''
         ],
     ],
