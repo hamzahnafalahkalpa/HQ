@@ -2,12 +2,16 @@
 
 namespace Projects\Hq\Models\ModuleWorkspace;
 
+use Hanafalah\ModulePayment\Concerns\HasPaymentSummary;
+use Hanafalah\ModuleTransaction\Concerns\HasTransaction;
 use Hanafalah\ModuleWorkspace\Models\Workspace\Workspace as WorkspaceWorkspace;
 use Projects\Hq\Resources\Workspace\ShowWorkspace;
 use Projects\Hq\Resources\Workspace\ViewWorkspace;
 
 class Workspace extends WorkspaceWorkspace
 {
+    use HasPaymentSummary, HasTransaction;
+
     protected $list = [
         'id', 'uuid', 'name', 'owner_id', 'product_id', 'status', 'props'
     ];  

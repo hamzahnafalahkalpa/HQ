@@ -7,12 +7,12 @@ use Projects\Hq\Controllers\API\Setting\{
     MaritalStatusController,
 };
 
-Route::group([
-    'prefix' => '/stakeholder',
-    'as' => 'stakeholder.'
-],function(){
-    Route::apiResource('/marital-status',MaritalStatusController::class)->parameters(['marital-status' => 'id']);
-    Route::apiResource('/family-role',FamilyRoleController::class)->parameters(['family-role' => 'id']);
-    Route::apiResource('/education',EducationController::class)->parameters(['education' => 'id']);
-});
+// Route::group([
+//     'prefix' => '/stakeholder',
+//     'as' => 'stakeholder.'
+// ],function(){
+//     Route::apiResource('/marital-status',MaritalStatusController::class)->parameters(['marital-status' => 'id']);
+//     Route::apiResource('/family-role',FamilyRoleController::class)->parameters(['family-role' => 'id']);
+//     Route::apiResource('/education',EducationController::class)->parameters(['education' => 'id']);
+// });
 

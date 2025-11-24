@@ -4,6 +4,7 @@ namespace Projects\Hq\Controllers\API\ProductService\Submission;
 
 use Hanafalah\ModulePayment\Contracts\Schemas\PosTransaction;
 use Projects\Hq\Controllers\API\ApiController;
+use Xendit\Configuration;
 
 class EnvironmentController extends ApiController{
     public function __construct(
@@ -18,6 +19,7 @@ class EnvironmentController extends ApiController{
 
     protected function commonRequest(){
         $this->userAttempt();
+        Configuration::setXenditKey(env('XENDIT_SECRET_KEY'));
     }
 
     protected function getPosTransactionPaginate(?callable $callback = null){        

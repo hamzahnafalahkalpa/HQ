@@ -5,11 +5,17 @@ namespace Projects\Hq\Schemas\ModuleWorkspace;
 use Hanafalah\ModuleWorkspace\Schemas\Workspace as SchemasWorkspace;
 use Illuminate\Database\Eloquent\Model;
 use Projects\Hq\Contracts\Schemas\ModuleWorkspace\Workspace as ModuleWorkspaceWorkspace;
-use Illuminate\Support\Facades\Http;
 
 class Workspace extends SchemasWorkspace implements ModuleWorkspaceWorkspace{
     public function prepareStoreWorkspace(mixed $workspace_dto): Model{
         $workspace = parent::prepareStoreWorkspace($workspace_dto);
+        $this->schemaContract('payment_summary')->prepareStorePaymentSummary($this->requestDTO(config('app.contracts.PaymentSummaryData'),[
+            'transaction_id'  => $workspace->transaction->getKey(),
+            'reference_type'  => $workspace->getMorphClass(),
+            'reference_id'    => $workspace->getKey(),
+            'reference_model' => $workspace
+        ]));
+        
         if (isset($workspace_dto->product_id)){
             $workspace->product_id = $workspace_dto->product_id;
             if (isset($workspace_dto->installed_product_items) && count($workspace_dto->installed_product_items) > 0){
@@ -22,34 +28,34 @@ class Workspace extends SchemasWorkspace implements ModuleWorkspaceWorkspace{
     
             $tenant = $workspace->tenant;
             // if (!isset($tenant) && $workspace_dto->status == 'ACTIVE'){
-            if (!isset($tenant)){
-                $product_model = $workspace_dto->product_model;
-                $app_tenant   = $this->TenantModel()->where('flag','APP')->where('props->product_type',$product_model->label)->firstOrFailWithMessage('App Tenant Not Found');
-                $group_tenant = $this->TenantModel()->where('flag','CENTRAL_TENANT')->where('props->product_type',$product_model->label)->firstOrFailWithMessage('Group Tenant Not Found');
-                $url = config('hq.backbone.url');
-                try {
-                    $response = Http::withHeaders(array_merge(request()->headers->all(),[
-                        'Accept' => '*/*'
-                    ]))
-                        ->timeout(10)
-                        ->post($url, [
-                            'workspace_id'    => $workspace->getKey(),
-                            'workspace_name' => $workspace->name,
-                            'product_label' => $product_model->label,
-                            'app_tenant_id'   => $app_tenant->getKey(),
-                            'group_tenant_id' => $group_tenant->getKey(),
-                        ]);
+            // if (!isset($tenant)){
+            //     $product_model = $workspace_dto->product_model;
+            //     $app_tenant   = $this->TenantModel()->where('flag','APP')->where('props->product_type',$product_model->label)->firstOrFailWithMessage('App Tenant Not Found');
+            //     $group_tenant = $this->TenantModel()->where('flag','CENTRAL_TENANT')->where('props->product_type',$product_model->label)->firstOrFailWithMessage('Group Tenant Not Found');
+            //     $url = config('hq.backbone.url');
+            //     try {
+            //         $response = Http::withHeaders(array_merge(request()->headers->all(),[
+            //             'Accept' => '*/*'
+            //         ]))
+            //             ->timeout(10)
+            //             ->post($url, [
+            //                 'workspace_id'    => $workspace->getKey(),
+            //                 'workspace_name' => $workspace->name,
+            //                 'product_label' => $product_model->label,
+            //                 'app_tenant_id'   => $app_tenant->getKey(),
+            //                 'group_tenant_id' => $group_tenant->getKey(),
+            //             ]);
     
-                    // Kalau status bukan 2xx, lempar exception
-                    if ($response->failed()) {
-                        throw new \RuntimeException(
-                            "Backbone API call failed with status {$response->status()}: {$response->body()}"
-                        );
-                    }
-                } catch (\Throwable $th) {
-                    throw $th;
-                }
-            }
+            //         // Kalau status bukan 2xx, lempar exception
+            //         if ($response->failed()) {
+            //             throw new \RuntimeException(
+            //                 "Backbone API call failed with status {$response->status()}: {$response->body()}"
+            //             );
+            //         }
+            //     } catch (\Throwable $th) {
+            //         throw $th;
+            //     }
+            // }
             $this->fillingProps($workspace,$workspace_dto->props);
             $workspace->save();
         }
