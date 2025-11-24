@@ -14,10 +14,12 @@ use Projects\Hq\{
 };
 use Hanafalah\MicroTenant\Facades\MicroTenant;
 use Projects\Hq\Contracts\Schemas\ModuleWorkspace\Workspace;
+use Projects\Hq\Contracts\Schemas\PosTransaction;
 use Projects\Hq\Contracts\Schemas\Product;
 use Projects\Hq\Contracts\Supports\ConnectionManager as ConnectionManager;
 use Projects\Hq\Schemas\Product as SchemasProduct;
 use Projects\Hq\Schemas\ModuleWorkspace\Workspace as SchemasWorkspace;
+use Projects\Hq\Schemas\PosTransaction as SchemasPosTransaction;
 use Projects\Hq\Supports\ConnectionManager as SupportsConnectionManager;
 
 class HqServiceProvider extends HqEnvironment

@@ -3,7 +3,7 @@
 use Hanafalah\ApiHelper\Facades\ApiAccess;
 use Hanafalah\LaravelSupport\Facades\LaravelSupport;
 use Illuminate\Support\Facades\Route;
-
+use Projects\Hq\Controllers\API\Xendit\XenditController;
 use Xendit\Configuration;
 
 use Xendit\{
@@ -27,15 +27,10 @@ ApiAccess::secure(function(){
     });
 });
 
-Route::post('/xendit/paid',function(){
-    \Log::channel('xendit')->info('Backbone: Xendit paid callback', [
-        'payload' => request()->all(),
-        'headers' => request()->headers->all()
-    ]);
-});
+Route::post('/xendit/paid',[XenditController::class,'store'])->name('api.xendit.paid');
 
 Route::get('/cek/invoice',function(){
     Configuration::setXenditKey(env('XENDIT_SECRET_KEY'));
     $xendit_invoice = new InvoiceApi();
-    return $xendit_invoice->getInvoices(null,'97f13cff-1300-42c7-9713-3189d8f3f233');
+    return $xendit_invoice->getInvoices(null,request()->external_id);
 });

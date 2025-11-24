@@ -5,6 +5,13 @@ namespace Projects\Hq\Schemas;
 use Hanafalah\ModulePayment\Schemas\PosTransaction as SchemasPosTransaction;
 use Illuminate\Database\Eloquent\Model;
 use Projects\Hq\Contracts\Schemas\PosTransaction as ContractsPosTransaction;
+use Illuminate\Support\Str;
+
+use Xendit\{
+    Invoice\InvoiceApi,
+    Invoice\CreateInvoiceRequest,
+    XenditSdkException
+};
 
 class PosTransaction extends SchemasPosTransaction implements ContractsPosTransaction
 {
@@ -24,7 +31,28 @@ class PosTransaction extends SchemasPosTransaction implements ContractsPosTransa
         $pos_transaction = parent::prepareStorePosTransaction($pos_transaction_dto);
         $this->fillingProps($pos_transaction,$pos_transaction_dto->props);
         $pos_transaction->save();
-        
+        $payment_summary = $pos_transaction->paymentSummary;
+        $payment_summary->refresh();
+
+        $xendit_invoice = new InvoiceApi();
+        $create_invoice_request = new CreateInvoiceRequest([
+            'external_id' => $payment_summary->getKey(),
+            'description' => $payment_summary->name,
+            'amount' => $payment_summary->amount,
+            'invoice_duration' => 172800,
+            'currency' => 'IDR',
+            'reminder_time' => 2
+        ]);
+        $for_user_id = null;
+        try {
+            $result = $xendit_invoice->createInvoice($create_invoice_request, $for_user_id);
+            $result = $result->jsonSerialize();
+            $payment_summary->xendit = $result;
+            $payment_summary->save();
+        } catch (XenditSdkException $e) {
+            echo 'Exception when calling InvoiceApi->createInvoice: ', $e->getMessage(), PHP_EOL;
+            echo 'Full Error: ', json_encode($e->getFullError()), PHP_EOL;
+        }
         return $this->pos_transaction_model = $pos_transaction;
     }
 }

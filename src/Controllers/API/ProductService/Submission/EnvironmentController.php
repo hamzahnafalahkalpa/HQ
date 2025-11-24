@@ -2,7 +2,7 @@
 
 namespace Projects\Hq\Controllers\API\ProductService\Submission;
 
-use Hanafalah\ModulePayment\Contracts\Schemas\PosTransaction;
+use Projects\Hq\Contracts\Schemas\PosTransaction;
 use Projects\Hq\Controllers\API\ApiController;
 use Xendit\Configuration;
 
