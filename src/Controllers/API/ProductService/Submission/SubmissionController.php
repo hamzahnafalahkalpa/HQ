@@ -40,6 +40,8 @@ class SubmissionController extends EnvironmentController{
             $transaction_item['item_type'] = 'Workspace';
             $item_payload = &$transaction_item['item'];
             $item_payload['owner_id'] = $user->getKey();
+            $timezone = $this->TimezoneModel()->findOrFail($item_payload['setting']['timezone_id']);
+            $item_payload['setting']['timezone'] = $timezone->toViewApi()->resolve();            
             $item_payload['integration'] = [
                 "satu_sehat" => [
                     "progress" => 0,
