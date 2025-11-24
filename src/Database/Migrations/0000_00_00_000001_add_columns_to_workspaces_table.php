@@ -6,6 +6,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Projects\Hq\Models\ModuleWorkspace\Workspace;
 use Projects\Hq\Models\Product;
+use Projects\Hq\Models\Submission;
 
 return new class extends Migration
 {
@@ -30,6 +31,16 @@ return new class extends Migration
                 $product = app(config('database.models.Product',Product::class));
 
                 $table->foreignIdFor($product::class,'product_id')->nullable()
+                      ->after('owner_id')
+                      ->index()->constrained()->cascadeOnUpdate()->restrictOnDelete();
+            });
+        });
+
+        $this->isNotColumnExists('submission_id',function() use ($table_name){
+            Schema::table($table_name, function (Blueprint $table) {
+                $submission = app(config('database.models.Submission',Submission::class));
+
+                $table->foreignIdFor($submission::class,'submission_id')->nullable()
                       ->after('owner_id')
                       ->index()->constrained()->cascadeOnUpdate()->restrictOnDelete();
             });

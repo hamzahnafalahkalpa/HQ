@@ -19,6 +19,10 @@ class ViewWorkspace extends WorkspaceViewWorkspace
       'product' => $this->relationValidation('product',function(){
         return $this->product->toViewApi()->resolve();
       },$this->prop_product),
+      'submission_id' => $this->submission_id,
+      'submission' => $this->relationValidation('submission',function(){
+        return $this->submission->toViewApi()->resolve();
+      },$this->prop_submission),
       'tenant' => $this->relationValidation('tenant',function(){
         return $this->tenant->toViewApi();
       })

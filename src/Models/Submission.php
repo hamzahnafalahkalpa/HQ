@@ -18,4 +18,8 @@ class Submission extends ModelsSubmission
     public function showUsingRelation(): array{
         return ['paymentSummary','transaction'];
     }
+
+    public function workspace(){
+        return $this->hasOneModel('Workspace','submission_id');
+    }
 }

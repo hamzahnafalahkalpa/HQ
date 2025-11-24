@@ -13,7 +13,7 @@ class Workspace extends WorkspaceWorkspace
     use HasPaymentSummary, HasTransaction;
 
     protected $list = [
-        'id', 'uuid', 'name', 'owner_id', 'product_id', 'status', 'props'
+        'id', 'uuid', 'name', 'owner_id', 'product_id', 'submission_id', 'status', 'props'
     ];  
 
     public function viewUsingRelation(): array{
@@ -34,6 +34,7 @@ class Workspace extends WorkspaceWorkspace
 
     public function tenant(){return $this->morphOneModel('Tenant','reference');}
     public function product(){return $this->belongsToModel('Product','product_id');}
+    public function submission(){return $this->belongsToModel('Submission','submission_id');}
     public function installedProductItem(){
         return $this->morphOneModel('InstalledProductItem','reference');
     }

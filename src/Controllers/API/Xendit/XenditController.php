@@ -19,6 +19,23 @@ class XenditController extends ApiController{
                     $payment_summary->debt = 0;
                     $payment_summary->xendit = $data;
                     $payment_summary->save();
+
+                    $reference = $payment_summary->reference;
+                    $workspace = $reference->workspace;
+                    if (isset($workspace)){
+                        $workspace->status = 'ACTIVE';
+                        $workspace->save();
+                        $workspace->load(['product','submission']);
+                        app(config('app.contracts.Workspace'))->generateTenant($this->requestDTO(
+                            config('app.contracts.WorkspaceData'),
+                            [
+                                'name' => $workspace->name,
+                                'workspace_id' => $workspace->getKey(),
+                                'workspace_model' => $workspace,
+                                'product_model' => $workspace->product
+                            ]
+                        ));
+                    }
                     return $data;
                 });
             } catch (\Throwable $th) {
