@@ -27,8 +27,11 @@ ApiAccess::secure(function(){
     });
 });
 
-Route::get('/paid',function(){
-    \Log::channel('xendit')->info('Xendit paid callback', request()->all());
+Route::post('/xendit/paid',function(){
+    \Log::channel('xendit')->info('Backbone: Xendit paid callback', [
+        'payload' => request()->all(),
+        'headers' => request()->headers->all()
+    ]);
 });
 
 Route::get('/cek/invoice',function(){
