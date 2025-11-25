@@ -56,7 +56,6 @@ class InstalledProductItemData extends Data implements DataInstalledProductItemD
     public static function before(array &$attributes){
         $new = self::new();
         $product_item = $new->ProductItemModel()->findOrFail($attributes['product_item_id']);
-
         $attributes['name'] ??= $product_item->name;
         $attributes['price'] ??= $product_item->price;
         $attributes['qty'] ??= 1;

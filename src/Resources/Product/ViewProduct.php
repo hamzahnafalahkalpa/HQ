@@ -27,12 +27,12 @@ class ViewProduct extends ViewUnicode
       'actual_price' => $price - ($price*$discount/100),
       'product_items' => $this->relationValidation('productItems',function(){
           return $this->productItems->transform(function($item){
-              return $item->toViewApi();
+              return $item->toViewApi()->resolve();
           });
       }),
       'additional_items' => $this->relationValidation('additionalItems',function(){
           return $this->additionalItems->transform(function($item){
-              return $item->toViewApi();
+              return $item->toViewApi()->resolve();
           });
       }),
     ];    

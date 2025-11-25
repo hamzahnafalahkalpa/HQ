@@ -21,7 +21,7 @@ class Workspace extends WorkspaceWorkspace
     }
 
     public function showUsingRelation(): array{
-        return ['tenant','address','product','installedProductItems'];
+        return ['tenant','address','product','installedProductItems','installedFeatures'];
     }
 
     public function getShowResource(){
@@ -34,7 +34,7 @@ class Workspace extends WorkspaceWorkspace
 
     public function tenant(){return $this->morphOneModel('Tenant','reference');}
     public function product(){return $this->belongsToModel('Product','product_id');}
-    public function submission(){return $this->belongsToModel('Submission','submission_id');}
+    public function submission(){return $this->belongsToModel('Submission','submission_id');}    
     public function installedProductItem(){
         return $this->morphOneModel('InstalledProductItem','reference');
     }

@@ -23,7 +23,8 @@ class ViewProductItem extends ApiResource
       'master_product_item_id' => $this->master_product_item_id,
       'price' => $this->price,
       'discount' => $this->discount,
-      'actual_price' => $this->price - ($this->price * ($this->discount / 100))
+      'actual_price' => $this->price - ($this->price * ($this->discount / 100)),
+      'dynamic_forms' => $this->dynamic_forms,
     ];
     return $arr;
   }

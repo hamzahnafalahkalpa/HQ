@@ -19,6 +19,13 @@ class Workspace extends SchemasWorkspace implements ModuleWorkspaceWorkspace{
                     $this->schemaContract('installed_product_item')->prepareStoreInstalledProductItem($installed_product_item);
                 }
             }
+            if (isset($workspace_dto->installed_features) && count($workspace_dto->installed_features) > 0){
+                foreach ($workspace_dto->installed_features as &$installed_feature_dto) {
+                    $installed_feature_dto->model_type = $workspace->getMorphClass();
+                    $installed_feature_dto->model_id = $workspace->getKey();
+                    $installed_feature = $this->schemaContract('installed_feature')->prepareStoreInstalledFeature($installed_feature_dto);
+                }
+            }
     
             $tenant = $workspace->tenant;
             if (!isset($tenant) && $workspace_dto->status == 'ACTIVE'){
@@ -41,14 +48,14 @@ class Workspace extends SchemasWorkspace implements ModuleWorkspaceWorkspace{
             $response = Http::withHeaders(array_merge(request()->headers->all(),[
                 'Accept' => '*/*'
             ]))
-                ->timeout(10)
-                ->post($url, [
-                    'workspace_id'    => $workspace->getKey(),
-                    'workspace_name' => $workspace->name,
-                    'product_label' => $product_model->label,
-                    'app_tenant_id'   => $app_tenant->getKey(),
-                    'group_tenant_id' => $group_tenant->getKey(),
-                ]);
+            ->timeout(1000)
+            ->post($url, [
+                'workspace_id'    => $workspace->getKey(),
+                'workspace_name'  => $workspace->name,
+                'product_label'   => $product_model->label,
+                'app_tenant_id'   => $app_tenant->getKey(),
+                'group_tenant_id' => $group_tenant->getKey(),
+            ]);
 
             // Kalau status bukan 2xx, lempar exception
             if ($response->failed()) {

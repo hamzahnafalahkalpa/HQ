@@ -34,7 +34,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => null,
                     'price' => 0,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Rekam Medis Elektronik',
@@ -44,7 +45,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => null,
                     'price' => 150000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Pemeriksaan',
@@ -54,7 +56,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => null,
                     'price' => 150000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Laporan',
@@ -64,7 +67,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => null,
                     'price' => 100000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Integrasi Satu Sehat',
@@ -74,7 +78,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => null,
                     'price' => 250000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Kasir',
@@ -84,7 +89,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => null,
                     'price' => 100000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Jumlah Pengguna',
@@ -94,21 +100,37 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => 'Max 3 Pengguna',
                     'price' => 300000,
-                    'discount' => 0
-                ]
+                    'discount' => 0,
+                    'value' => 3,
+                    'dynamic_forms' => []
+                ],
+                [
+                    'name' => 'Poli Klinik',
+                    'master_product_item' => [
+                        'name' => 'Poli Klinik',
+                        'label' => 'MedicService',
+                    ],
+                    'note' => null,
+                    'price' => 300000,
+                    'discount' => 0,
+                    'dynamic_forms' => [
+                        [
+                            'label'          => 'Nama Poli',
+                            'key'            => 'medic_service_id',
+                            'type'           => 'Select',
+                            'component_name' => 'MedicService',
+                            'default_value'  => null,
+                            'attribute'      => [
+                                'max' => 1
+                            ],
+                            'rule'           => null,
+                            'options'        => [],
+                            'value'          => null
+                        ]
+                    ]
+                ]                
             ],
             'additional_items' => [
-                [
-                    'name' => 'Penambahan Poli',
-                    'label' => 'MedicService',
-                    'master_product_item' => [
-                        'name' => 'Add on Poli',
-                        'label' => 'Additional Clinic',
-                    ],
-                    'note' => '1 poli by default, added',
-                    'price' => 0,
-                    'discount' => 0
-                ],
                 [
                     'name' => 'Penambahan Pengguna',
                     'label' => 'User',
@@ -117,7 +139,20 @@ class ProductSeeder extends Seeder
                         'label' => 'Add on User',
                     ],
                     'price' => 100000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => [
+                        [
+                            'label'          => 'Jumlah Pengguna',
+                            'key'            => 'user_count',
+                            'type'           => 'InputNumber',
+                            'component_name' => 'UserCount',
+                            'default_value'  => null,
+                            'attribute'      => [],
+                            'rule'           => null,
+                            'options'        => [],
+                            'value'          => null
+                        ]
+                    ]
                 ],
                 [
                     'name' => 'Penambahan Formulir',
@@ -127,7 +162,8 @@ class ProductSeeder extends Seeder
                         'label' => 'Add on Form',
                     ],
                     'price' => 1500000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Penambahan Laporan',
@@ -137,7 +173,8 @@ class ProductSeeder extends Seeder
                         'label' => 'Add on Report',
                     ],
                     'price' => 1500000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ]
             ]
         ],
@@ -162,7 +199,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => null,
                     'price' => 0,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Rekam Medis Elektronik',
@@ -172,7 +210,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => 'Recap per visit + full export in PDF',
                     'price' => 400000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Pemeriksaan',
@@ -182,7 +221,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => 'Include 500 patient recap (AI) / bulan',
                     'price' => 0,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Laporan',
@@ -192,7 +232,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => 'Medium (~20 laporan)',
                     'price' => 200000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Integrasi Satu Sehat',
@@ -202,7 +243,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => null,
                     'price' => 250000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Integrasi BPJS',
@@ -212,7 +254,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => null,
                     'price' => 250000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Laboratorium',
@@ -222,7 +265,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => 'Document repository dan koneksi ke EMR',
                     'price' => 300000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Radiologi',
@@ -232,7 +276,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => 'Document repository dan koneksi ke EMR',
                     'price' => 300000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Apotek',
@@ -242,7 +287,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => 'Dispense dan link ke kasir',
                     'price' => 400000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Reservasi / Kalendar',
@@ -252,17 +298,33 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => null,
                     'price' => 100000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
-                    'name' => 'Poli Spesialis',
+                    'name' => 'Poli Klinik',
                     'master_product_item' => [
-                        'name' => 'Poli Spesialis',
-                        'label' => 'Specialist Poly',
+                        'name' => 'Poli Klinik',
+                        'label' => 'MedicService',
                     ],
                     'note' => null,
                     'price' => 300000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => [
+                        [
+                            'label'          => 'Nama Poli',
+                            'key'            => 'medic_service_id',
+                            'type'           => 'MultiSelect',
+                            'component_name' => 'MedicService',
+                            'default_value'  => null,
+                            'attribute'      => [
+                                'max' => 2
+                            ],
+                            'rule'           => null,
+                            'options'        => [],
+                            'value'          => []
+                        ]
+                    ]
                 ],
                 [
                     'name' => 'Jumlah Pengguna',
@@ -272,7 +334,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => 'Max 8 pengguna',
                     'price' => 1200000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'value' => 8
                 ]
             ],
             'additional_items' => [
@@ -281,11 +344,23 @@ class ProductSeeder extends Seeder
                     'label' => 'MedicService',
                     'master_product_item' => [
                         'name' => 'Add on Poli',
-                        'label' => 'Additional Clinic',
+                        'label' => 'AdditionalMedicService',
                     ],
-                    'note' => '2 poli by default, added',
                     'price' => 300000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => [
+                        [
+                            'label'          => 'Nama Poli',
+                            'key'            => 'medic_service_id',
+                            'type'           => 'MultiSelect',
+                            'component_name' => 'MedicService',
+                            'default_value'  => null,
+                            'attribute'      => null,
+                            'rule'           => null,
+                            'options'        => [],
+                            'value'          => []
+                        ]
+                    ]
                 ],
                 [
                     'name' => 'Add on Patient Recap',
@@ -295,7 +370,8 @@ class ProductSeeder extends Seeder
                         'label' => 'Add on 1000 Patients (AI)',
                     ],
                     'price' => 200000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Add on User',
@@ -305,7 +381,20 @@ class ProductSeeder extends Seeder
                         'label' => 'Add on User',
                     ],
                     'price' => 150000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => [
+                        [
+                            'label'          => 'Jumlah Pengguna',
+                            'key'            => 'user_count',
+                            'type'           => 'InputNumber',
+                            'component_name' => 'UserCount',
+                            'default_value'  => null,
+                            'attribute'      => [],
+                            'rule'           => null,
+                            'options'        => [],
+                            'value'          => null
+                        ]
+                    ]
                 ],
                 [
                     'name' => 'Add on Integrations',
@@ -315,7 +404,8 @@ class ProductSeeder extends Seeder
                         'label' => 'Integrations (Selected)',
                     ],
                     'price' => 1200000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Integration Config (One Time)',
@@ -325,7 +415,8 @@ class ProductSeeder extends Seeder
                         'label' => 'Integration Setup',
                     ],
                     'price' => 6000000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Add on Skrining (One Time)',
@@ -335,7 +426,8 @@ class ProductSeeder extends Seeder
                         'label' => 'Custom Screening Form',
                     ],
                     'price' => 1500000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Add on Report (One Time)',
@@ -345,7 +437,8 @@ class ProductSeeder extends Seeder
                         'label' => 'Custom Report',
                     ],
                     'price' => 1500000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ]
             ]
         ],
@@ -398,7 +491,7 @@ class ProductSeeder extends Seeder
                         'name' => 'Laporan',
                         'label' => 'Reporting',
                     ],
-                    'note' => 'Medium (~20 laporan)',
+                    // 'note' => 'Medium (~20 laporan)',
                     'price' => 0,
                     'discount' => 0
                 ],
@@ -473,14 +566,26 @@ class ProductSeeder extends Seeder
                     'discount' => 0
                 ],
                 [
-                    'name' => 'Poli Spesialis',
+                    'name' => 'Poli Klinik',
                     'master_product_item' => [
-                        'name' => 'Poli Spesialis',
-                        'label' => 'Specialist Poly',
+                        'name' => 'Poli Klinik',
+                        'label' => 'MedicService',
                     ],
-                    'note' => 'User defined (1 custom screening/formulir)',
                     'price' => 300000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => [
+                        [
+                            'label'          => 'Nama Poli',
+                            'key'            => 'medic_service_id',
+                            'type'           => 'MultiSelect',
+                            'component_name' => 'MedicService',
+                            'default_value'  => null,
+                            'attribute'      => [
+                                'max' => 2
+                            ],
+                            'value' => []
+                        ]
+                    ]
                 ],
                 [
                     'name' => 'Advanced Reporting',
@@ -563,16 +668,6 @@ class ProductSeeder extends Seeder
                     'discount' => 0
                 ],
                 [
-                    'name' => 'Spesialisasi',
-                    'master_product_item' => [
-                        'name' => 'Spesialisasi',
-                        'label' => 'Specialty',
-                    ],
-                    'note' => '2 included',
-                    'price' => 1000000,
-                    'discount' => 0
-                ],
-                [
                     'name' => 'Jumlah Pengguna',
                     'master_product_item' => [
                         'name' => 'Jumlah Pengguna',
@@ -580,7 +675,9 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => '@30 pengguna',
                     'price' => 6000000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => [],
+                    'value' => 30
                 ]
             ],
             'additional_items' => [
@@ -589,11 +686,23 @@ class ProductSeeder extends Seeder
                     'label' => 'MedicService',
                     'master_product_item' => [
                         'name' => 'Add on Poli',
-                        'label' => 'Additional Clinic',
+                        'label' => 'AdditionalMedicService',
                     ],
-                    'note' => 'Per poli added',
                     'price' => 500000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => [
+                        [
+                            'label'          => 'Nama Poli',
+                            'key'            => 'medic_service_id',
+                            'type'           => 'MultiSelect',
+                            'component_name' => 'MedicService',
+                            'default_value'  => null,
+                            'attribute'      => null,
+                            'rule'           => null,
+                            'options'        => [],
+                            'value'          => []
+                        ]
+                    ]
                 ],
                 [
                     'name' => 'Add on Patient Recap',
@@ -613,7 +722,20 @@ class ProductSeeder extends Seeder
                         'label' => 'Add on User',
                     ],
                     'price' => 200000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => [
+                        [
+                            'label'          => 'Jumlah Pengguna',
+                            'key'            => 'user_count',
+                            'type'           => 'InputNumber',
+                            'component_name' => 'UserCount',
+                            'default_value'  => null,
+                            'attribute'      => [],
+                            'rule'           => null,
+                            'options'        => [],
+                            'value'          => null
+                        ]
+                    ]
                 ],
                 [
                     'name' => 'Add on Integrations',

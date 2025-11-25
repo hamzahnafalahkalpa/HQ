@@ -41,4 +41,6 @@ class InstalledProductItem extends BaseModel
 
     public function reference(){return $this->morphTo();}
     public function productItem(){return $this->belongsToModel('ProductItem');}
+    public function installedFeature(){return $this->morphOneModel('InstalledFeature','model');}
+    public function installedFeatures(){return $this->morphManyModel('InstalledFeature','model');}
 }

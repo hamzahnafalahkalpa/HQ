@@ -112,6 +112,7 @@ return [
                     'ProductItem',
                     'MasterProductItem',
                     'InstalledProductItem',
+                    'InstalledFeature',
                     'MedicService',
                     'Timezone'
                 ]
