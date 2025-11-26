@@ -61,5 +61,14 @@ class WorkspaceSeeder extends Seeder{
         ]);
 
         MicroTenant::tenantImpersonate($project_tenant,false);        
+
+        $transaction = app(config('app.contracts.Transaction'))
+            ->prepareStoreTransaction($this->requestDTO(config('app.contracts.TransactionData'),[
+                'reference_model' => $workspace,
+                'reference_id' => $workspace->getKey(),
+                'reference_type' => $workspace->getMorphClass()
+            ]));
+        $workspace->prop_transaction = $transaction->toViewApi()->resolve();
+        $workspace->save();
     }
 }

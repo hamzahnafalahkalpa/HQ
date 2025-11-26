@@ -2,6 +2,8 @@
 
 namespace Projects\Hq\Models\ModuleWorkspace;
 
+use Hanafalah\ModuleLicense\Concerns\HasLicense;
+use Hanafalah\ModuleLicense\Concerns\HasModelHasLicense;
 use Hanafalah\ModulePayment\Concerns\HasPaymentSummary;
 use Hanafalah\ModuleTransaction\Concerns\HasTransaction;
 use Hanafalah\ModuleWorkspace\Models\Workspace\Workspace as WorkspaceWorkspace;
@@ -10,7 +12,14 @@ use Projects\Hq\Resources\Workspace\ViewWorkspace;
 
 class Workspace extends WorkspaceWorkspace
 {
-    use HasPaymentSummary, HasTransaction;
+    use HasPaymentSummary, HasTransaction, HasLicense, HasModelHasLicense;
+
+    public static function bootHasTransaction()
+    {
+        static::created(function ($query) {
+            //OVERRIDE CREATED
+        });
+    }
 
     protected $list = [
         'id', 'uuid', 'name', 'owner_id', 'product_id', 'submission_id', 'status', 'props'

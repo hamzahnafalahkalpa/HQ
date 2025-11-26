@@ -36,7 +36,7 @@ return new class extends Migration
                 $table->string('model_id', 36)->nullable(false);
                 $table->string('master_feature_type', 50)->nullable(false);
                 $table->string('master_feature_id', 36)->nullable(false);
-                $table->foreignIdFor($version::class)->nullable(null)
+                $table->foreignIdFor($version::class)->nullable()
                     ->index()->constrained()->restrictOnDelete()->cascadeOnUpdate();
                 $table->unsignedTinyInteger('current')->default(1)->nullable(false);
                 $table->unsignedTinyInteger('batch')->nullable();

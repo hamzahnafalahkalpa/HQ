@@ -23,6 +23,7 @@
     },
     "require": {
         "xendit/xendit-php": "^7.0",
+        "hanafalah/module-license": "dev-main",
         "hanafalah/laravel-support": "dev-main",
         "hanafalah/module-medic-service": "dev-main",
         "hanafalah/module-payment": "dev-main",
@@ -39,6 +40,13 @@
         "hanafalah/laravel-feature": {
             "type": "path",
             "url": "../../repositories/laravel-feature",
+            "options": {
+                "symlink": true
+            }
+        },
+        "hanafalah/module-license": {
+            "type": "path",
+            "url": "../../repositories/module-license",
             "options": {
                 "symlink": true
             }

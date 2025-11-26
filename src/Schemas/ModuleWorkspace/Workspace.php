@@ -10,6 +10,18 @@ use Illuminate\Support\Facades\Http;
 class Workspace extends SchemasWorkspace implements ModuleWorkspaceWorkspace{
     public function prepareStoreWorkspace(mixed $workspace_dto): Model{
         $workspace = parent::prepareStoreWorkspace($workspace_dto);
+
+        $tenant = tenancy()->tenant;
+        if (isset($tenant) && $tenant->flag == 'APP') {
+            $transaction = app(config('app.contracts.Transaction'))
+                ->prepareStoreTransaction($this->requestDTO(config('app.contracts.TransactionData'),[
+                    'reference_model' => $workspace,
+                    'reference_id' => $workspace->getKey(),
+                    'reference_type' => $workspace->getMorphClass()
+                ]));
+            $workspace->prop_transaction = $transaction->toViewApi()->resolve();
+        }
+
         if (isset($workspace_dto->product_id)){
             $workspace->product_id = $workspace_dto->product_id;
             if (isset($workspace_dto->installed_product_items) && count($workspace_dto->installed_product_items) > 0){
@@ -32,14 +44,31 @@ class Workspace extends SchemasWorkspace implements ModuleWorkspaceWorkspace{
                 $workspace_dto->workspace_model = $workspace;
                 $this->generateTenant($workspace_dto);
             }
-            $this->fillingProps($workspace,$workspace_dto->props);
-            $workspace->save();
         }
+        $this->fillingProps($workspace,$workspace_dto->props);
+        $workspace->save();
         return $this->workspace_model = $workspace;
     }
 
     public function generateTenant(mixed $workspace_dto): void{
         $workspace     = $workspace_dto->workspace_model;
+
+        $now = now();
+        $this->schemaContract('license')->prepareStoreLicense($this->requestDTO(
+            config('app.contracts.LicenseData'),[
+                'reference_type' => $workspace->getMorphClass(),
+                'reference_id'   => $workspace->getKey(),
+                'expired_at' => $now->addMonth(),
+                'last_paid' => $now,
+                'status' => 'ACTIVE',
+                'recurring_type' => 'MONTHLY',
+                'flag' => 'WORKSPACE_LICENSE',
+                'model_has_license' => [
+                    'model_type' => $workspace->getMorphClass(),
+                    'model_id'   => $workspace->getKey(),
+                ]
+            ]
+        ));
         $product_model = $workspace_dto->product_model ?? $workspace->product;
         $app_tenant    = $this->TenantModel()->where('flag','APP')->where('props->product_type',$product_model->label)->firstOrFailWithMessage('App Tenant Not Found');
         $group_tenant  = $this->TenantModel()->where('flag','CENTRAL_TENANT')->where('props->product_type',$product_model->label)->firstOrFailWithMessage('Group Tenant Not Found');
@@ -55,6 +84,7 @@ class Workspace extends SchemasWorkspace implements ModuleWorkspaceWorkspace{
                 'product_label'   => $product_model->label,
                 'app_tenant_id'   => $app_tenant->getKey(),
                 'group_tenant_id' => $group_tenant->getKey(),
+                'admin'           => $workspace->admin
             ]);
 
             // Kalau status bukan 2xx, lempar exception

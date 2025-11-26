@@ -114,7 +114,9 @@ return [
                     'InstalledProductItem',
                     'InstalledFeature',
                     'MedicService',
-                    'Timezone'
+                    'Timezone',
+                    'License',
+                    'ModelHasLicense'
                 ]
             ],
             'tenant' => [
