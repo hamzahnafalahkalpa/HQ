@@ -15,11 +15,15 @@ class XenditController extends ApiController{
         if (isset($data['external_id'])){
             try {
                 $data = $this->transaction(function () use ($data) {
-                    $payment_summary = $this->PaymentSummaryModel()->find($data['external_id']);
+                    $billing = $this->BillingModel()->findOrFail($data['external_id']);
+                    $transaction = $billing->hasTransaction;
+                    $payment_summary = $transaction->paymentSummary;
                     $payment_summary->debt = 0;
-                    $payment_summary->xendit = $data;
                     $payment_summary->save();
-
+                    $billing->xendit = $data;
+                    $billing->reported_at = now();
+                    $billing->save();
+                    
                     $reference = $payment_summary->reference;
                     $workspace = $reference->workspace;
                     if (isset($workspace)){

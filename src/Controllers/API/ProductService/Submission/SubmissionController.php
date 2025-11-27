@@ -123,7 +123,11 @@ class SubmissionController extends EnvironmentController{
 
         $name = request()->reference['name'];
         request()->merge([
-            'name' => $name ?? 'Registration Submission'
+            'name' => $name ?? 'Registration Submission',
+            'billing' => [
+                'author_type' => $user->getMorphClass(),
+                'author_id'   => $user->getKey()
+            ]
         ]);
         return $this->storePosTransaction();
     }

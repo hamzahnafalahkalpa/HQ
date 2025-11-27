@@ -34,9 +34,19 @@ class PosTransaction extends SchemasPosTransaction implements ContractsPosTransa
         $payment_summary = $pos_transaction->paymentSummary;
         $payment_summary->refresh();
 
+        $billing = $pos_transaction->billing;
+
         $xendit_invoice = new InvoiceApi();
+        // $create_invoice_request = new CreateInvoiceRequest([
+        //     'external_id' => $payment_summary->getKey(),
+        //     'description' => $payment_summary->name,
+        //     'amount' => $payment_summary->amount,
+        //     'invoice_duration' => 172800,
+        //     'currency' => 'IDR',
+        //     'reminder_time' => 2
+        // ]);
         $create_invoice_request = new CreateInvoiceRequest([
-            'external_id' => $payment_summary->getKey(),
+            'external_id' => $billing->getKey(),
             'description' => $payment_summary->name,
             'amount' => $payment_summary->amount,
             'invoice_duration' => 172800,
@@ -47,8 +57,10 @@ class PosTransaction extends SchemasPosTransaction implements ContractsPosTransa
         try {
             $result = $xendit_invoice->createInvoice($create_invoice_request, $for_user_id);
             $result = $result->jsonSerialize();
-            $payment_summary->xendit = $result;
-            $payment_summary->save();
+            // $payment_summary->xendit = $result;
+            // $payment_summary->save();
+            $billing->xendit = $result;
+            $billing->save();
         } catch (XenditSdkException $e) {
             echo 'Exception when calling InvoiceApi->createInvoice: ', $e->getMessage(), PHP_EOL;
             echo 'Full Error: ', json_encode($e->getFullError()), PHP_EOL;

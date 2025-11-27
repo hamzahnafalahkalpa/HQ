@@ -1,10 +1,10 @@
 <?php
 
-namespace Projects\Hq\Resources\ModulePaymentSummary;
+namespace Projects\Hq\Resources\ModuleBilling;
 
-use Hanafalah\ModulePayment\Resources\PaymentSummary\ViewPaymentSummary as PaymentSummaryViewPaymentSummary;
+use Hanafalah\ModulePayment\Resources\Billing\ViewBilling as BillingViewBilling;
 
-class ViewPaymentSummary extends PaymentSummaryViewPaymentSummary
+class ViewBilling extends BillingViewBilling
 {
   /**
    * Transform the resource into an array.
@@ -15,7 +15,7 @@ class ViewPaymentSummary extends PaymentSummaryViewPaymentSummary
   public function toArray(\Illuminate\Http\Request $request): array
   {
     $arr = [
-      // 'xendit' => $this->xendit,
+      'xendit' => $this->xendit,
     ];
     $arr = $this->mergeArray(parent::toArray($request),$arr);
     return $arr;
