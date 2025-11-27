@@ -126,7 +126,9 @@ class SubmissionController extends EnvironmentController{
             'name' => $name ?? 'Registration Submission',
             'billing' => [
                 'author_type' => $user->getMorphClass(),
-                'author_id'   => $user->getKey()
+                'author_id'   => $user->getKey(),
+                'debt'        => $product->price ?? 0,
+                'amount'      => $product->price ?? 0
             ]
         ]);
         return $this->storePosTransaction();

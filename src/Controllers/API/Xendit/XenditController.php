@@ -21,6 +21,7 @@ class XenditController extends ApiController{
                     $payment_summary->debt = 0;
                     $payment_summary->save();
                     $billing->xendit = $data;
+                    $billing->debt = 0;
                     $billing->reported_at = now();
                     $billing->save();
                     
