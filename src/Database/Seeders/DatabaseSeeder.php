@@ -14,6 +14,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        config([
+            'laravel-feature.is_validate_restriction' => false,
+            'laravel-support.use_id_as_primary_validation_unicode' => false,
+            'app.use_license_validation' => false
+        ]);
         $this->call([
             TimezoneSeeder::class,
             WorkspaceSeeder::class,

@@ -5,7 +5,7 @@ use Projects\Hq\{
 };
 
 return [
-    "namespace"     => "Projects\Hq",
+    "namespace"     => "Projects\\Hq",
     "service_name"  => "Hq",
     "paths"         => [
         "local_path"   => 'projects',

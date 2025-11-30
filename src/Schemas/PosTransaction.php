@@ -29,6 +29,61 @@ class PosTransaction extends SchemasPosTransaction implements ContractsPosTransa
 
     public function prepareStorePosTransaction(mixed $pos_transaction_dto): Model{
         $pos_transaction = parent::prepareStorePosTransaction($pos_transaction_dto);
+
+        $reference = $pos_transaction->reference;
+        if ($pos_transaction->reference_type == 'Submission' && $reference->flag == 'ADDITIONAL'){
+            $transaction_items = $pos_transaction->transactionItems;
+            foreach ($transaction_items as &$form_product_item) {
+                $form_product_item_model = $this->ProductItemModel()->findOrFail($form_product_item->item_id);
+
+                $installed_data = [
+                    'product_item_id' => $form_product_item_model->getKey(),
+                    "qty"             => 1
+                ];
+                if (isset($form_product_item->dynamic_forms) && count($form_product_item->dynamic_forms) > 0){
+                    $installed_features = [];
+                    foreach ($form_product_item->dynamic_forms as $dynamic_form) {
+                        $key_value = $dynamic_form['key'];
+                        $feature_type = null;
+                        switch ($key_value) {
+                            case 'medic_service_id':
+                                if (!is_array($dynamic_form['value'])){
+                                    $dynamic_form['value'] = [$dynamic_form['value']];                                            
+                                }
+                                $feature_type = 'MedicService';
+                            break;
+                            case 'user_count':
+                                $installed_data['qty'] = intval($dynamic_form['value']);
+                            break;
+                        }
+                        if (isset($feature_type)){
+                            $installed_data['qty']--;
+                            foreach ($dynamic_form['value'] as $dynamic_value) {
+                                $installed_data['qty']++;
+                                $model = $this->{$feature_type.'Model'}()->findOrFail($dynamic_value);
+                                $installed_features[] = [
+                                    'name' => $model->name ?? 'Unknown Feature',
+                                    'master_feature_type' => $feature_type,
+                                    'master_feature_id'   => $dynamic_value,
+                                ];
+                            }
+                        }
+                    }
+                }
+                $installed_data['installed_features'] = $installed_features;
+                $installed_data['submission_id'] = $reference->getKey();
+                $installed_data['reference_type'] = $reference->reference_type;
+                $installed_data['reference_id'] = $reference->reference_id;
+                $this->schemaContract('installed_product_item')
+                    ->prepareStoreInstalledProductItem(
+                        $this->requestDTO(
+                            config('app.contracts.InstalledProductItemData'),
+                            $installed_data
+                        )
+                    );
+            }
+        }
+
         $this->fillingProps($pos_transaction,$pos_transaction_dto->props);
         $pos_transaction->save();
         $payment_summary = $pos_transaction->paymentSummary;
@@ -37,14 +92,6 @@ class PosTransaction extends SchemasPosTransaction implements ContractsPosTransa
         $billing = $pos_transaction->billing;
 
         $xendit_invoice = new InvoiceApi();
-        // $create_invoice_request = new CreateInvoiceRequest([
-        //     'external_id' => $payment_summary->getKey(),
-        //     'description' => $payment_summary->name,
-        //     'amount' => $payment_summary->amount,
-        //     'invoice_duration' => 172800,
-        //     'currency' => 'IDR',
-        //     'reminder_time' => 2
-        // ]);
         $create_invoice_request = new CreateInvoiceRequest([
             'external_id' => $billing->getKey(),
             'description' => $payment_summary->name,
@@ -57,8 +104,6 @@ class PosTransaction extends SchemasPosTransaction implements ContractsPosTransa
         try {
             $result = $xendit_invoice->createInvoice($create_invoice_request, $for_user_id);
             $result = $result->jsonSerialize();
-            // $payment_summary->xendit = $result;
-            // $payment_summary->save();
             $billing->xendit = $result;
             $billing->save();
         } catch (XenditSdkException $e) {

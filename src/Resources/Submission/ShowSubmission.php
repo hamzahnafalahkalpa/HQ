@@ -2,6 +2,8 @@
 
 namespace Projects\Hq\Resources\Submission;
 
+use Hanafalah\ModuleTransaction\Resources\Submission\ShowSubmission as SubmissionShowSubmission;
+
 class ShowSubmission extends ViewSubmission
 {
   /**
@@ -13,7 +15,8 @@ class ShowSubmission extends ViewSubmission
   public function toArray(\Illuminate\Http\Request $request): array
   {
     $arr = [];
-    $arr = $this->mergeArray(parent::toArray($request),$arr);
+    $show = $this->resolveNow(new SubmissionShowSubmission($this));
+    $arr = $this->mergeArray(parent::toArray($request),$show,$arr);
     return $arr;
   }
 }

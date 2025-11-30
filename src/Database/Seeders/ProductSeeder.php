@@ -335,7 +335,8 @@ class ProductSeeder extends Seeder
                     'note' => 'Max 8 pengguna',
                     'price' => 1200000,
                     'discount' => 0,
-                    'value' => 8
+                    'value' => 8,
+                    'dynamic_forms' => []
                 ]
             ],
             'additional_items' => [
@@ -463,7 +464,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => null,
                     'price' => 0,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Rekam Medis Elektronik',
@@ -473,7 +475,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => 'Recap per visit + full export in PDF',
                     'price' => 500000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Pemeriksaan',
@@ -483,7 +486,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => 'Include 100 patient recap (AI) / bulan',
                     'price' => 0,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Laporan',
@@ -493,7 +497,8 @@ class ProductSeeder extends Seeder
                     ],
                     // 'note' => 'Medium (~20 laporan)',
                     'price' => 0,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Integrasi Satu Sehat',
@@ -503,7 +508,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => null,
                     'price' => 250000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Integrasi BPJS',
@@ -513,7 +519,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => null,
                     'price' => 250000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Laboratorium',
@@ -523,7 +530,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => 'Document repository dan koneksi ke EMR',
                     'price' => 0,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Radiologi',
@@ -533,7 +541,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => 'Document repository dan koneksi ke EMR',
                     'price' => 0,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Apotek',
@@ -543,7 +552,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => 'Dispense dan link ke kasir',
                     'price' => 0,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Kasir',
@@ -553,7 +563,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => null,
                     'price' => 0,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Reservasi / Kalendar',
@@ -563,7 +574,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => 'Kyoo + kalendar dan antrian',
                     'price' => 100000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Poli Klinik',
@@ -595,7 +607,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => null,
                     'price' => 500000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Advanced Kasir',
@@ -605,7 +618,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => 'Invoice, payer, voucher by payer, custom pricelists',
                     'price' => 1000000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Advanced Apotek',
@@ -615,7 +629,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => 'Added inventory support (alkes)',
                     'price' => 1000000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Advanced Lab',
@@ -625,7 +640,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => null,
                     'price' => 1000000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Advanced Radiologi',
@@ -635,7 +651,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => 'Custom PACS support',
                     'price' => 1000000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Rawat Inap',
@@ -645,7 +662,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => null,
                     'price' => 500000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'MCU',
@@ -655,7 +673,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => null,
                     'price' => 1000000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'IGD',
@@ -665,7 +684,8 @@ class ProductSeeder extends Seeder
                     ],
                     'note' => null,
                     'price' => 500000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Jumlah Pengguna',
@@ -712,7 +732,8 @@ class ProductSeeder extends Seeder
                         'label' => 'Add on 1000 Patients (AI)',
                     ],
                     'price' => 200000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Add on User',
@@ -745,7 +766,8 @@ class ProductSeeder extends Seeder
                         'label' => 'Integrations (Selected)',
                     ],
                     'price' => 1200000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Integration Config (One Time)',
@@ -755,7 +777,8 @@ class ProductSeeder extends Seeder
                         'label' => 'Integration Setup',
                     ],
                     'price' => 6000000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Add on Skrining (One Time)',
@@ -765,7 +788,8 @@ class ProductSeeder extends Seeder
                         'label' => 'Custom Screening Form',
                     ],
                     'price' => 1500000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ],
                 [
                     'name' => 'Add on Report (One Time)',
@@ -775,7 +799,8 @@ class ProductSeeder extends Seeder
                         'label' => 'Custom Report',
                     ],
                     'price' => 1500000,
-                    'discount' => 0
+                    'discount' => 0,
+                    'dynamic_forms' => []
                 ]
             ]
         ]

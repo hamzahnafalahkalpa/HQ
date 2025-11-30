@@ -15,16 +15,9 @@ use Projects\Hq\Controllers\API\ProductService\Submission\SubmissionController;
 |
 */
 Route::apiResource('/product-service',ProductServiceController::class)->parameters(['product-service' => 'id']);
-Route::apiResource('/submission',SubmissionController::class)->parameters(['submission' => 'id']);
-// Route::group([
-//     "prefix" => "/product-service/{transaction_id}",
-//     'as' => 'product-service.show.'
-// ],function(){
-//     Route::apiResource('/billing',BillingController::class)->parameters(['billing' => 'id']);
-//     Route::group([
-//         "prefix" => "/billing/{billing_id}",
-//         'as' => 'billing.show.'
-//     ],function(){
-//         Route::apiResource('/invoice',InvoiceController::class)->parameters(['invoice' => 'id']);
-//     });
-// });
+Route::group([
+    "prefix" => "/product-service/{product_service_id}",
+    'as' => 'product-service.show.'
+],function(){
+    Route::apiResource('/submission',SubmissionController::class)->parameters(['submission' => 'id']);
+});

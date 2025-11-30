@@ -17,6 +17,10 @@ class InstalledProductItemData extends Data implements DataInstalledProductItemD
     #[MapName('name')]
     public ?string $name = null;
 
+    #[MapInputName('submission_id')]
+    #[MapName('submission_id')]
+    public mixed $submission_id = null;
+
     #[MapInputName('reference_type')]
     #[MapName('reference_type')]
     public ?string $reference_type = null;

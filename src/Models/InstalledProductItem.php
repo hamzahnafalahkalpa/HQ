@@ -20,7 +20,7 @@ class InstalledProductItem extends BaseModel
     protected $primaryKey = 'id';
     protected $list = [
         'id', 'name', 'reference_type', 'reference_id', 'product_item_id', 'price', 
-        'actual_price', 'qty', 'discount', 'total_price', 'props'
+        'submission_id','actual_price', 'qty', 'discount', 'total_price', 'props'
     ];
 
     protected $casts = [
@@ -41,6 +41,7 @@ class InstalledProductItem extends BaseModel
 
     public function reference(){return $this->morphTo();}
     public function productItem(){return $this->belongsToModel('ProductItem');}
+    public function submission(){return $this->belongsToModel('Submission');}
     public function installedFeature(){return $this->morphOneModel('InstalledFeature','model');}
     public function installedFeatures(){return $this->morphManyModel('InstalledFeature','model');}
 }

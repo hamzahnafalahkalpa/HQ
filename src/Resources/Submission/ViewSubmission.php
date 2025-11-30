@@ -2,9 +2,9 @@
 
 namespace Projects\Hq\Resources\Submission;
 
-use Hanafalah\LaravelSupport\Resources\ApiResource;
+use Hanafalah\ModuleTransaction\Resources\Submission\ViewSubmission as SubmissionViewSubmission;
 
-class ViewSubmission extends ApiResource
+class ViewSubmission extends SubmissionViewSubmission
 {
   /**
    * Transform the resource into an array.
@@ -14,7 +14,11 @@ class ViewSubmission extends ApiResource
    */
   public function toArray(\Illuminate\Http\Request $request): array
   {
-    $arr = parent::toArray($request);
+    $arr = [
+      'reference_type' => $this->reference_type,
+      'reference_id'   => $this->reference_id,
+    ];
+    $arr = $this->mergeArray(parent::toArray($request),$arr);
     return $arr;
   }
 }

@@ -17,13 +17,75 @@ class XenditController extends ApiController{
                 $data = $this->transaction(function () use ($data) {
                     $billing = $this->BillingModel()->with('hasTransaction.consument')->findOrFail($data['external_id']);
                     $transaction = $billing->hasTransaction;
-                    $transaction->load('paymentSummary.paymentDetails');
+                    $transaction->load(['transactionItems','paymentSummary.paymentDetails']);
                     $payment_summary = $transaction->paymentSummary;
-                            // 'has_transaction_id' => $transaction->getKey(),
-                            // 'reporting' => false,
-                            // 'xendit' => $data,
-                            // 'debt' => 0,
-                            // 'reported_at' => now()   
+                    $reference = $payment_summary->reference;
+                    switch ($reference->flag) {
+                        case 'MAIN':
+                            $workspace = $reference->workspace;
+                            if (isset($workspace)){
+                                $workspace->status = 'ACTIVE';
+                                $workspace->save();
+                                $workspace->load(['product','submission']);
+                                app(config('app.contracts.Workspace'))->generateTenant($this->requestDTO(
+                                    config('app.contracts.WorkspaceData'),
+                                    [
+                                        'name' => $workspace->name,
+                                        'workspace_id' => $workspace->getKey(),
+                                        'workspace_model' => $workspace,
+                                        'product_model' => $workspace->product
+                                    ]
+                                ));
+                            }
+                        break;
+                        case 'ADDITIONAL':
+                            $workspace = $reference->reference;
+                            $tenant = $workspace->tenant;
+                            if (isset($workspace)){
+                                $transactionItems = $transaction->transactionItems;
+                                $restrictionModel = $this->RestrictionFeatureModel();
+                                foreach ($transactionItems as $transactionItem) {
+                                    $dynamic_forms = $transactionItem->dynamic_forms ?? [];
+                                    foreach ($dynamic_forms as $dynamic_form) {
+                                        switch ($dynamic_form['key']) {
+                                            case 'medic_service_id': 
+                                                foreach ($dynamic_form['value'] as $medic_service_id) {
+                                                    $restriction = $restrictionModel->where('reference_type','Tenant')
+                                                        ->where('reference_id',$tenant->getKey())
+                                                        ->where('model_type','MedicService')
+                                                        ->where('model_id',$medic_service_id)
+                                                        ->first();
+                                                    if (isset($restriction)){
+                                                        $model = $restriction->model;
+                                                        $model->is_restricted = false;
+                                                        $model->save();
+                                                        $restriction->delete();
+                                                    }
+                                                }
+                                            break;
+                                            case 'user_count': 
+                                                $qty = $dynamic_form['value'] ?? 1;
+                                                $workspace_license = $workspace->license;
+                                                for ($i=0; $i < $qty; $i++) { 
+                                                    app(config('app.contracts.License'))->prepareStoreLicense(
+                                                        config('app.contracts.LicenseData'), [
+                                                            'reference_type' => $workspace->getMorphClass(),
+                                                            'reference_id'   => $workspace->getKey(),
+                                                            'expired_at' => $workspace_license->expired_at,
+                                                            'last_paid' => now()->toDateTimeString(),
+                                                            'status' => 'ACTIVE',
+                                                            'recurring_type' => $workspace_license->recurring_type,
+                                                            'flag' => 'USER_LICENSE'
+                                                        ]
+                                                    );
+                                                }
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        break;
+                    }
                     $payment_method = $this->PaymentMethodModel()->where('name','BANK TRANSFER')->first();
                     app(config('app.contracts.Billing'))->prepareStoreBilling(
                         $this->requestDTO(config('app.contracts.BillingData'),[
@@ -67,30 +129,6 @@ class XenditController extends ApiController{
                             ]
                         ])
                     );
-                    // $payment_summary = $transaction->paymentSummary;
-                    // $payment_summary->debt = 0;
-                    // $payment_summary->save();
-                    // $billing->xendit = $data;
-                    // $billing->debt = 0;
-                    // $billing->reported_at = now();
-                    // $billing->save();
-                    
-                    $reference = $payment_summary->reference;
-                    $workspace = $reference->workspace;
-                    if (isset($workspace)){
-                        $workspace->status = 'ACTIVE';
-                        $workspace->save();
-                        $workspace->load(['product','submission']);
-                        app(config('app.contracts.Workspace'))->generateTenant($this->requestDTO(
-                            config('app.contracts.WorkspaceData'),
-                            [
-                                'name' => $workspace->name,
-                                'workspace_id' => $workspace->getKey(),
-                                'workspace_model' => $workspace,
-                                'product_model' => $workspace->product
-                            ]
-                        ));
-                    }
                     return $data;
                 });
             } catch (\Throwable $th) {

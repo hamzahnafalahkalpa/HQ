@@ -10,17 +10,15 @@ use Hanafalah\LaravelSupport\{
 use Projects\Hq\{
     Hq,
     Contracts,
-    Facades
 };
 use Hanafalah\MicroTenant\Facades\MicroTenant;
 use Projects\Hq\Contracts\Schemas\ModuleWorkspace\Workspace;
-use Projects\Hq\Contracts\Schemas\PosTransaction;
 use Projects\Hq\Contracts\Schemas\Product;
 use Projects\Hq\Contracts\Supports\ConnectionManager as ConnectionManager;
 use Projects\Hq\Schemas\Product as SchemasProduct;
 use Projects\Hq\Schemas\ModuleWorkspace\Workspace as SchemasWorkspace;
-use Projects\Hq\Schemas\PosTransaction as SchemasPosTransaction;
 use Projects\Hq\Supports\ConnectionManager as SupportsConnectionManager;
+use PhpAmqpLib\Connection\AMQPStreamConnection;
 
 class HqServiceProvider extends HqEnvironment
 {
@@ -72,6 +70,24 @@ class HqServiceProvider extends HqEnvironment
                     $this->registerRouteService(RouteServiceProvider::class);
                     
                 }
+
+                $connection = new AMQPStreamConnection(
+                    env('RABBITMQ_HOST'),
+                    env('RABBITMQ_PORT'),
+                    env('RABBITMQ_USER'),
+                    env('RABBITMQ_PASSWORD'),
+                    '/'
+                );
+
+                $channel = $connection->channel();
+
+                foreach (['default', 'billing'] as $queue) {
+                    $channel->queue_declare($queue, false, true, false, false);
+                }
+
+                $channel->close();
+                $connection->close();
+
                 $this->app->singleton(PathRegistry::class, function () {
                     $registry = new PathRegistry();
         

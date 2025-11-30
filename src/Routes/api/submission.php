@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Projects\Hq\Controllers\API\ProductService\Submission\SubmissionController;
+use Projects\Hq\Controllers\API\Submission\SubmissionController;
 
 /*
 |--------------------------------------------------------------------------

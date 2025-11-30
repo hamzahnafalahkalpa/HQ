@@ -5,6 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Projects\Hq\Models\InstalledProductItem;
 use Projects\Hq\Models\ProductItem;
+use Projects\Hq\Models\Submission;
 
 return new class extends Migration
 {
@@ -28,12 +29,14 @@ return new class extends Migration
         $this->isNotTableExists(function() use ($table_name){
             Schema::create($table_name, function (Blueprint $table) {
                 $product_item  = app(config('database.models.ProductItem', ProductItem::class));
+                $submission  = app(config('database.models.Submission', Submission::class));
 
                 $table->ulid('id')->primary();
                 $table->string('name', 255)->nullable(false);
                 $table->string('reference_type', 50)->nullable(false);
                 $table->string('reference_id', 50)->nullable(false);
                 $table->foreignIdFor($product_item::class)->index()->constrained()->restrictOnDelete()->cascadeOnUpdate();
+                $table->foreignIdFor($submission::class)->index()->constrained()->restrictOnDelete()->cascadeOnUpdate();
                 $table->unsignedBigInteger('price')->nullable(true)->default(0);
                 $table->unsignedBigInteger('actual_price')->nullable(true)->default(0);
                 $table->unsignedBigInteger('discount')->nullable(true)->default(0);

@@ -1,25 +1,30 @@
 <?php
 
-namespace Projects\Hq\Controllers\API\ProductService\Submission;
+namespace Projects\Hq\Controllers\API\Submission;
 
 use Projects\Hq\Contracts\Schemas\PosTransaction;
 use Projects\Hq\Controllers\API\ApiController;
 use Xendit\Configuration;
 
-class EnvironmentController extends ApiController{
-    public function __construct(
-        public PosTransaction $__pos_schema
-    ){
-        parent::__construct();
-    }
-
+class EnvironmentController extends Environment{
     protected function commonConditional($query){
-
+        parent::commonConditional($query);
     }
-
+    
     protected function commonRequest(){
-        $this->userAttempt();
+        parent::commonRequest();
+        $billing = request()?->billing;
+        if (isset($billing)){
+            $billing['author_type']  ??= $this->global_user->getMorphClass();   
+            $billing['author_id']    ??= $this->global_user->getKey();   
+        }
+    
+        request()->merge([
+            'search_reference_type' => ['Submission'],
+            'billing'               => $billing ?? null
+        ]);
         Configuration::setXenditKey(env('XENDIT_SECRET_KEY'));
+        
     }
 
     protected function getPosTransactionPaginate(?callable $callback = null){        

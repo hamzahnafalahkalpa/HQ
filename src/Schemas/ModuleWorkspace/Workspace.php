@@ -28,6 +28,7 @@ class Workspace extends SchemasWorkspace implements ModuleWorkspaceWorkspace{
                 foreach ($workspace_dto->installed_product_items as &$installed_product_item) {
                     $installed_product_item->reference_type = $workspace->getMorphClass();
                     $installed_product_item->reference_id = $workspace->getKey();
+                    $installed_product_item->submission_id = $workspace->submission_id;
                     $this->schemaContract('installed_product_item')->prepareStoreInstalledProductItem($installed_product_item);
                 }
             }
@@ -77,7 +78,7 @@ class Workspace extends SchemasWorkspace implements ModuleWorkspaceWorkspace{
             $response = Http::withHeaders(array_merge(request()->headers->all(),[
                 'Accept' => '*/*'
             ]))
-            ->timeout(1000)
+            ->timeout(10)
             ->post($url, [
                 'workspace_id'    => $workspace->getKey(),
                 'workspace_name'  => $workspace->name,
