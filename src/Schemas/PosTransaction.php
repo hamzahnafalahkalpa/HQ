@@ -3,6 +3,7 @@
 namespace Projects\Hq\Schemas;
 
 use Hanafalah\ModulePayment\Schemas\PosTransaction as SchemasPosTransaction;
+use Hanafalah\ModuleTransaction\Contracts\Data\TransactionItemData;
 use Illuminate\Database\Eloquent\Model;
 use Projects\Hq\Contracts\Schemas\PosTransaction as ContractsPosTransaction;
 use Illuminate\Support\Str;
@@ -111,5 +112,27 @@ class PosTransaction extends SchemasPosTransaction implements ContractsPosTransa
             echo 'Full Error: ', json_encode($e->getFullError()), PHP_EOL;
         }
         return $this->pos_transaction_model = $pos_transaction;
+    }
+
+    protected function createTransactionItem(TransactionItemData &$transaction_item_dto, Model &$transaction){
+        $reference = $transaction->reference;
+        if ($reference->getMorphClass() == 'Submission' && $reference->flag == 'MAIN') {
+            $transaction_item_dto->submission_id = $reference->getKey();
+            if (isset($transaction_item_dto->item) && $transaction_item_dto->item_type == 'Workspace'){
+                $transaction_item_dto->item->submission_model = $reference;
+                $transaction_item_dto->item->submission_id = $reference->getKey();
+                foreach ($transaction_item_dto->item->installed_product_items as &$installed_product_item) {
+                    $installed_product_item->submission_id = $reference->getKey();
+                }
+            }
+        }
+
+        $transaction_item_dto->transaction_id    = $transaction->getKey();
+        $transaction_item_dto->transaction_model = $transaction;
+        $transaction_item_dto->reference_type = $transaction->reference_type;
+        $transaction_item_dto->reference_id = $transaction->reference_id;
+        $payment_summary = $transaction->paymentSummary;
+        $transaction_item_dto->payment_summary_id = $payment_summary->getKey();
+        return $this->schemaContract('transaction_item')->prepareStoreTransactionItem($transaction_item_dto);
     }
 }

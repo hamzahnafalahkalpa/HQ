@@ -3,8 +3,8 @@
 use Hanafalah\LaravelPermission\Enums\Permission\Type;
 
 return [
-    'name'        => 'Daftar Invoice',
-    'alias'       => 'api.invoice',
+    'name'        => 'Daftar Tagihan',
+    'alias'       => 'api.billing',
     'icon'        => 'mdi:network-point-of-sale',
     'type'        => Type::MENU->value,
     'show_in_acl' => true,
@@ -12,14 +12,14 @@ return [
     'ordering'    => 2,
     'childs'      => [
         [
-            'name'        => 'Update Invoice',
+            'name'        => 'Update Tagihan',
             'alias'       => 'store',
             'type'        => Type::PERMISSION->value,
             'guard_name'  => 'api',
             'show_in_data' => true
         ],
         [
-            'name'        => 'Detail Invoice',
+            'name'        => 'Detail Tagihan',
             'alias'       => 'show',
             'type'        => Type::PERMISSION->value,
             'guard_name'  => 'api',

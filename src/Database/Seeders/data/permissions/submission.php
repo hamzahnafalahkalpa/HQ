@@ -3,8 +3,8 @@
 use Hanafalah\LaravelPermission\Enums\Permission\Type;
 
 return [
-    'name'        => 'Produk dan Layanan', 
-    'alias'       => 'api.product-service',
+    'name'        => 'Transaksi dan Pembelian Produk', 
+    'alias'       => 'api.submission',
     'icon'        => 'hugeicons:transaction-history',
     'type'        => Type::MENU->value,
     'show_in_acl' => true,
@@ -30,10 +30,7 @@ return [
             'type'        => Type::PERMISSION->value,
             'guard_name'  => 'api',
             'show_in_data' => true,
-            'show_in_acl' => true,
-            'childs'       => [
-                include(__DIR__.'/product-service/submission.php'),
-            ]
+            'show_in_acl' => true
         ],
         [
             'name'       => 'Hapus Layanan',

@@ -36,7 +36,7 @@ return new class extends Migration
                 $table->string('reference_type', 50)->nullable(false);
                 $table->string('reference_id', 50)->nullable(false);
                 $table->foreignIdFor($product_item::class)->index()->constrained()->restrictOnDelete()->cascadeOnUpdate();
-                $table->foreignIdFor($submission::class)->index()->constrained()->restrictOnDelete()->cascadeOnUpdate();
+                $table->foreignIdFor($submission::class)->nullable()->index()->constrained()->restrictOnDelete()->cascadeOnUpdate();
                 $table->unsignedBigInteger('price')->nullable(true)->default(0);
                 $table->unsignedBigInteger('actual_price')->nullable(true)->default(0);
                 $table->unsignedBigInteger('discount')->nullable(true)->default(0);

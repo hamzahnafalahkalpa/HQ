@@ -4,7 +4,7 @@ use Hanafalah\LaravelPermission\Enums\Permission\Type;
 
 return [
     'name'        => 'Daftar Invoice',
-    'alias'       => 'api.invoice',
+    'alias'       => 'invoice',
     'icon'        => 'mdi:network-point-of-sale',
     'type'        => Type::MENU->value,
     'show_in_acl' => true,
@@ -13,10 +13,9 @@ return [
     'childs'      => [
         [
             'name'        => 'Update Invoice',
-            'alias'       => 'store',
+            'alias'       => 'update',
             'type'        => Type::PERMISSION->value,
-            'guard_name'  => 'api',
-            'show_in_data' => true
+            'guard_name'  => 'api'
         ],
         [
             'name'        => 'Detail Invoice',

@@ -68,7 +68,7 @@ class XenditController extends ApiController{
                                                 $workspace_license = $workspace->license;
                                                 for ($i=0; $i < $qty; $i++) { 
                                                     app(config('app.contracts.License'))->prepareStoreLicense(
-                                                        config('app.contracts.LicenseData'), [
+                                                        $this->requestDTO(config('app.contracts.LicenseData'), [
                                                             'reference_type' => $workspace->getMorphClass(),
                                                             'reference_id'   => $workspace->getKey(),
                                                             'expired_at' => $workspace_license->expired_at,
@@ -76,7 +76,7 @@ class XenditController extends ApiController{
                                                             'status' => 'ACTIVE',
                                                             'recurring_type' => $workspace_license->recurring_type,
                                                             'flag' => 'USER_LICENSE'
-                                                        ]
+                                                        ])
                                                     );
                                                 }
                                             break;

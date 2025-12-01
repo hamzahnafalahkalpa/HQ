@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
         config([
             'laravel-feature.is_validate_restriction' => false,
             'laravel-support.use_id_as_primary_validation_unicode' => false,
-            'app.use_license_validation' => false
+            'app.use_license_validation' => false,
+            'app.is_seeding' => true
         ]);
         $this->call([
             TimezoneSeeder::class,

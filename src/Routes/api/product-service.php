@@ -20,4 +20,5 @@ Route::group([
     'as' => 'product-service.show.'
 ],function(){
     Route::apiResource('/submission',SubmissionController::class)->parameters(['submission' => 'id']);
+    Route::apiResource('/invoice',InvoiceController::class)->parameters(['invoice' => 'id']);
 });

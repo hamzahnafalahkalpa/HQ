@@ -15,6 +15,9 @@ class ViewBilling extends BillingViewBilling
   public function toArray(\Illuminate\Http\Request $request): array
   {
     $arr = [
+      'invoice'  => $this->relationValidation('invoice', function () {
+        return $this->propNil($this->invoice->toShowApi(),'billing');
+      }),
       'xendit' => $this->xendit,
     ];
     $arr = $this->mergeArray(parent::toArray($request),$arr);

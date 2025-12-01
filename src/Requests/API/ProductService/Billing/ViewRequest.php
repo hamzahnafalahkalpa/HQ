@@ -2,8 +2,6 @@
 
 namespace Projects\Hq\Requests\API\ProductService\Billing;
 
-use Projects\Hq\Requests\API\Transaction\Billing\Environment;
-
 class ViewRequest extends Environment
 {
 

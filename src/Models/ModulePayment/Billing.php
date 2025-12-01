@@ -9,6 +9,33 @@ use Projects\Hq\Resources\ModuleBilling\{
 
 class Billing extends TransactionBilling
 {
+    public function viewUsingRelation(): array{
+        return ['hasTransaction','invoice.paymentHistory'];
+    }
+
+    public function showUsingRelation(): array{
+        return [
+            'hasTransaction',
+            'invoice' => function($query){
+                return $query->with([
+                    'paymentSummary' =>function($query){
+                        return $query->with([
+                            'paymentDetails',
+                            'recursiveChilds'
+                        ]);
+                    },
+                    'paymentHistory' => function($query){
+                        return $query->with([
+                            'paymentHistoryDetails',
+                            'childs'
+                        ]);
+                    },
+                    'splitPayments'
+                ])->orderBy('created_at','desc');
+            },
+        ];
+    }
+
     public function getShowResource(){
         return ShowBilling::class;
     }

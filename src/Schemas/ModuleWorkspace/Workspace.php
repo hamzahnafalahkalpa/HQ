@@ -8,6 +8,22 @@ use Projects\Hq\Contracts\Schemas\ModuleWorkspace\Workspace as ModuleWorkspaceWo
 use Illuminate\Support\Facades\Http;
 
 class Workspace extends SchemasWorkspace implements ModuleWorkspaceWorkspace{
+    protected function prepareUpdateCreate(mixed $workspace_dto){
+        $add = [
+            'name'   => $workspace_dto->name, 
+            'status' => $workspace_dto->status,
+            'owner_id' => $workspace_dto->owner_id,
+            'submission_id' => $workspace_dto->submission_id,
+        ];
+        if (isset($workspace_dto->uuid)){
+            $guard = ['uuid' => $workspace_dto->uuid];
+            $create = [$guard,$add];
+        }else{
+            $create = [$add];
+        }
+        return $this->usingEntity()->updateOrCreate(...$create);
+    }
+
     public function prepareStoreWorkspace(mixed $workspace_dto): Model{
         $workspace = parent::prepareStoreWorkspace($workspace_dto);
 

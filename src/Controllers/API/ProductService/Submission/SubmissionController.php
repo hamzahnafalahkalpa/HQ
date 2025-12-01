@@ -62,7 +62,7 @@ class SubmissionController extends EnvironmentController{
             $submission = [
                 'id' => null,
                 'name' => 'Penambahan Fitur',
-                'reference_type' => 'Submission',
+                'reference_type' => 'Workspace',
                 'reference_id' => request()->product_service_id,
                 'flag' => 'ADDITIONAL',
                 'payment_summary' => [

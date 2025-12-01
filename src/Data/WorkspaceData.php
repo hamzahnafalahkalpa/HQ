@@ -16,6 +16,14 @@ class WorkspaceData extends DataWorkspaceData implements ContractsDataWorkspaceD
     #[MapName('product_id')]
     public mixed $product_id = null;
 
+    #[MapInputName('submission_id')]
+    #[MapName('submission_id')]
+    public mixed $submission_id = null;
+
+    #[MapInputName('submission_model')]
+    #[MapName('submission_model')]
+    public ?object $submission_model = null;
+
     #[MapInputName('product_model')]
     #[MapName('product_model')]
     public ?object $product_model = null;
@@ -51,6 +59,7 @@ class WorkspaceData extends DataWorkspaceData implements ContractsDataWorkspaceD
                 foreach ($product->productItems as $productItem) {
                     $installed_data_dto = [
                         'product_item_id' => $productItem->getKey(),
+                        'submission_id'   => $attributes['submission_id'] ?? null,
                         "qty"             => 1
                     ];
                     $src = array_search($productItem->getKey(), $form_product_items_ids);

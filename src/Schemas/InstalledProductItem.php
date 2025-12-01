@@ -38,7 +38,8 @@ class InstalledProductItem extends PackageManagement implements ContractsInstall
             $guard = [
                 'product_item_id' => $installed_product_item_dto->product_item_id,
                 'reference_id'   => $installed_product_item_dto->reference_id,
-                'reference_type' => $installed_product_item_dto->reference_type
+                'reference_type' => $installed_product_item_dto->reference_type,
+                'submission_id' => $installed_product_item_dto->submission_id
             ];
         }
         $create = [$guard, $add];
