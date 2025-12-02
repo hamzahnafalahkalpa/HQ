@@ -27,6 +27,27 @@ class AutolistController extends ApiController{
 
         $morph = Str::studly(request()->morph);
         switch ($morph) {
+            case 'MedicService':
+                $schema = app(config('app.contracts.'.$morph));
+                $is_for_registration = isset(request()->is_for_registration) && request()->is_for_registration;
+                if ($is_for_registration) $schema->setIsParentOnly(false);
+                return $schema->autolist(request()->type,function($query) use ($is_for_registration){
+                    $query->when($is_for_registration,function($query){
+                        $query->whereIn('label',[
+                            MedicServiceLabel::INPATIENT->value,
+                            MedicServiceLabel::MCU->value,
+                            MedicServiceLabel::RADIOLOGY->value,
+                            MedicServiceLabel::VERLOS_KAMER->value,
+                            MedicServiceLabel::EMERGENCY_UNIT->value,
+                            // MedicServiceLabel::TREATMENT_ROOM->value,
+                            'UMUM', 'ORTHOPEDI', 'SUNAT', 'KECANTIKAN', 'MATA', 'THT', 'INTERNIS', 'GIGI & MULUT', 'KIA'
+                        ]);
+                    })->when(isset(request()->exclude_id),function($query){
+                        $ids = $this->mustArray(request()->exclude_id);
+                        $query->whereNotIn('id',$ids);
+                    });
+                });
+            break;
             case 'Unicode':
                 $datas = $this->cacheWhen(true,[
                     'name'     => 'unicode',
