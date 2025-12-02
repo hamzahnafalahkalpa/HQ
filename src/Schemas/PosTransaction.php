@@ -32,6 +32,7 @@ class PosTransaction extends SchemasPosTransaction implements ContractsPosTransa
         $pos_transaction = parent::prepareStorePosTransaction($pos_transaction_dto);
 
         $reference = $pos_transaction->reference;
+        $payment_summary = $pos_transaction->paymentSummary;
         if ($pos_transaction->reference_type == 'Submission' && $reference->flag == 'ADDITIONAL'){
             $transaction_items = $pos_transaction->transactionItems;
             foreach ($transaction_items as &$form_product_item) {
@@ -87,7 +88,6 @@ class PosTransaction extends SchemasPosTransaction implements ContractsPosTransa
 
         $this->fillingProps($pos_transaction,$pos_transaction_dto->props);
         $pos_transaction->save();
-        $payment_summary = $pos_transaction->paymentSummary;
         $payment_summary->refresh();
 
         $billing = $pos_transaction->billing;
@@ -96,7 +96,7 @@ class PosTransaction extends SchemasPosTransaction implements ContractsPosTransa
         $create_invoice_request = new CreateInvoiceRequest([
             'external_id' => $billing->getKey(),
             'description' => $payment_summary->name,
-            'amount' => $payment_summary->amount,
+            'amount'         => $payment_summary->debt,
             'invoice_duration' => 172800,
             'currency' => 'IDR',
             'reminder_time' => 2
