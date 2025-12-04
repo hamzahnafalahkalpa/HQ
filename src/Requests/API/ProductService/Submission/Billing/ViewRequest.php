@@ -2,7 +2,7 @@
 
 namespace Projects\Hq\Requests\API\ProductService\Submission\Billing;
 
-use Projects\Hq\Requests\API\Transaction\Billing\Environment;
+use Projects\Hq\Requests\API\ProductService\Billing\Environment;
 
 class ViewRequest extends Environment
 {

@@ -57,6 +57,31 @@ return [
                 'prefix_indexes' => true,
                 'search_path'    => 'public',
                 'sslmode'        => 'prefer',
+            ],
+            'clinic' => [
+                'driver'         => env('DB_DRIVER', 'pgsql'),
+                'read' => [
+                    'host' => [
+                        env('DB_READ_HOST_1','192.168.1.1'),
+                        env('DB_READ_HOST_2','192.168.1.2')
+                    ],
+                ],
+                'write' => [
+                    'host' => [
+                        env('DB_WRITE_HOST_1','192.168.1.3')
+                    ],
+                ],
+                'url'            => env('DB_URL'),
+                'host'           => env('DB_HOST', '127.0.0.1'),
+                'port'           => env('DB_PORT', '3306'),
+                'database'       => env('DB_DATABASE', 'wellmed'),
+                'username'       => env('DB_USERNAME', 'root'),
+                'password'       => env('DB_PASSWORD', ''),
+                'charset'        => env('DB_CHARSET', 'utf8'),
+                'prefix'         => '',
+                'prefix_indexes' => true,
+                'search_path'    => 'public',
+                'sslmode'        => 'prefer',
             ]
         ],
         'managers' => [
@@ -124,6 +149,11 @@ return [
                     'Unicode',
                     'HqAddress',
                     'Permission'
+                ]
+            ],
+            'clinic' => [
+                'models' => [
+                    'Employee'
                 ]
             ]
         ],

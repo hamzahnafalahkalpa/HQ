@@ -4,7 +4,7 @@ use Hanafalah\LaravelPermission\Enums\Permission\Type;
 
 return [
     'name'        => 'Transaksi dan Penambahan Produk', 
-    'alias'       => 'api.submission',
+    'alias'       => 'submission',
     'icon'        => 'hugeicons:transaction-history',
     'type'        => Type::MODULE->value,
     'show_in_acl' => true,

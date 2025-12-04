@@ -1,8 +1,6 @@
 <?php
 
-namespace Projects\Hq\Requests\API\ProductService\Submission\Billing\Invoice;
-
-use Projects\Hq\Requests\API\Transaction\Invoice\Environment;
+namespace Projects\Hq\Requests\API\ProductService\License;
 
 class ShowRequest extends Environment
 {

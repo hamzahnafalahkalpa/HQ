@@ -85,5 +85,6 @@ return [
         'hanafalah/module-employee'             => ['repository' =>'hamzahnafalahkalpa/module-employee','provider' => 'Hanafalah\\ModuleEmployee\\ModuleEmployeeServiceProvider'],
         'hanafalah/laravel-xendit'              => ['repository' =>'hamzahnafalahkalpa/laravel-xendit','provider' => 'Hanafalah\\LaravelXendit\\LaravelXenditServiceProvider'],
         'hanafalah/module-license'              => ['repository' =>'hamzahnafalahkalpa/module-license','provider' => 'Hanafalah\\ModuleLicense\\ModuleLicenseServiceProvider'],
+        'hanafalah/module-employee'             => ['repository' =>'hamzahnafalahkalpa/module-employee','provider' => 'Hanafalah\\ModuleEmployee\\ModuleEmployeeServiceProvider'],
     ]
 ];

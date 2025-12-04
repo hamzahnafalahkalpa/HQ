@@ -33,6 +33,7 @@ return [
             'show_in_acl' => true,
             'childs'       => [
                 include(__DIR__.'/product-service/submission.php'),
+                include(__DIR__.'/product-service/license.php'),
             ]
         ],
         [

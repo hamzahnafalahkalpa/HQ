@@ -71,6 +71,13 @@ class HqServiceProvider extends HqEnvironment
                     
                 }
 
+                if (isset(request()->product_service_id)){
+                    $workspace = $this->WorkspaceModel()->findOrFail(request()->product_service_id);
+                    config([
+                        'database.connections.clinic.database' => $workspace->tenant->tenancy_db_name
+                    ]);
+                }
+
                 $connection = new AMQPStreamConnection(
                     env('RABBITMQ_HOST'),
                     env('RABBITMQ_PORT'),

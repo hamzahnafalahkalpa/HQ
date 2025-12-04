@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use Projects\Hq\Controllers\API\ProductService\ProductServiceController;
-use Projects\Hq\Controllers\API\ProductService\Submission\SubmissionController;
+use Projects\Hq\Controllers\API\ProductService\{
+    Submission\SubmissionController,
+    License\LicenseController,
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +23,6 @@ Route::group([
     'as' => 'product-service.show.'
 ],function(){
     Route::apiResource('/submission',SubmissionController::class)->parameters(['submission' => 'id']);
-    Route::apiResource('/invoice',InvoiceController::class)->parameters(['invoice' => 'id']);
+    Route::apiResource('/license',LicenseController::class)->parameters(['license' => 'id']);
+    // Route::apiResource('/invoice',InvoiceController::class)->parameters(['invoice' => 'id']);
 });
