@@ -10,6 +10,14 @@ class BillingController extends EnvironmentController{
     protected function commonConditional($query){
     }
 
+    protected function commonRequest(){
+        parent::commonRequest();
+        request()->merge([
+            'search_author_type' => 'User',
+            'search_author_id'   => $this->global_user->getKey()
+        ]);
+    }
+
     public function index(ViewRequest $request){
         return $this->getBillingPaginate();
     }
