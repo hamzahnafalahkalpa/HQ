@@ -98,6 +98,7 @@ class Workspace extends SchemasWorkspace implements ModuleWorkspaceWorkspace{
             ->post($url, [
                 'workspace_id'    => $workspace->getKey(),
                 'workspace_name'  => $workspace->name,
+                'workspace_data'  => $workspace->toViewApi()->resolve(),
                 'product_label'   => $product_model->label,
                 'app_tenant_id'   => $app_tenant->getKey(),
                 'group_tenant_id' => $group_tenant->getKey(),
