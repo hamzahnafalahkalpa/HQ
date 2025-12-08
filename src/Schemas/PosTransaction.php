@@ -33,6 +33,26 @@ class PosTransaction extends SchemasPosTransaction implements ContractsPosTransa
 
         $reference = $pos_transaction->reference;
         $payment_summary = $pos_transaction->paymentSummary;
+        $billing = &$pos_transaction->billing;
+        $invoices = &$billing->invoices;
+        foreach ($invoices as &$invoice) {
+            $payment_history = &$invoice->paymentHistory;
+            $form = $payment_history->form;
+            $payment_summaries = &$form['payment_summaries'];
+            $payment_summary_data = [
+                'id' => $payment_summary->getKey(),
+                'payment_details' => []
+            ];
+            foreach ($payment_summary->paymentDetails as $paymentDetail) {
+                $payment_summary_data['payment_details'][] = [
+                    'id' => $paymentDetail->getKey()
+                ];                
+            }
+            $payment_summaries[] = $payment_summary_data;
+            $payment_history->setAttribute('form', $form);
+            $payment_history->save();
+        }
+        $billing->save();
         if ($pos_transaction->reference_type == 'Submission' && $reference->flag == 'ADDITIONAL'){
             $transaction_items = $pos_transaction->transactionItems;
             foreach ($transaction_items as &$form_product_item) {
@@ -90,7 +110,7 @@ class PosTransaction extends SchemasPosTransaction implements ContractsPosTransa
         $pos_transaction->save();
         $payment_summary->refresh();
 
-        $billing = $pos_transaction->billing;
+        // $billing = $pos_transaction->billing;
 
         $xendit_invoice = new InvoiceApi();
         $create_invoice_request = new CreateInvoiceRequest([

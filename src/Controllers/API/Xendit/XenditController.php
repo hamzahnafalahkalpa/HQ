@@ -86,7 +86,7 @@ class XenditController extends ApiController{
                             }
                         break;
                     }
-                    $payment_method = $this->PaymentMethodModel()->where('name','BANK TRANSFER')->first();
+                    // $payment_method = $this->PaymentMethodModel()->where('name','BANK TRANSFER')->first();
                     app(config('app.contracts.Billing'))->prepareStoreBilling(
                         $this->requestDTO(config('app.contracts.BillingData'),[
                             "id" => $billing->getKey(),
@@ -96,39 +96,78 @@ class XenditController extends ApiController{
                             'author_type' => $billing->author_type,
                             'author_id' => $billing->author_id,
                             'debt' => 0,
-                            "invoices" => [
-                                [
-                                    "id"         => null,                
-                                    "payer_id"   => $transaction->consument->getKey(), 
-                                    "payer_type" => "Consument", 
-                                    "reporting" => true,
-                                    "payment_history" => [
-                                        "id" => null,
-                                        "discount" => 0,
-                                        "form" => [ //THIS FIELD USING ONLY FOR ARTIFICIAL DATA, WILL REMOVE WHEN DATA SETTLED
-                                            "payment_summaries" => [
-                                                //YOU CAN USE PAYMENT SUMMARY AND PAYMENT DETAIL RESPONSE WHEN SHOW POS TRANSACTION
-                                                [
-                                                    "id" => $payment_summary->getKey(),
-                                                    "payment_details" => $payment_summary->paymentDetails->map(function($pd){
-                                                        return ["id" => $pd->getKey()];
-                                                    })->toArray()
-                                                ]
+                            'money_paid' => ($billing->money_paid ?? 0) + $payment_summary->debt,
+                            "invoices" => call_user_func(function() use ($payment_summary, $billing, $transaction){
+                                $billing->load('invoices.paymentHistory');
+                                $invoices = [];
+                                foreach ($billing->invoices as $invoice) {
+                                    $payment_history = $invoice->paymentHistory;
+                                    $invoices[] = [
+                                        "id" => $invoice->getKey(),
+                                        "payer_id"   => $transaction->consument->getKey(), 
+                                        "payer_type" => "Consument", 
+                                        "reporting" => true,
+                                        "payment_history" => [
+                                            'id' => $payment_history->getKey(),
+                                            'discount' => $payment_history->discount,
+                                            'form' => $payment_history->form
+                                        ],
+                                        "split_payments" => [
+                                            [
+                                                "id"=> null,
+                                                "money_paid" => $payment_summary->debt, //nullable
+                                                // "payment_method_id" => $payment_method->getKey(),
+                                                // 'payment_method_model' => $payment_method //required, GET FROM AUTOLIST - PAYMENT METHOD LIST                
                                             ]
                                         ]
-                                    ],
-                                    "split_payments" => [
-                                        [
-                                            "id"=> null,
-                                            "money_paid" => $payment_summary->amount, //nullable
-                                            "payment_method_id" => $payment_method->getKey(),
-                                            'payment_method_model' => $payment_method //required, GET FROM AUTOLIST - PAYMENT METHOD LIST                
-                                        ]
-                                    ]
-                                ]
-                            ]
+                                    ];
+                                }
+                                return $invoices;
+                            })
                         ])
                     );
+                    // app(config('app.contracts.Billing'))->prepareStoreBilling(
+                    //     $this->requestDTO(config('app.contracts.BillingData'),[
+                    //         "id" => $billing->getKey(),
+                    //         "reporting" => true, 
+                    //         'xendit' => $data,
+                    //         'has_transaction_id' => $transaction->getKey(),
+                    //         'author_type' => $billing->author_type,
+                    //         'author_id' => $billing->author_id,
+                    //         'debt' => 0,
+                    //         "invoices" => [
+                    //             [
+                    //                 "id"         => null,                
+                    //                 "payer_id"   => $transaction->consument->getKey(), 
+                    //                 "payer_type" => "Consument", 
+                    //                 "reporting" => true,
+                    //                 "payment_history" => [
+                    //                     "id" => null,
+                    //                     "discount" => 0,
+                    //                     "form" => [ //THIS FIELD USING ONLY FOR ARTIFICIAL DATA, WILL REMOVE WHEN DATA SETTLED
+                    //                         "payment_summaries" => [
+                    //                             //YOU CAN USE PAYMENT SUMMARY AND PAYMENT DETAIL RESPONSE WHEN SHOW POS TRANSACTION
+                    //                             [
+                    //                                 "id" => $payment_summary->getKey(),
+                    //                                 "payment_details" => $payment_summary->paymentDetails->map(function($pd){
+                    //                                     return ["id" => $pd->getKey()];
+                    //                                 })->toArray()
+                    //                             ]
+                    //                         ]
+                    //                     ]
+                    //                 ],
+                    //                 "split_payments" => [
+                    //                     [
+                    //                         "id"=> null,
+                    //                         "money_paid" => $payment_summary->amount, //nullable
+                    //                         "payment_method_id" => $payment_method->getKey(),
+                    //                         'payment_method_model' => $payment_method //required, GET FROM AUTOLIST - PAYMENT METHOD LIST                
+                    //                     ]
+                    //                 ]
+                    //             ]
+                    //         ]
+                    //     ])
+                    // );
                     return $data;
                 });
             } catch (\Throwable $th) {

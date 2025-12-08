@@ -28,6 +28,12 @@ class SubmissionController extends EnvironmentController{
         $user = $this->global_user;
 
         $amount = 0;
+        $workspace = $this->WorkspaceModel()->with('license')->findOrFail(request()->product_service_id);
+        $license = $workspace->license;
+        $expired_at = $license->expired_at;
+        $expired_at = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $expired_at);
+        $days_until_expiry = (int) now()->diffInDays($expired_at, false);
+
         if (isset(request()->transaction_items)){
             $transaction_items = request()->transaction_items;
             foreach ($transaction_items as &$transaction_item) {
@@ -42,15 +48,27 @@ class SubmissionController extends EnvironmentController{
                     }
                 }
                 $qty ??= 1;
+                $total_price = $product_item->price * $qty;
+                if ($days_until_expiry > 0) {
+                    $debt_price = ($total_price / 365) * $days_until_expiry;
+                    $note = "(Prorate {$days_until_expiry} hari sampai {$expired_at->format('d M Y')})";
+                } else {
+                    $debt_price = $total_price;
+                    $note = "";
+                }
+                $debt_price = (int) ceil($debt_price);
+                $discount = $total_price - $debt_price;
                 $payment_detail = $transaction_item['payment_detail'] ?? [
                     'id' => null,
                     'payment_summary_id'  => null,
                     'transaction_item_id' => null,
                     'qty'        => $qty ?? 1,
                     'price'      => $product_item->price,
-                    'amount'     => $total_price = $product_item->price * $qty,
-                    'debt'       => $total_price,
-                    'cogs'       => 0
+                    'amount'     => $total_price,
+                    'debt'       => $debt_price,
+                    'discount'   => $discount,
+                    'cogs'       => 0,
+                    'note'       => $note
                 ];
                 $amount += $product_item->price * $qty;
                 $transaction_item['payment_detail'] = $payment_detail;
@@ -63,7 +81,7 @@ class SubmissionController extends EnvironmentController{
                 'id' => null,
                 'name' => 'Penambahan Fitur',
                 'reference_type' => 'Workspace',
-                'reference_id' => request()->product_service_id,
+                'reference_id' => $workspace->getKey(),
                 'flag' => 'ADDITIONAL',
                 'payment_summary' => [
                     'id' => null,
@@ -86,14 +104,44 @@ class SubmissionController extends EnvironmentController{
             request()->merge(['consument' => $consument]);
         }
 
+        if ($days_until_expiry > 0) {
+            $debt = ($amount / 365) * $days_until_expiry;
+            $note = "(Prorate {$days_until_expiry} hari sampai {$expired_at->format('d M Y')})";
+        } else {
+            $debt = $amount;
+            $note = "";
+        }
+        $debt = (int) ceil($debt);
+        $discount = $amount - $debt;
+
         $name = request()->reference['name'];
         request()->merge([
             'name' => $name ?? 'Penambahan Produk',
             'billing' => [
                 'author_type' => $user->getMorphClass(),
                 'author_id'   => $user->getKey(),
-                'debt'        => $amount,
-                'amount'      => $amount
+                'debt'        => $debt,
+                'amount'      => $amount,
+                'discount'    => $discount,
+                'note'        => $note,
+                'reporting' => false,
+                'invoices'    => [
+                    [
+                        'id' => null,
+                        'reporting' => false,
+                        'author_type' => 'User',
+                        'author_id'   => $user->getKey(),
+                        'payer_type' => 'User',
+                        'payer_id'   => $user->getKey(),
+                        'payment_history' => [
+                            'id' => null,
+                            'discount' => 0,
+                            'form' => [
+                                'payment_summaries' => []
+                            ]
+                        ]   
+                    ]
+                ]
             ]
         ]);
         return $this->storePosTransaction();

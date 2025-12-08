@@ -154,8 +154,27 @@ class SubmissionController extends EnvironmentController{
             'billing' => [
                 'author_type' => $user->getMorphClass(),
                 'author_id'   => $user->getKey(),
+                'reporting'   => false,
                 'debt'        => (($product->price ?? 0) - ($discount ?? 0)) + $amount,
-                'amount'      => ($product->price ?? 0) + $amount
+                'amount'      => ($product->price ?? 0) + $amount,
+                'discount'    => $discount ?? 0,
+                'invoices'    => [
+                    [
+                        'id' => null,
+                        'reporting' => false,
+                        'author_type' => 'User',
+                        'author_id'   => $user->getKey(),
+                        'payer_type' => 'User',
+                        'payer_id'   => $user->getKey(),
+                        'payment_history' => [
+                            'id' => null,
+                            'discount' => 0,
+                            'form' => [
+                                'payment_summaries' => []
+                            ]
+                        ]   
+                    ]
+                ]
             ]
         ]);
         return $this->storePosTransaction();
