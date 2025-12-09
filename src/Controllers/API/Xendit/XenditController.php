@@ -113,6 +113,7 @@ class XenditController extends ApiController{
                         $this->requestDTO(config('app.contracts.BillingData'),[
                             "id" => $billing->getKey(),
                             "reporting" => true, 
+                            'name' => null,
                             'xendit' => $data,
                             'has_transaction_id' => $transaction->getKey(),
                             'author_type' => $billing->author_type,
