@@ -49,6 +49,9 @@ class XenditController extends ApiController{
                                     foreach ($dynamic_forms as $dynamic_form) {
                                         switch ($dynamic_form['key']) {
                                             case 'medic_service_id': 
+                                                $license = $workspace->license;
+                                                $license->is_billing_generated = false;
+                                                $license->save();
                                                 foreach ($dynamic_form['value'] as $medic_service_id) {
                                                     $restriction = $restrictionModel->where('reference_type','Tenant')
                                                         ->where('reference_id',$tenant->getKey())
@@ -72,7 +75,8 @@ class XenditController extends ApiController{
                                                             'reference_type' => $workspace->getMorphClass(),
                                                             'reference_id'   => $workspace->getKey(),
                                                             'expired_at' => $workspace_license->expired_at,
-                                                            'last_paid' => now()->toDateTimeString(),
+                                                            'billing_generated_at' => now()->toDateTimeString(),
+                                                            'is_billing_generated' => false,
                                                             'status' => 'ACTIVE',
                                                             'recurring_type' => $workspace_license->recurring_type,
                                                             'flag' => 'USER_LICENSE'
@@ -83,10 +87,28 @@ class XenditController extends ApiController{
                                         }
                                     }
                                 }
+
+                                $this->InstalledProductItemModel()
+                                    ->where('reference_type',$workspace->getMorphClass())
+                                    ->where('reference_id',$workspace->getKey())
+                                    ->where('status','DRAFT')
+                                    ->update([
+                                        'status' => 'ACTIVE'
+                                    ]);
                             }
                         break;
+                        case 'RENEWAL':
+                            $workspace = $reference->workspace;
+                            if (isset($workspace)){
+                                $workspace->status = 'ACTIVE';
+                                $workspace->save();
+                                $license = $workspace->license;
+                                $license->expired_at = $license->next_expired_at;
+                                $license->next_expired_at = null;
+                                $license->is_billing_generated = false;
+                                $license->save();
+                            }
                     }
-                    // $payment_method = $this->PaymentMethodModel()->where('name','BANK TRANSFER')->first();
                     app(config('app.contracts.Billing'))->prepareStoreBilling(
                         $this->requestDTO(config('app.contracts.BillingData'),[
                             "id" => $billing->getKey(),

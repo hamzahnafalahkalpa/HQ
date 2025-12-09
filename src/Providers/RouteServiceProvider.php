@@ -32,6 +32,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->mapApiRoutes();
         $this->mapWebRoutes();
+        $this->mapConsoleRoutes();
     }
 
     /**
@@ -68,6 +69,20 @@ class RouteServiceProvider extends ServiceProvider
             ],function(){
                 require __DIR__.'/../Routes/api.php';
             });
+        }
+    }
+
+    /**
+     * Define the "console" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapConsoleRoutes()
+    {
+        if (file_exists(__DIR__.'/../Routes/console.php')){
+            require __DIR__.'/../Routes/console.php';
         }
     }
 }

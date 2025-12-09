@@ -55,12 +55,14 @@ class WorkspaceData extends DataWorkspaceData implements ContractsDataWorkspaceD
                 $form = $attributes['form'];
                 $form_product_items = &$form['product_items'];
                 $form_product_items_ids = array_column($form_product_items, 'id');
+
                 $attributes['installed_features'] ??= [];
                 foreach ($product->productItems as $productItem) {
                     $installed_data_dto = [
                         'product_item_id' => $productItem->getKey(),
                         'submission_id'   => $attributes['submission_id'] ?? null,
-                        "qty"             => 1
+                        "qty"             => 1,
+                        'status'          => 'DRAFT'
                     ];
                     $src = array_search($productItem->getKey(), $form_product_items_ids);
                     if (is_numeric($src)) {
@@ -92,6 +94,48 @@ class WorkspaceData extends DataWorkspaceData implements ContractsDataWorkspaceD
                                             'master_feature_id'   => $dynamic_value,
                                         ];
                                     }
+                                }
+                            }
+                        }
+                    }
+                    $installed_product_item_dto[] = $installed_data_dto;
+                }
+
+                foreach ($form['additional_items'] as $additional_item) {
+                    $productItem = $new->ProductItemModel()->findOrFail($additional_item['id']);
+                    $installed_data_dto = [
+                        'product_item_id' => $productItem->getKey(),
+                        'submission_id'   => $attributes['submission_id'] ?? null,
+                        "qty"             => 1,
+                        'status'          => 'DRAFT'
+                    ];
+                    $form_product_item = $additional_item;
+                    if (isset($form_product_item['dynamic_forms']) && count($form_product_item['dynamic_forms']) > 0){
+                        $installed_features = &$attributes['installed_features'];
+                        foreach ($form_product_item['dynamic_forms'] as $dynamic_form) {
+                            $key_value = $dynamic_form['key'];
+                            $feature_type = null;
+                            switch ($key_value) {
+                                case 'medic_service_id':
+                                    if (!is_array($dynamic_form['value'])){
+                                        $dynamic_form['value'] = [$dynamic_form['value']];                                            
+                                    }
+                                    $feature_type = 'MedicService';
+                                break;
+                                case 'user_count':
+                                    $installed_data_dto['qty'] = intval($dynamic_form['value']);
+                                break;
+                            }
+                            if (isset($feature_type)){
+                                $installed_data_dto['qty']--;
+                                foreach ($dynamic_form['value'] as $dynamic_value) {
+                                    $installed_data_dto['qty']++;
+                                    $model = $new->{$feature_type.'Model'}()->findOrFail($dynamic_value);
+                                    $installed_features[] = [
+                                        'name' => $model->name ?? 'Unknown Feature',
+                                        'master_feature_type' => $feature_type,
+                                        'master_feature_id'   => $dynamic_value,
+                                    ];
                                 }
                             }
                         }

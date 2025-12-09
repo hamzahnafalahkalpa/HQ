@@ -17,6 +17,7 @@ class Submission extends ModelsSubmission
         'reference_type',
         'reference_id',
         'name',
+        'status',
         'props',
     ];
 

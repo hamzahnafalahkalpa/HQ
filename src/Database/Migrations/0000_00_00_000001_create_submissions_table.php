@@ -32,6 +32,7 @@ return new class extends Migration
                 $table->string('name', 255)->nullable(false);
                 $table->string('reference_type', 50)->nullable();
                 $table->string('reference_id',26)->nullable();
+                $table->string('status', 50)->nullable();
                 $table->json('props')->nullable();
                 $table->timestamps();
                 $table->softDeletes();

@@ -53,6 +53,10 @@ class InstalledProductItemData extends Data implements DataInstalledProductItemD
     #[MapName('total_price')]
     public ?int $total_price = null;
 
+    #[MapInputName('status')]
+    #[MapName('status')]
+    public ?string $status = null;
+
     #[MapInputName('props')]
     #[MapName('props')]
     public ?array $props = null;
@@ -64,8 +68,9 @@ class InstalledProductItemData extends Data implements DataInstalledProductItemD
         $attributes['price'] ??= $product_item->price;
         $attributes['qty'] ??= 1;
         $attributes['discount'] ??= 0;
-        $attributes['actual_price'] ??= ($attributes['price']*$attributes['qty']) - $attributes['discount'];
-        $attributes['total_price'] ??= $attributes['qty'] * $attributes['actual_price'];
+        // $attributes['actual_price'] ??= ($attributes['price']*$attributes['qty']) - $attributes['discount'];
+        $attributes['actual_price'] ??= $attributes['price'] - $attributes['discount'];
+        $attributes['total_price'] ??= $attributes['actual_price'] * $attributes['qty'];
         $attributes['prop_product_item'] = $product_item->toViewApi()->resolve();
     }
 }

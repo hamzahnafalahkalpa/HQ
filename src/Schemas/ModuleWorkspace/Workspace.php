@@ -70,12 +70,22 @@ class Workspace extends SchemasWorkspace implements ModuleWorkspaceWorkspace{
     public function generateTenant(mixed $workspace_dto): void{
         $workspace     = $workspace_dto->workspace_model;
 
+        $this->InstalledProductItemModel()
+            ->where('reference_type',$workspace->getMorphClass())
+            ->where('reference_id',$workspace->getKey())
+            ->where('status','DRAFT')
+            ->update([
+                'status' => 'ACTIVE'
+            ]);
+
         $now = now();
         $this->schemaContract('license')->prepareStoreLicense($this->requestDTO(
             config('app.contracts.LicenseData'),[
                 'reference_type' => $workspace->getMorphClass(),
                 'reference_id'   => $workspace->getKey(),
                 'expired_at' => $now->addMonth(),
+                'billing_generated_at' => $now,
+                'is_billing_generated' => false,
                 'last_paid' => $now,
                 'status' => 'ACTIVE',
                 'recurring_type' => 'MONTHLY',

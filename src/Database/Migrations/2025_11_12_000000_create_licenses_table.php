@@ -34,6 +34,8 @@ return new class extends Migration
                 $table->string('reference_id', 26)->nullable(false);
                 $table->timestamp('expired_at')->nullable();
                 $table->timestamp('last_paid')->nullable();
+                $table->timestamp('billing_generated_at')->nullable();
+                $table->timestamp('due_date')->nullable();
                 $table->string('status', 255)->nullable(false);
                 $table->string('recurring_type', 255)->nullable(false);
                 $table->string('flag', 100)->nullable(false);

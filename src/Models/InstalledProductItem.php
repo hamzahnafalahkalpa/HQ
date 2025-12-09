@@ -20,7 +20,7 @@ class InstalledProductItem extends BaseModel
     protected $primaryKey = 'id';
     protected $list = [
         'id', 'name', 'reference_type', 'reference_id', 'product_item_id', 'price', 
-        'submission_id','actual_price', 'qty', 'discount', 'total_price', 'props'
+        'submission_id','actual_price', 'qty', 'discount', 'total_price', 'status', 'props'
     ];
 
     protected $casts = [
@@ -28,7 +28,8 @@ class InstalledProductItem extends BaseModel
         'reference_id' => 'string',
         'reference_type' => 'string',
         'product_item_id' => 'string',
-        'price' => 'int'
+        'price' => 'int',
+        'status' => 'string'
     ];
 
     public function getViewResource(){

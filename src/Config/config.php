@@ -60,7 +60,8 @@ return [
         Commands\InstallMakeCommand::class,
         Commands\MigrateCommand::class,
         Commands\ModelMakeCommand::class,
-        Commands\SeedCommand::class
+        Commands\SeedCommand::class,
+        Commands\GenerateBillingCommand::class
     ],
     "encodings" => [
     ],

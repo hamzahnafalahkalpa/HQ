@@ -110,14 +110,12 @@ class PosTransaction extends SchemasPosTransaction implements ContractsPosTransa
         $pos_transaction->save();
         $payment_summary->refresh();
 
-        // $billing = $pos_transaction->billing;
-
         $xendit_invoice = new InvoiceApi();
         $create_invoice_request = new CreateInvoiceRequest([
             'external_id' => $billing->getKey(),
             'description' => $payment_summary->name,
             'amount'         => $payment_summary->debt,
-            'invoice_duration' => 172800,
+            'invoice_duration' => $reference->flag == 'RENEWAL' ? 691200 : 259200,
             'currency' => 'IDR',
             'reminder_time' => 2
         ]);

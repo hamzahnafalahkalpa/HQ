@@ -10,14 +10,6 @@ use Spatie\LaravelData\Attributes\MapName;
 
 class SubmissionData extends ModuleTransactionDataSubmissionData implements DataSubmissionData
 {
-    #[MapInputName('reference_type')]
-    #[MapName('reference_type')]
-    public ?string $reference_type = null;
-
-    #[MapInputName('reference_id')]
-    #[MapName('reference_id')]
-    public mixed $reference_id = null;
-
     #[MapInputName('payment_summary')]
     #[MapName('payment_summary')]
     public ?PaymentSummaryData $payment_summary;

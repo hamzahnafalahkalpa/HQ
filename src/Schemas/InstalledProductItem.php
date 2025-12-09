@@ -30,6 +30,7 @@ class InstalledProductItem extends PackageManagement implements ContractsInstall
             'total_price' => $installed_product_item_dto->total_price,
             'discount' => $installed_product_item_dto->discount,
             'qty' => $installed_product_item_dto->qty,
+            'status' => $installed_product_item_dto->status,
         ];
 
         if (isset($installed_product_item_dto->id)) {

@@ -42,6 +42,7 @@ return new class extends Migration
                 $table->unsignedBigInteger('discount')->nullable(true)->default(0);
                 $table->unsignedBigInteger('total_price')->nullable(true)->default(0);
                 $table->unsignedInteger('qty')->nullable(true)->default(1);
+                $table->string('status',100)->nullable(true);
                 $table->json('props')->nullable();
                 $table->timestamps();
                 $table->softDeletes();

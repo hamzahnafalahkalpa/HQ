@@ -12,15 +12,7 @@ class Submission extends SchemasSubmission implements ContractsSubmission
     public $submission_model;
 
     public function prepareStoreSubmission(mixed $submission_dto): Model{
-        $add = [
-            'name' => $submission_dto->name,
-            'reference_type' => $submission_dto->reference_type,
-            'reference_id' => $submission_dto->reference_id
-        ];
-        $guard  = ['id' => $submission_dto->id];
-        $create = [$guard, $add];
-
-        $submission = $this->usingEntity()->updateOrCreate(...$create);
+        $submission = parent::prepareStoreSubmission($submission_dto);
 
         if (isset($submission_dto->installed_product_items) && count($submission_dto->installed_product_items) > 0){
             foreach ($submission_dto->installed_product_items as &$installed_product_item) {
