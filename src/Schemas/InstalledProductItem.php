@@ -45,6 +45,25 @@ class InstalledProductItem extends PackageManagement implements ContractsInstall
         }
         $create = [$guard, $add];
         $installed_product_item = $this->usingEntity()->updateOrCreate(...$create);
+
+        // if ($installed_product_item->product_item['flag'] == 'Add'){
+        //     if ($installed_product_item->product_item['label'] == 'User'){
+        //         $now = now();
+        //         $this->schemaContract('license')->prepareStoreLicense($this->requestDTO(config('app.contracts.LicenseData'),[
+        //             'reference_type'    => $installed_product_item->reference_type,
+        //             'reference_id'      => $installed_product_item->reference_id,
+        //             'name' => null,
+        //             'expired_at'        => $now->addMonth(),
+        //             'last_paid'         => $now,
+        //             'billing_generated_at' => $now,
+        //             'is_billing_generated' => false,
+        //             'status'            => 'ACTIVE',
+        //             'recurring_type'    => 'MONTHLY',
+        //             'flag'              => 'USER_LICENSE',
+        //         ]));
+        //     }
+        // }
+
         $this->fillingProps($installed_product_item,$installed_product_item_dto->props);
         $installed_product_item->save();
         return $this->installed_product_item_model = $installed_product_item;

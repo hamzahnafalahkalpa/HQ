@@ -96,6 +96,31 @@ class Workspace extends SchemasWorkspace implements ModuleWorkspaceWorkspace{
                 ]
             ]
         ));
+
+        $workspace->load(['installedProductItems' => function($query){
+            $query->where('props->prop_product_item->flag','Add');
+        }]);
+        foreach ($workspace->installedProductItems as $installed_product_item) {
+            if ($installed_product_item->prop_product_item['flag'] == 'Add'){
+                if ($installed_product_item->prop_product_item['label'] == 'User'){
+                    $now = now();
+                    for ($i=0; $i < $installed_product_item->qty; $i++) { 
+                        $license = $this->schemaContract('license')->prepareStoreLicense($this->requestDTO(config('app.contracts.LicenseData'),[
+                            'reference_type'    => $installed_product_item->reference_type,
+                            'reference_id'      => $installed_product_item->reference_id,
+                            'name' => null,
+                            'expired_at'        => $now->addMonth(),
+                            'last_paid'         => $now,
+                            'billing_generated_at' => $now,
+                            'is_billing_generated' => false,
+                            'status'            => 'ACTIVE',
+                            'recurring_type'    => 'MONTHLY',
+                            'flag'              => 'USER_LICENSE',
+                        ]));
+                    }
+                }
+            }
+        }
         $product_model = $workspace_dto->product_model ?? $workspace->product;
         $app_tenant    = $this->TenantModel()->where('flag','APP')->where('props->product_type',$product_model->label)->firstOrFailWithMessage('App Tenant Not Found');
         $group_tenant  = $this->TenantModel()->where('flag','CENTRAL_TENANT')->where('props->product_type',$product_model->label)->firstOrFailWithMessage('Group Tenant Not Found');
