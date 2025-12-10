@@ -11,7 +11,7 @@ return new class extends Migration
 {
     use NowYouSeeMe;
 
-    private $__table;
+    
 
     public function __construct(){
         $this->__table = app(config('database.models.ModelHasEncoding', ModelHasEncoding::class));
