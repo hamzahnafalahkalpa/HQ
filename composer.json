@@ -32,7 +32,8 @@
         "hanafalah/module-support": "dev-main",
         "hanafalah/wellmed-feature": "dev-main",
         "hanafalah/module-employee": "dev-main",
-        "hanafalah/laravel-xendit": "dev-main"
+        "hanafalah/laravel-xendit": "dev-main",
+        "maatwebsite/excel": "^3.1"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
