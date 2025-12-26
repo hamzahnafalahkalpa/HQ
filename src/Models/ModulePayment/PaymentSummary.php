@@ -3,7 +3,7 @@
 namespace Projects\Hq\Models\ModulePayment;
 
 use Hanafalah\ModulePayment\Models\Payment\PaymentSummary as PaymentPaymentSummary;
-use Projects\Hq\Resources\ModulePaymentSummary\{
+use Projects\Hq\Transformers\ModulePaymentSummary\{
     ViewPaymentSummary,ShowPaymentSummary
 };
 

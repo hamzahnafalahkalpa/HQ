@@ -5,7 +5,7 @@ namespace Projects\Hq\Models;
 use Hanafalah\LaravelHasProps\Concerns\HasProps;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Projects\Hq\Resources\Product\{
+use Projects\Hq\Transformers\Product\{
     ViewProduct,
     ShowProduct
 };

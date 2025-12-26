@@ -4,7 +4,7 @@ namespace Projects\Hq\Models;
 
 use Hanafalah\ModulePayer\Models\Company as ModelsCompany;
 use Hanafalah\ModuleUser\Concerns\UserReference\HasUserReference;
-use Projects\Hq\Resources\Company\{ViewCompany, ShowCompany};
+use Projects\Hq\Transformers\Company\{ViewCompany, ShowCompany};
 
 class Company extends ModelsCompany
 {

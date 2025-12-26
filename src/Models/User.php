@@ -9,8 +9,8 @@ use Hanafalah\ModuleUser\Models\User\User as UserUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 
-use Projects\Hq\Resources\ModuleUser\ShowUser;
-use Projects\Hq\Resources\ModuleUser\ViewUser;
+use Projects\Hq\Transformers\ModuleUser\ShowUser;
+use Projects\Hq\Transformers\ModuleUser\ViewUser;
 
 class User extends UserUser
 {

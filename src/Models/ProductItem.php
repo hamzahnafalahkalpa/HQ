@@ -6,7 +6,7 @@ use Hanafalah\LaravelHasProps\Concerns\HasProps;
 use Hanafalah\LaravelSupport\Models\BaseModel;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Projects\Hq\Resources\ProductItem\{
+use Projects\Hq\Transformers\ProductItem\{
     ViewProductItem,
     ShowProductItem
 };

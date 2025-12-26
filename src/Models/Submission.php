@@ -4,8 +4,8 @@ namespace Projects\Hq\Models;
 
 use Hanafalah\ModulePayment\Concerns\HasPaymentSummary;
 use Hanafalah\ModuleTransaction\Models\Submission as ModelsSubmission;
-use Projects\Hq\Resources\Submission\ShowSubmission;
-use Projects\Hq\Resources\Submission\ViewSubmission;
+use Projects\Hq\Transformers\Submission\ShowSubmission;
+use Projects\Hq\Transformers\Submission\ViewSubmission;
 
 class Submission extends ModelsSubmission
 {

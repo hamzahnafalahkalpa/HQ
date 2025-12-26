@@ -7,8 +7,8 @@ use Hanafalah\ModuleLicense\Concerns\HasModelHasLicense;
 use Hanafalah\ModulePayment\Concerns\HasPaymentSummary;
 use Hanafalah\ModuleTransaction\Concerns\HasTransaction;
 use Hanafalah\ModuleWorkspace\Models\Workspace\Workspace as WorkspaceWorkspace;
-use Projects\Hq\Resources\Workspace\ShowWorkspace;
-use Projects\Hq\Resources\Workspace\ViewWorkspace;
+use Projects\Hq\Transformers\Workspace\ShowWorkspace;
+use Projects\Hq\Transformers\Workspace\ViewWorkspace;
 
 class Workspace extends WorkspaceWorkspace
 {

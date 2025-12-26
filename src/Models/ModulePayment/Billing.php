@@ -3,7 +3,7 @@
 namespace Projects\Hq\Models\ModulePayment;
 
 use Hanafalah\ModulePayment\Models\Transaction\Billing as TransactionBilling;
-use Projects\Hq\Resources\ModuleBilling\{
+use Projects\Hq\Transformers\ModuleBilling\{
     ViewBilling,ShowBilling
 };
 

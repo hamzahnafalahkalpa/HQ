@@ -3,7 +3,7 @@
 namespace Projects\Hq\Models;
 
 use Hanafalah\ModulePeople\Models\People\People;
-use Projects\Hq\Resources\Stakeholder\{
+use Projects\Hq\Transformers\Stakeholder\{
     ViewStakeholder,
     ShowStakeholder
 };

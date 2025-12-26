@@ -3,8 +3,8 @@
 namespace Projects\Hq\Models\MicroTenant;
 
 use Hanafalah\MicroTenant\Models\Tenant\Tenant as TenantTenant;
-use Projects\Hq\Resources\Tenant\ShowTenant;
-use Projects\Hq\Resources\Tenant\ViewTenant;
+use Projects\Hq\Transformers\Tenant\ShowTenant;
+use Projects\Hq\Transformers\Tenant\ViewTenant;
 
 class Tenant extends TenantTenant
 {
