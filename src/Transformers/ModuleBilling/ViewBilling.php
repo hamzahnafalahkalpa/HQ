@@ -1,4 +1,3 @@
-
 <?php
 
 namespace Projects\Hq\Transformers\ModuleBilling;
