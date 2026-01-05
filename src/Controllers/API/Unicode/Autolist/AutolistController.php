@@ -2,7 +2,6 @@
 
 namespace Projects\Hq\Controllers\API\Unicode\Autolist;
 
-use Hanafalah\LaravelHasProps\Models\Scopes\HasCurrentScope;
 use Hanafalah\LaravelSupport\Concerns\Support\HasCache;
 use Illuminate\Http\Request;
 use Projects\Hq\Controllers\API\ApiController;
@@ -20,12 +19,13 @@ class AutolistController extends ApiController{
     ];
 
     public function index(Request $request){
-        request()->merge([ 
-            'search_name'  => request()->search_name ?? request()->search_value,
-            'search_value' => null
-        ]);
-
         $morph = Str::studly(request()->morph);
+        if ($morph != 'Disease'){
+            request()->merge([ 
+                'search_name'  => request()->search_name ?? request()->search_value,
+                'search_value' => null
+            ]);
+        }
         switch ($morph) {
             case 'MedicService':
                 $schema = app(config('app.contracts.'.$morph));
