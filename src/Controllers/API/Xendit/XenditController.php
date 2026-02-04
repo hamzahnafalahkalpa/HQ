@@ -194,7 +194,6 @@ class XenditController extends ApiController{
                     return $data;
                 });
             } catch (\Throwable $th) {
-                dd($th->getMessage());
                 throw $th;
             }
         }
