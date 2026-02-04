@@ -12,6 +12,7 @@ class EncodingSeeder extends Seeder{
      */
     public function run()
     {
+        echo "[DEBUG] Booting ".class_basename($this)."\n";
         $workspace  = app(config('database.models.Workspace'))->uuid('9e7ff0f6-7679-46c8-ac3e-71da818160Hq')->firstOrFail();        
         foreach (config('module-encoding.encodings') as $encoding) {
             $encoding = app(config('database.models.Encoding'))
@@ -22,7 +23,7 @@ class EncodingSeeder extends Seeder{
                         ]);
 
             $workspace->modelHasEncoding()->firstOrCreate([
-                'reference_id'   => $workspace->getKey(),
+                'reference_id'   => (string) $workspace->getKey(),
                 'reference_type' => $workspace->getMorphClass(),
                 'encoding_id'    => $encoding->getKey()
             ]);

@@ -81,7 +81,7 @@ class SubmissionController extends EnvironmentController{
                 'id' => null,
                 'name' => 'Penambahan Fitur',
                 'reference_type' => 'Workspace',
-                'reference_id' => $workspace->getKey(),
+                'reference_id' => (string) $workspace->getKey(),
                 'flag' => 'ADDITIONAL',
                 'payment_summary' => [
                     'id' => null,
@@ -99,7 +99,7 @@ class SubmissionController extends EnvironmentController{
                 'name'           => $user->name,
                 'phone'          => $user->phone,
                 'reference_type' => $user->getMorphClass(),
-                'reference_id'   => $user->getKey()
+                'reference_id'   => (string) $user->getKey()
             ];
             request()->merge(['consument' => $consument]);
         }

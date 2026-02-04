@@ -17,7 +17,7 @@ class DigitalSignController extends ApiController{
     private function localRequest(){
         $this->userAttempt();
         request()->merge([
-            'reference_id'   => $this->global_employee->getKey(),
+            'reference_id'   => (string) $this->global_employee->getKey(),
             'reference_type' => $this->global_employee->getMorphClass()
         ]);
     }

@@ -32,7 +32,7 @@ class Workspace extends SchemasWorkspace implements ModuleWorkspaceWorkspace{
             $transaction = app(config('app.contracts.Transaction'))
                 ->prepareStoreTransaction($this->requestDTO(config('app.contracts.TransactionData'),[
                     'reference_model' => $workspace,
-                    'reference_id' => $workspace->getKey(),
+                    'reference_id' => (string) $workspace->getKey(),
                     'reference_type' => $workspace->getMorphClass()
                 ]));
             $workspace->prop_transaction = $transaction->toViewApi()->resolve();
@@ -43,7 +43,7 @@ class Workspace extends SchemasWorkspace implements ModuleWorkspaceWorkspace{
             if (isset($workspace_dto->installed_product_items) && count($workspace_dto->installed_product_items) > 0){
                 foreach ($workspace_dto->installed_product_items as &$installed_product_item) {
                     $installed_product_item->reference_type = $workspace->getMorphClass();
-                    $installed_product_item->reference_id = $workspace->getKey();
+                    $installed_product_item->reference_id = (string) $workspace->getKey();
                     $installed_product_item->submission_id = $workspace->submission_id;
                     $this->schemaContract('installed_product_item')->prepareStoreInstalledProductItem($installed_product_item);
                 }
@@ -51,7 +51,7 @@ class Workspace extends SchemasWorkspace implements ModuleWorkspaceWorkspace{
             if (isset($workspace_dto->installed_features) && count($workspace_dto->installed_features) > 0){
                 foreach ($workspace_dto->installed_features as &$installed_feature_dto) {
                     $installed_feature_dto->model_type = $workspace->getMorphClass();
-                    $installed_feature_dto->model_id = $workspace->getKey();
+                    $installed_feature_dto->model_id = (string) $workspace->getKey();
                     $installed_feature = $this->schemaContract('installed_feature')->prepareStoreInstalledFeature($installed_feature_dto);
                 }
             }
@@ -72,7 +72,7 @@ class Workspace extends SchemasWorkspace implements ModuleWorkspaceWorkspace{
 
         $this->InstalledProductItemModel()
             ->where('reference_type',$workspace->getMorphClass())
-            ->where('reference_id',$workspace->getKey())
+            ->where('reference_id',(string) $workspace->getKey())
             ->where('status','DRAFT')
             ->update([
                 'status' => 'ACTIVE'
@@ -82,7 +82,7 @@ class Workspace extends SchemasWorkspace implements ModuleWorkspaceWorkspace{
         $this->schemaContract('license')->prepareStoreLicense($this->requestDTO(
             config('app.contracts.LicenseData'),[
                 'reference_type' => $workspace->getMorphClass(),
-                'reference_id'   => $workspace->getKey(),
+                'reference_id'   => (string) $workspace->getKey(),
                 'expired_at' => $now->addMonth(),
                 'billing_generated_at' => $now,
                 'is_billing_generated' => false,
@@ -92,7 +92,7 @@ class Workspace extends SchemasWorkspace implements ModuleWorkspaceWorkspace{
                 'flag' => 'WORKSPACE_LICENSE',
                 'model_has_license' => [
                     'model_type' => $workspace->getMorphClass(),
-                    'model_id'   => $workspace->getKey(),
+                    'model_id'   => (string) $workspace->getKey(),
                 ]
             ]
         ));
@@ -107,7 +107,7 @@ class Workspace extends SchemasWorkspace implements ModuleWorkspaceWorkspace{
                     for ($i=0; $i < $installed_product_item->qty; $i++) { 
                         $license = $this->schemaContract('license')->prepareStoreLicense($this->requestDTO(config('app.contracts.LicenseData'),[
                             'reference_type'    => $installed_product_item->reference_type,
-                            'reference_id'      => $installed_product_item->reference_id,
+                            'reference_id'      => (string) $installed_product_item->reference_id,
                             'name' => null,
                             'expired_at'        => $now->addMonth(),
                             'last_paid'         => $now,

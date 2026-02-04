@@ -74,7 +74,7 @@ class GenerateBillingCommand extends EnvironmentCommand
                         'name' => $owner->name,
                         'phone' => $owner->phone,
                         'reference_type' => $owner->getMorphClass(),
-                        'reference_id' => $owner->getKey()
+                        'reference_id' => (string) $owner->getKey()
                     ],
                     'billing' => [
                         

@@ -16,7 +16,7 @@ class EncodingController extends ApiController{
     private function mapper(){
         $this->userAttempt();
         request()->merge([
-            'reference_id'   => $this->global_workspace->getKey(),
+            'reference_id'   => (string) $this->global_workspace->getKey(),
             'reference_type' => $this->global_workspace->getMorphClass()
         ]);
     }
@@ -34,7 +34,7 @@ class EncodingController extends ApiController{
     public function store(StoreRequest $request){
         $this->mapper();
         $model_has_encoding = request()->model_has_encoding;
-        $model_has_encoding['reference_id']   = $this->global_workspace->getKey();
+        $model_has_encoding['reference_id']   = (string) $this->global_workspace->getKey();
         $model_has_encoding['reference_type'] = $this->global_workspace->getMorphClass();
         request()->merge([
             'model_has_encoding' => $model_has_encoding

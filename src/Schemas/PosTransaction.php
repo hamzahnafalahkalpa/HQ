@@ -95,7 +95,7 @@ class PosTransaction extends SchemasPosTransaction implements ContractsPosTransa
                 $installed_data['installed_features'] = $installed_features;
                 $installed_data['submission_id'] = $reference->getKey();
                 $installed_data['reference_type'] = $reference->reference_type;
-                $installed_data['reference_id'] = $reference->reference_id;
+                $installed_data['reference_id'] = (string) $reference->reference_id;
                 $this->schemaContract('installed_product_item')
                     ->prepareStoreInstalledProductItem(
                         $this->requestDTO(

@@ -813,6 +813,7 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
+        echo "[DEBUG] Booting ".class_basename($this)."\n";
         foreach ($this->__products as $product) {
             switch ($product['label']) {
                 case 'LITE': $product['icon'] = hq_asset_url('/assets/wellmed-lite.png');break;

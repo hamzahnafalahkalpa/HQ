@@ -54,9 +54,9 @@ class XenditController extends ApiController{
                                                 $license->save();
                                                 foreach ($dynamic_form['value'] as $medic_service_id) {
                                                     $restriction = $restrictionModel->where('reference_type','Tenant')
-                                                        ->where('reference_id',$tenant->getKey())
+                                                        ->where('reference_id',(string) $tenant->getKey())
                                                         ->where('model_type','MedicService')
-                                                        ->where('model_id',$medic_service_id)
+                                                        ->where('model_id',(string) $medic_service_id)
                                                         ->first();
                                                     if (isset($restriction)){
                                                         $model = $restriction->model;
@@ -73,7 +73,7 @@ class XenditController extends ApiController{
                                                     app(config('app.contracts.License'))->prepareStoreLicense(
                                                         $this->requestDTO(config('app.contracts.LicenseData'), [
                                                             'reference_type' => $workspace->getMorphClass(),
-                                                            'reference_id'   => $workspace->getKey(),
+                                                            'reference_id'   => (string) $workspace->getKey(),
                                                             'expired_at' => $workspace_license->expired_at,
                                                             'billing_generated_at' => now()->toDateTimeString(),
                                                             'is_billing_generated' => false,
@@ -90,7 +90,7 @@ class XenditController extends ApiController{
 
                                 $this->InstalledProductItemModel()
                                     ->where('reference_type',$workspace->getMorphClass())
-                                    ->where('reference_id',$workspace->getKey())
+                                    ->where('reference_id',(string) $workspace->getKey())
                                     ->where('status','DRAFT')
                                     ->update([
                                         'status' => 'ACTIVE'

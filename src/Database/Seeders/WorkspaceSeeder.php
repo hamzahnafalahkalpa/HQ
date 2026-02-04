@@ -18,6 +18,7 @@ class WorkspaceSeeder extends Seeder{
      */
     public function run(): void
     {
+        echo "[DEBUG] Booting ".class_basename($this)."\n";
         $workspace = app(config('database.models.Workspace'))->uuid('9e7ff0f6-7679-46c8-ac3e-71da818160Hq')->first();        
         $generator_config = config('laravel-package-generator');
         $project_namespace = 'Projects';
@@ -34,7 +35,7 @@ class WorkspaceSeeder extends Seeder{
                 'parent_id'      => null,
                 'name'           => 'Hq',
                 'flag'           => 'APP',
-                'reference_id'   => $workspace->getKey(),
+                'reference_id'   => (string) $workspace->getKey(),
                 'reference_type' => $workspace->getMorphClass(),
                 'provider'       => $project_namespace.'\\Hq\\Providers\\HqServiceProvider',
                 'path'           => $generator_config['patterns']['project']['published_at'],
@@ -65,7 +66,7 @@ class WorkspaceSeeder extends Seeder{
         $transaction = app(config('app.contracts.Transaction'))
             ->prepareStoreTransaction($this->requestDTO(config('app.contracts.TransactionData'),[
                 'reference_model' => $workspace,
-                'reference_id' => $workspace->getKey(),
+                'reference_id' => (string) $workspace->getKey(),
                 'reference_type' => $workspace->getMorphClass()
             ]));
         $workspace->prop_transaction = $transaction->toViewApi()->resolve();

@@ -38,7 +38,7 @@ class InstalledProductItem extends PackageManagement implements ContractsInstall
         }else{
             $guard = [
                 'product_item_id' => $installed_product_item_dto->product_item_id,
-                'reference_id'   => $installed_product_item_dto->reference_id,
+                'reference_id'   => (string) $installed_product_item_dto->reference_id,
                 'reference_type' => $installed_product_item_dto->reference_type,
                 'submission_id' => $installed_product_item_dto->submission_id
             ];
@@ -51,7 +51,7 @@ class InstalledProductItem extends PackageManagement implements ContractsInstall
         //         $now = now();
         //         $this->schemaContract('license')->prepareStoreLicense($this->requestDTO(config('app.contracts.LicenseData'),[
         //             'reference_type'    => $installed_product_item->reference_type,
-        //             'reference_id'      => $installed_product_item->reference_id,
+        //             'reference_id'      => (string) $installed_product_item->reference_id,
         //             'name' => null,
         //             'expired_at'        => $now->addMonth(),
         //             'last_paid'         => $now,

@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        echo "[DEBUG] Booting ".class_basename($this)."\n";
         $user = app(config('database.models.User'))->where('username','admin_hq')->first();
         if (!isset($user)){
             foreach ([
@@ -40,7 +41,7 @@ class UserSeeder extends Seeder
                     "user_reference" => [
                         "role_ids" => $role_ids, // Daftar role ID
                         "workspace_type" => 'Tenant',
-                        "workspace_id" => tenancy()->tenant->id,
+                        "workspace_id" => (string) tenancy()->tenant->id,
                         "reference_type" => "People",
                         "reference" => [ // Informasi individu
                             "id" => null,

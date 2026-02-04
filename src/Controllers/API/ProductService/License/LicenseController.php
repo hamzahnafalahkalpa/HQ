@@ -18,7 +18,7 @@ class LicenseController extends EnvironmentController{
     protected function commonConditional($query){
         parent::commonConditional($query);
         $query->where('reference_type','Workspace')
-              ->where('reference_id',request()->product_service_id)
+              ->where('reference_id',(string) request()->product_service_id)
               ->where('flag','USER_LICENSE');
     }
 
