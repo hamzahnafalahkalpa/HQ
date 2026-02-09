@@ -2,6 +2,8 @@
 
 namespace Projects\Hq\Controllers\API\Registration;
 
+use Hanafalah\MicroTenant\Facades\MicroTenant as FacadesMicroTenant;
+use Hanafalah\MicroTenant\MicroTenant;
 use Projects\Hq\Requests\API\Registration\{
     StoreRequest
 };
@@ -28,9 +30,14 @@ class RegistrationController extends EnvironmentController{
         $user = request()->user;
         $user['is_hq_user'] = true;
         $user['email_verified_at'] = now();
+        $tenant = tenancy()->tenant;
+        if (!isset($tenant)) {
+            $tenant = $this->TenantModel()->where('props->product_type','Hq')->first();
+            FacadesMicroTenant::tenantImpersonate($tenant);
+        }
         request()->merge([
             'workspace_type' => 'Tenant',
-            'workspace_id' => tenancy()->tenant->getKey(),
+            'workspace_id' => $tenant->getKey(),
             'user' => $user,
             'role_ids' => [$this->RoleModel()->where('name','Customer')->firstOrFail()->getKey()]
         ]);

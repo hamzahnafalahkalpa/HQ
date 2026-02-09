@@ -2,6 +2,7 @@
 
 namespace Projects\Hq\Controllers\API\Xendit;
 
+use Hanafalah\MicroTenant\Facades\MicroTenant;
 use Projects\Hq\Controllers\API\ApiController;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,11 @@ class XenditController extends ApiController{
         ]);
         $data = request()->all();
         if (isset($data['external_id'])){
+            $tenant = tenancy()->tenant;
+            if (!isset($tenant)) {
+                $tenant = $this->TenantModel()->where('props->product_type','Hq')->first();
+                MicroTenant::tenantImpersonate($tenant);
+            }
             try {
                 $data = $this->transaction(function () use ($data) {
                     $billing = $this->BillingModel()->with('hasTransaction.consument')->findOrFail($data['external_id']);
