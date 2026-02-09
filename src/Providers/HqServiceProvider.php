@@ -103,6 +103,7 @@ class HqServiceProvider extends HqEnvironment
                     return $registry;
                 });
             } catch (\Throwable $th) {
+                // dd($th->getMessage());
             }
         });
     }    
