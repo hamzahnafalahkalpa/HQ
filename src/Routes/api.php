@@ -4,6 +4,9 @@ use Hanafalah\ApiHelper\Facades\ApiAccess;
 use Hanafalah\LaravelSupport\Facades\LaravelSupport;
 use Illuminate\Support\Facades\Route;
 use Projects\Hq\Controllers\API\Xendit\XenditController;
+use Projects\Hq\Controllers\API\Registration\{
+    RegistrationController
+};
 use Xendit\Configuration;
 
 use Xendit\{
@@ -26,6 +29,8 @@ ApiAccess::secure(function(){
         });
     });
 });
+
+Route::apiResource('/registration',RegistrationController::class)->only('store');
 
 Route::post('/xendit/paid',[XenditController::class,'store'])->name('api.xendit.paid');
 

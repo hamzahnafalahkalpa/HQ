@@ -15,4 +15,3 @@ use Projects\Hq\Controllers\API\Registration\{
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::apiResource('/registration',RegistrationController::class)->only('store');
