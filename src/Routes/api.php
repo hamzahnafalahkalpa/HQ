@@ -30,7 +30,11 @@ ApiAccess::secure(function(){
     });
 });
 
-Route::apiResource('/registration',RegistrationController::class)->only('store');
+Route::group([
+    'as' => 'api.',
+],function(){
+    Route::apiResource('/registration',RegistrationController::class)->only('store');
+});
 
 Route::post('/xendit/paid',[XenditController::class,'store'])->name('api.xendit.paid');
 
